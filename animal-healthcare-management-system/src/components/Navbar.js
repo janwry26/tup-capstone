@@ -1,7 +1,8 @@
 import '../styles/navbar.css'
 import { Component } from 'react'
 import { MenuData } from './MenuData';
-import { useState } from 'react';
+import logo from '../assets/images/logo/tup-logo.png';
+
 class Navbar extends Component {
     state = {clicked: false};
     handleClick = ()=>{
@@ -10,7 +11,7 @@ class Navbar extends Component {
     render(){
         return(
          <nav className="navBarItems">
-            <h1 className='logo'>CHRISTINE JOY <i className='fab fa-react'></i></h1>
+            <img className='logo' src={logo} />
             <div className='menu-icons' onClick={this.handleClick}>
                 <i className={this.state.clicked ? "fas fa-times" : "fas fa-bars"} ></i>
             </div>

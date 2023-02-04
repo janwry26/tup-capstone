@@ -1,7 +1,17 @@
-.home{
+.hero-section{
     width: 100%;
+    padding-top: 50px;
     height: 100vh;
-    background: rgb(36,0,0);
-    background: linear-gradient(90deg, rgba(36,0,0,1) 0%, rgba(255,12,12,1) 100%, rgba(0,212,255,1) 100%);
+    background: rgb(176,171,171);
+    background: linear-gradient(90deg, rgba(176,171,171,1) 0%, rgba(200,217,217,1) 32%, rgba(121,116,116,1) 100%);
+    overflow-x: hidden;
+    overflow-y: hidden;
+
+}
+
+@media screen and (max-width: 1024px) {
+   .hero-section{
+    height: auto;
+    }
 
 }
