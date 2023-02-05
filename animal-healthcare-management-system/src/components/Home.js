@@ -1,5 +1,6 @@
 import '../styles/home.css'
 import hero from '../assets/images/hero/hero.png'
+import { Link } from 'react-router-dom';
 function Home(){
     return(
         <div className='hero-section'>
@@ -14,7 +15,9 @@ function Home(){
             </h1>
             <p className="lead">Incididunt laborum minim elit pariatur officia velit irure nostrud ullamco voluptate in cupidatat sunt. Laboris laborum ea nulla veniam. Lorem dolore velit duis nostrud sint pariatur sunt esse labore laboris nulla nostrud sint consectetur. Commodo deserunt consectetur occaecat id. Nostrud qui est anim commodo quis et commodo consectetur commodo esse aliquip anim aute qui.</p>
             <div className="d-grid gap-2 d-md-flex justify-content-md-start">
+              <Link to="/login">
               <button type="button" className="btn btn-primary btn-lg px-4 me-md-2">Login</button>
+              </Link>
             </div>
           </div>
         </div>
