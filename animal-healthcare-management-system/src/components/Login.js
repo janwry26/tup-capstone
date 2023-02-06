@@ -12,10 +12,9 @@ function Login(){
                 <input required="" name="" type="password"/>
                 <label>Password</label>
                 </div><center>
-                <a href="#">
-                    login
-                <span></span>
-                </a></center>
+               <button className='btn'>
+                Sign in
+                </button></center>
             </form>
         </div>
         </div>
