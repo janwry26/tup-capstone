@@ -10,9 +10,15 @@
 }
 .btn-primary{
     background-color: rgb(79, 74, 74);
+    border: 1px solid rgb(79, 74, 74);
+}
+
+.btn-primary:hover{
+    border: 1px solid rgb(79, 74, 74);
 }
 .d-block{
     border-radius: 45px;
+   
     box-shadow: 28px 27px 51px 24px rgba(0,0,0,0.62);
     -webkit-box-shadow: 28px 27px 51px 24px rgba(0,0,0,0.62);
     -moz-box-shadow: 28px 27px 51px 24px rgba(0,0,0,0.62);
