@@ -1,0 +1,9 @@
+.dashboard {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: bisque;
+    height: 100vh;
+    text-transform: uppercase;
+}
