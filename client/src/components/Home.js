@@ -10,7 +10,7 @@ function Home(){
             <img src={hero} className="d-block mx-lg-auto hero-img img-fluid" alt="Bootstrap Themes" width="600" height="400" />
           </div>
           <div className="col-lg-6">
-            <h1 className="display-6 fw-bold mb-3">
+            <h1 className="display-6 fw-bold mb-3 ">
                 ANIMAL HEALTHCARE MANAGEMENT SYSTEM 
             </h1>
             <p className="lead">Incididunt laborum minim elit pariatur officia velit irure nostrud ullamco voluptate in cupidatat sunt. Laboris laborum ea nulla veniam. Lorem dolore velit duis nostrud sint pariatur sunt esse labore laboris nulla nostrud sint consectetur.</p>

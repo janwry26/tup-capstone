@@ -14,8 +14,10 @@ function Dashboard({user}) {
 
     return (
         <div className="dashboard">
-            <h1>Welcome</h1>
-            <NavLink to='/logout' className="nav-link" aria-current="page">Logout</NavLink>
+            <h1>DASHBOARD</h1>
+            <NavLink to='/logout' className="nav-link" aria-current="page">
+            <button type="button" className="btn btn-primary btn-lg px-4 me-md-2">Logout</button>
+            </NavLink>
         </div>
     )
 }
