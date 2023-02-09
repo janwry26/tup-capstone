@@ -26,18 +26,22 @@ function Login({user}){
     }
 
     const handleSubmit = async () => {
-        
         await http.post("/auth", {
             username,
             password
         })
         .then((res) => {
-            localStorage.setItem("token", res.data)
-            window.location = '/dashboard'
+            localStorage.setItem("token", res.data);
+            window.location = '/dashboard';
         })
-        .catch((err) => alert(err))
+        .catch((err) => {
+            if (err.response && err.response.status === 400) {
+                alert("Invalid username or password");
+            } else {
+                alert(err);
+            }
+        });
     };
-
     return(
         <div className='login-container'>
         <div className="login-box">
