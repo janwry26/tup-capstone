@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import '../styles/login.css';
 import http from '../utils/http';
+import Swal from 'sweetalert2';
 
 function Login({user}){
     let navigate = useNavigate();
@@ -19,7 +20,11 @@ function Login({user}){
         e.preventDefault();
 
         if (username == "" || password == "") {
-            alert("No field must be empty")
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'No field must be empty',
+            });
         } else {
             handleSubmit()
         }
@@ -36,9 +41,17 @@ function Login({user}){
         })
         .catch((err) => {
             if (err.response && err.response.status === 400) {
-                alert("Invalid username or password");
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Invalid username or password',
+                });
             } else {
-                alert(err);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: err,
+                });
             }
         });
     };
