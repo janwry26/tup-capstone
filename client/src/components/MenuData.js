@@ -11,16 +11,13 @@ export const MenuData = [
         cName:"nav-links",
         icon:"fa-solid  fa-circle-info"
     },
+
     {
-        title: 'Service',
+        title: 'FAQ',
         url:"#",
         cName:"nav-links",
-        icon:"fa-solid  fa-briefcase"
+        icon:"fa-solid  fa-question-circle"
     },
-    {
-        title: 'Contact',
-        url:"#",
-        cName:"nav-links",
-        icon:"fa-solid  fa-address-book"
-    },
+
+   
 ]
