@@ -7,20 +7,54 @@
     overflow-x: hidden;
 
 }
+.title{
+    font-size: 35px;
+    text-align: center;
+}
+p.lead{
+    text-align: justify;
+    inline-size: 400px;
+    overflow-wrap: break-word;
+}
 .btn-primary{
+    color: black;
     background-color: #222;
     border: 1px solid rgb(79, 74, 74);
+    border-radius: 15px;
 }
 
 .btn-primary:hover{
     border: 1px solid rgb(79, 74, 74);
 }
+
+button.btn1{
+    color: black;
+    background-color: transparent;   
+    width: 185px;
+    padding: 3px;
+    font-size: 12px;
+    height: 40px;
+}
+
+button.btn2{
+    width: 185px;
+    font-size: 12px;
+    height: 40px;
+
+}
+
 .d-block{
     border-radius: 45px;
    
-    box-shadow: 28px 27px 51px 24px rgba(0,0,0,0.62);
-    -webkit-box-shadow: 28px 27px 51px 24px rgba(0,0,0,0.62);
-    -moz-box-shadow: 28px 27px 51px 24px rgba(0,0,0,0.62);
+    box-shadow: 12px 17px 27px -4px rgba(0,0,0,0.75);
+    -webkit-box-shadow: 12px 17px 27px -4px rgba(0,0,0,0.75);
+    -moz-box-shadow: 12px 17px 27px -4px rgba(0,0,0,0.75);
+}
+.home-text-container{
+    max-width: 550px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 @media screen and (max-width: 1024px) {

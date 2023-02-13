@@ -66,13 +66,15 @@
     overflow: hidden;
     transition: .5s;
     margin-top: 40px;
-    letter-spacing: 4px
+    letter-spacing: 4px;
+    border-radius: 15px;
+
   }
   
   .btn:hover {
     background: #1e201e;
     color: #fff;
-    border-radius: 5px;
+    border-radius: 15px;
     box-shadow: 0 0 5px #f8f8f8,
                 0 0 25px #c6cdc6,
                 0 0 50px #848684,
