@@ -45,11 +45,11 @@ function Dashboard({user}) {
         <ColorModeContext.Provider value ={colorMode}>
         <ThemeProvider theme ={theme}>
         <CssBaseline />
-        <div className="dashboard">
+       
         <main className='content'>
                 <TopBar/>
         </main>
-        </div>
+        
         </ThemeProvider>
     </ColorModeContext.Provider>
     )
