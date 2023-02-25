@@ -1,14 +1,18 @@
-import '../styles/navbar.css'
 import { Component } from 'react'
 import { MenuData } from './MenuData';
 import logo from '../assets/images/logo/tup-logo.png';
-
+import '../styles/navbar.css'
 class Navbar extends Component {
     state = {clicked: false};
     handleClick = ()=>{
         this.setState({clicked:!this.state.clicked});
     };
     render(){
+        const currentRoute = window.location.pathname; // Get current route
+        const hideNavbar = currentRoute === '/dashboard'; // Check if current route is dashboard
+        if (hideNavbar) {
+            return null; // Return null to hide the navbar
+        }
         return(
          <nav className="navBarItems">
             <img className='logo' src={logo} />
