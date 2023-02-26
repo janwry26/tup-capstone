@@ -12,7 +12,7 @@ const Routing = ({user}) => {
             <Route path='/' element={<Home />} />
             <Route path='/login' element={<Login user={user} />} />
             <Route element={<PrivateRoute user={user} />}>
-                <Route path='/dashboard' element={<Dashboard />} />
+                <Route path='/dashboard/*' element={<Dashboard />} />
             </Route>
             <Route element={<PrivateRoute user={user} />}>
                 <Route path='/logout' element={<Logout />} />
