@@ -9,7 +9,14 @@ class Navbar extends Component {
     };
     render(){
         const currentRoute = window.location.pathname; // Get current route
-        const hideNavbar = currentRoute === '/dashboard'; // Check if current route is dashboard
+        const hideNavbar = 
+        currentRoute === '/dashboard' ||
+        currentRoute === '/dashboard/team' ||
+        currentRoute === '/dashboard/contact' ||
+        currentRoute === '/dashboard/invoices' ||
+        currentRoute === '/dashboard/form' ||
+        currentRoute === '/dashboard/faq' ||
+        currentRoute === '/dashboard/line'  ; // Check if current route is dashboard
         if (hideNavbar) {
             return null; // Return null to hide the navbar
         }
