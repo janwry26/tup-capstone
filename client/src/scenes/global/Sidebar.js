@@ -17,7 +17,9 @@ import PieChartOutlineOutlinedIcon from "@mui/icons-material/PieChartOutlineOutl
 import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
-
+import Inventory2OutlinedIcon from '@mui/icons-material/Inventory2Outlined';
+import Inventory2RoundedIcon from '@mui/icons-material/Inventory2Rounded';
+import Inventory2TwoToneIcon from '@mui/icons-material/Inventory2TwoTone';
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -45,6 +47,7 @@ const Sidebar = () => {
   return (
     <Box
       sx={{
+       
         "& .pro-sidebar-inner": {
           background: `${colors.primary[400]} !important`,
         },
@@ -220,6 +223,35 @@ const Sidebar = () => {
               selected={selected}
               setSelected={setSelected}
             />
+             <Typography
+              variant="h6"
+              color={colors.grey[300]}
+              sx={{ m: "15px 0 5px 20px" }}
+            >
+              Inventory
+            </Typography>
+            <Item
+              title="Inventory 1"
+              to="/dashboard/bar"
+              icon={<Inventory2OutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              title="Inventory 2"
+              to="/dashboard/pie"
+              icon={<Inventory2RoundedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              title="Inventory 3"
+              to="/dashboard/line"
+              icon={<Inventory2TwoToneIcon/>}
+              selected={selected}
+              setSelected={setSelected}
+            />
+          
           </Box>
         </Menu>
       </ProSidebar>
