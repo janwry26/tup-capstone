@@ -17,7 +17,8 @@ class Navbar extends Component {
         currentRoute === '/dashboard/form' ||
         currentRoute === '/dashboard/faq' ||
         currentRoute === '/dashboard/line' ||
-        currentRoute === '/dashboard/panel' 
+        currentRoute === '/dashboard/panel' ||
+        currentRoute === '/dashboard/calendar' 
 
          ; // Check if current route is dashboard
         if (hideNavbar) {

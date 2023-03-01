@@ -17,7 +17,7 @@ import FAQ from "../scenes/faq";
 // import Geography from "./scenes/geography";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { ColorModeContext, useMode } from "../theme";
-// import Calendar from "./scenes/calendar/calendar";
+import Calendar from "../scenes/calendar/calendar";
 
 function DashboardMain() {
   const [theme, colorMode] = useMode();
@@ -39,6 +39,8 @@ function DashboardMain() {
             <Route path="/faq" element={<FAQ />} />
             <Route path="/team" element={<Team />} />
             <Route path="/line" element={<Line />} />
+            <Route path="/calendar" element={<Calendar />} />
+
             </Routes>
           </main>
         </div>
