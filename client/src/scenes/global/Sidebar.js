@@ -21,6 +21,7 @@ import Inventory2OutlinedIcon from '@mui/icons-material/Inventory2Outlined';
 import Inventory2RoundedIcon from '@mui/icons-material/Inventory2Rounded';
 import Inventory2TwoToneIcon from '@mui/icons-material/Inventory2TwoTone';
 import AddTaskIcon from '@mui/icons-material/AddTask';
+import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -263,15 +264,19 @@ const Sidebar = () => {
              Task
             </Typography>
             <Item
-              title="Assign Task"
+              title="Create Task"
               to="/dashboard/task"
               icon={<AddTaskIcon />}
               selected={selected}
               setSelected={setSelected}
             />
-          
-          
-          
+             <Item
+              title="Manage Task"
+              to="/dashboard/manage"
+              icon={<EditOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
           </Box>
         </Menu>
       </ProSidebar>
