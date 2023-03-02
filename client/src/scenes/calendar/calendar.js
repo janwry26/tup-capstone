@@ -6,6 +6,7 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import listPlugin from "@fullcalendar/list";
+import Swal from 'sweetalert2'; // import SweetAlert2 library
 import {
   Box,
   List,
@@ -23,31 +24,43 @@ const Calendar = () => {
   const [currentEvents, setCurrentEvents] = useState([]);
 
   const handleDateClick = (selected) => {
-    const title = prompt("Please enter a new title for your event");
     const calendarApi = selected.view.calendar;
     calendarApi.unselect();
 
-    if (title) {
-      calendarApi.addEvent({
-        id: `${selected.dateStr}-${title}`,
-        title,
-        start: selected.startStr,
-        end: selected.endStr,
-        allDay: selected.allDay,
-      });
-    }
+    Swal.fire({
+      title: "Enter event title:",
+      input: "text",
+      inputPlaceholder: "Event title",
+      showCancelButton: true,
+      confirmButtonText: "Save",
+      cancelButtonText: "Cancel",
+    }).then((result) => {
+      if (result.isConfirmed && result.value.trim() !== "") {
+        const title = result.value.trim();
+        calendarApi.addEvent({
+          id: `${selected.dateStr}-${title}`,
+          title,
+          start: selected.startStr,
+          end: selected.endStr,
+          allDay: selected.allDay,
+        });
+      }
+    });
   };
 
   const handleEventClick = (selected) => {
-    if (
-      window.confirm(
-        `Are you sure you want to delete the event '${selected.event.title}'`
-      )
-    ) {
-      selected.event.remove();
-    }
+    Swal.fire({
+      title: `Are you sure you want to delete the event '${selected.event.title}'?`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Yes",
+      cancelButtonText: "No",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        selected.event.remove();
+      }
+    });
   };
-
   return (
     <Box m="20px">
       <Header title="Calendar" subtitle="Full Calendar Interactive Page" />
