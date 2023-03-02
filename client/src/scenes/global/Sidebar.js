@@ -20,6 +20,7 @@ import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
 import Inventory2OutlinedIcon from '@mui/icons-material/Inventory2Outlined';
 import Inventory2RoundedIcon from '@mui/icons-material/Inventory2Rounded';
 import Inventory2TwoToneIcon from '@mui/icons-material/Inventory2TwoTone';
+import AddTaskIcon from '@mui/icons-material/AddTask';
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -47,6 +48,9 @@ const Sidebar = () => {
   return (
     <Box
       sx={{
+        overflow: "auto",
+        height: "100vh",
+        overflowX: "hidden",
        
         "& .pro-sidebar-inner": {
           background: `${colors.primary[400]} !important`,
@@ -232,25 +236,41 @@ const Sidebar = () => {
             </Typography>
             <Item
               title="Inventory 1"
-              to="/dashboard/bar"
+              to="/dashboard/inventory1"
               icon={<Inventory2OutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
               title="Inventory 2"
-              to="/dashboard/pie"
+              to="/dashboard/inventory2"
               icon={<Inventory2RoundedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
               title="Inventory 3"
-              to="/dashboard/line"
+              to="/dashboard/inventory3"
               icon={<Inventory2TwoToneIcon/>}
               selected={selected}
               setSelected={setSelected}
             />
+             <Typography
+              variant="h6"
+              color={colors.grey[300]}
+              sx={{ m: "15px 0 5px 20px" }}
+            >
+             Task
+            </Typography>
+            <Item
+              title="Assign Task"
+              to="/dashboard/task"
+              icon={<AddTaskIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+          
+          
           
           </Box>
         </Menu>
