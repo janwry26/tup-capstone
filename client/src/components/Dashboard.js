@@ -18,6 +18,7 @@ import Geography from "../scenes/geography";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { ColorModeContext, useMode } from "../theme";
 import Calendar from "../scenes/calendar/calendar";
+import Task from "../scenes/task";
 
 function DashboardMain() {
   const [theme, colorMode] = useMode();
@@ -43,7 +44,7 @@ function DashboardMain() {
             <Route path="/bar" element={<Bar />} />
             <Route path="/pie" element={<Pie />} />
             <Route path="/geography" element={<Geography />} />
-
+            <Route path="/task" element={<Task />} />
             </Routes>
           </main>
         </div>
