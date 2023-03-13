@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Header from "../../components/Header";
-import { Box } from "@mui/material";
-
+import { Box, Button } from "@mui/material";
+import "./task.css"
 function TaskList() {
   const [tasks, setTasks] = useState([]);
   const [newTask, setNewTask] = useState("");
@@ -29,17 +29,24 @@ function TaskList() {
         <Header title="TASK" subtitle="Managing task for staff" fontSize="36px" mt="20px" />
 
         <form onSubmit={handleSubmit}>
-          <label htmlFor="newTask">Enter a new task:</label>
+        
+          <label htmlFor="newTask" class="inp" for="inp">
           <div>
-            <input
-              id="newTask"
-              type="text"
-              placeholder="Enter a new task"
+              <input placeholder=""
               value={newTask}
               onChange={(event) => setNewTask(event.target.value)}
-            />
-            <button type="submit">Add</button>
+              id="newTask" type="text"/>
+              <span class="label">add task here</span>
+              <span class="focus-bg"></span>
+            
+              <Button type="submit" color="secondary" variant="contained">
+                Create
+              </Button>
           </div>
+          </label>
+          
+        
+          
         </form>
 
         {tasks.length > 0 && (
@@ -50,10 +57,14 @@ function TaskList() {
                   {task.text}
                 </div>
                 <div>
-                  <button onClick={() => handleUpdate(task.id, prompt("Enter new task text"))}>
-                    Edit
-                  </button>
-                  <button onClick={() => handleDelete(task.id)}>Delete</button>
+                 
+                  <Button onClick={() => handleUpdate(task.id, prompt("Enter new task text"))} type="submit" color="secondary" variant="contained">
+                   Update
+                  </Button>
+                              
+                  <Button onClick={() => handleDelete(task.id)} type="submit" color="error" variant="contained">
+                    Delete
+                  </Button>
                 </div>
               </div>
             ))}
