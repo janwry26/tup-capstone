@@ -2,6 +2,8 @@ import { useState } from "react";
 import Header from "../../components/Header";
 import { Box, Button } from "@mui/material";
 import "./task.css"
+import Swal from "sweetalert2";
+
 function TaskList() {
   const [tasks, setTasks] = useState([]);
   const [newTask, setNewTask] = useState("");
@@ -14,14 +16,49 @@ function TaskList() {
   };
 
   const handleDelete = (id) => {
-    setTasks(tasks.filter((task) => task.id !== id));
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        setTasks(tasks.filter((task) => task.id !== id));
+        Swal.fire("Deleted!", "Your task has been deleted.", "success");
+      }
+    });
   };
 
   const handleUpdate = (id, newText) => {
-    setTasks(
-      tasks.map((task) => (task.id === id ? { ...task, text: newText || task.text } : task))
-    );
+    Swal.fire({
+      title: "Update task",
+      input: "text",
+      text: "You can update your task by typing here!",
+      icon: 'info',
+      inputValue: newText,
+      showCancelButton: true,
+      confirmButtonText: "Save",
+      cancelButtonText: "Cancel",
+      inputValidator: (value) => {
+        if (!value) {
+          return "You need to enter a new task name!";
+        }
+      },
+    }).then((result) => {
+      if (result.isConfirmed) {
+        setTasks(
+          tasks.map((task) =>
+            task.id === id ? { ...task, text: result.value } : task
+          )
+        );
+        Swal.fire("Updated!", "Your task has been updated.", "success");
+      }
+    });
   };
+  
   
 
   return (
@@ -61,7 +98,7 @@ function TaskList() {
                 </div>
                 <div className="btn-upd-del">
                  
-                  <Button onClick={() => handleUpdate(task.id, prompt("Enter new task text"))} type="submit" color="secondary" variant="contained">
+                  <Button onClick={() => handleUpdate(task.id)} type="submit" color="secondary" variant="contained">
                    Update
                   </Button>
                               
