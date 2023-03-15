@@ -49,9 +49,9 @@ const Sidebar = () => {
   return (
     <Box
       sx={{
-        overflow: "auto",
+        // overflow: "auto",
         height: "100vh",
-        overflowX: "hidden",
+        // overflowX: "hidden",
        
         "& .pro-sidebar-inner": {
           background: `${colors.primary[400]} !important`,
