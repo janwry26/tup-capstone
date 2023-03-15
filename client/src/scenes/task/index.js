@@ -87,13 +87,12 @@ function TaskList() {
         
           
         </form>
-
+        <h2>TASK CREATED BELOW:</h2>
         {tasks.length > 0 && (
           <div>
             {tasks.map((task) => (
               <div key={task.id}>
                 <div style={{ textDecoration: task.completed ? "line-through" : "" }}>
-                  <h2>TASK CREATED:</h2>
                   <h3 className="task-created">{task.text}</h3>
                 </div>
                 <div className="btn-upd-del">
