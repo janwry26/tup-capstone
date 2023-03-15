@@ -31,17 +31,18 @@ function TaskList() {
         <form onSubmit={handleSubmit}>
         
           <label htmlFor="newTask" class="inp" for="inp">
-          <div>
+          <div className="input-container"> 
               <input placeholder=""
               value={newTask}
               onChange={(event) => setNewTask(event.target.value)}
               id="newTask" type="text"/>
               <span class="label">add task here</span>
               <span class="focus-bg"></span>
-            
+              <span>
               <Button type="submit" color="secondary" variant="contained">
                 Create
               </Button>
+              </span>
           </div>
           </label>
           
@@ -54,9 +55,9 @@ function TaskList() {
             {tasks.map((task) => (
               <div key={task.id}>
                 <div style={{ textDecoration: task.completed ? "line-through" : "" }}>
-                  {task.text}
+                  <h3 className="task-created">{task.text}</h3>
                 </div>
-                <div>
+                <div className="btn-upd-del">
                  
                   <Button onClick={() => handleUpdate(task.id, prompt("Enter new task text"))} type="submit" color="secondary" variant="contained">
                    Update
