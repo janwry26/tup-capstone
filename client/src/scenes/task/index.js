@@ -19,9 +19,10 @@ function TaskList() {
 
   const handleUpdate = (id, newText) => {
     setTasks(
-      tasks.map((task) => (task.id === id ? { ...task, text: newText } : task))
+      tasks.map((task) => (task.id === id ? { ...task, text: newText || task.text } : task))
     );
   };
+  
 
   return (
     <Box p="20px">
@@ -55,6 +56,7 @@ function TaskList() {
             {tasks.map((task) => (
               <div key={task.id}>
                 <div style={{ textDecoration: task.completed ? "line-through" : "" }}>
+                  <h2>TASK CREATED:</h2>
                   <h3 className="task-created">{task.text}</h3>
                 </div>
                 <div className="btn-upd-del">
