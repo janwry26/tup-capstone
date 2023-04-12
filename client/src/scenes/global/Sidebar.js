@@ -120,7 +120,7 @@ const Sidebar = () => {
                  Janwry
                 </Typography>
                 <Typography variant="h5" color={colors.greenAccent[500]}>
-                  VP Fancy Admin
+                  Admin
                 </Typography>
               </Box>
             </Box>
