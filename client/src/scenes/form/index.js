@@ -30,6 +30,7 @@ const Form = () => {
         }) => (
           <form onSubmit={handleSubmit}>
             <Box
+            background="white"
               display="grid"
               gap="30px"
               gridTemplateColumns="repeat(4, minmax(0, 1fr))"

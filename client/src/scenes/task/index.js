@@ -1,9 +1,8 @@
 import { useState } from "react";
 import Header from "../../components/Header";
-import { Box, Button } from "@mui/material";
-import "./task.css"
+import { Button, Form } from "react-bootstrap";
 import Swal from "sweetalert2";
-
+import {Box} from "@mui/material"
 function TaskList() {
   const [tasks, setTasks] = useState([]);
   const [newTask, setNewTask] = useState("");
@@ -11,7 +10,7 @@ function TaskList() {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (!newTask) return;
-    setTasks([...tasks, { text: newTask, id: Date.now() }]);
+    setTasks([...tasks, { text: newTask, id: Date.now(), completed: false }]);
     setNewTask("");
   };
 
@@ -37,7 +36,7 @@ function TaskList() {
       title: "Update task",
       input: "text",
       text: "You can update your task by typing here!",
-      icon: 'info',
+      icon: "info",
       inputValue: newText,
       showCancelButton: true,
       confirmButtonText: "Save",
@@ -58,60 +57,82 @@ function TaskList() {
       }
     });
   };
-  
-  
+
+  const handleComplete = (id) => {
+    setTasks(
+      tasks.map((task) =>
+        task.id === id ? { ...task, completed: !task.completed } : task
+      )
+    );
+  };
 
   return (
-    <Box p="20px">
+    <Box p="20px" width="80%" margin="0 auto" paddingTop="50px">
       <div>
-        <Header title="TASK" subtitle="Managing task for staff" fontSize="36px" mt="20px" />
-
-        <form onSubmit={handleSubmit}>
-        
-          <label htmlFor="newTask" class="inp" for="inp">
-          <div className="input-container"> 
-              <input placeholder=""
+        <Header
+          title="TASK"
+          subtitle="Managing task for staff"
+          fontSize="36px"
+          mt="20px"
+        />
+        <Form onSubmit={handleSubmit}>
+          <Form.Group>
+            <Form.Control
+              type="text"
+              placeholder="Add task here..."
               value={newTask}
               onChange={(event) => setNewTask(event.target.value)}
-              id="newTask" type="text"/>
-              <span class="label">add task here</span>
-              <span class="focus-bg"></span>
-              <span>
-              <Button type="submit" color="secondary" variant="contained">
+              style={{ marginBottom: "10px" }}
+            />
+           
+              <Button type="submit" color="success" variant="success">
                 Create
               </Button>
-              </span>
-          </div>
-          </label>
           
-        
-          
-        </form>
-        <h2>TASK CREATED BELOW:</h2>
+          </Form.Group>
+        </Form>
+        <h2 className="mt-4">TASK CREATED BELOW:</h2>
+
         {tasks.length > 0 && (
-          <div>
+          <div className="mt-3">
             {tasks.map((task) => (
-              <div key={task.id}>
-                <div style={{ textDecoration: task.completed ? "line-through" : "" }}>
-                  <h3 className="task-created">{task.text}</h3>
-                </div>
-                <div className="btn-upd-del">
-                 
-                  <Button onClick={() => handleUpdate(task.id)} type="submit" color="secondary" variant="contained">
-                   Update
-                  </Button>
-                              
-                  <Button onClick={() => handleDelete(task.id)} type="submit" color="error" variant="contained">
-                    Delete
-                  </Button>
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
+              <div key={task.id} className="d-flex align-items-center ">
+                <Form.Check
+                  type="checkbox"
+                  id={`task-${task.id}`}
+                  label={task.text}
+                  checked={task.completed}
+                  onChange={() => handleComplete(task.id)}
+                  className="flex-grow-1"
+                />
+              <div className="d-flex">
+              <Button
+                onClick={() => handleUpdate(task.id, task.text)}
+                variant="info"
+                className="me-2"
+              >
+                Update
+              </Button>
+              <Button
+                onClick={() => handleDelete(task.id)}
+                variant="danger"
+              >
+                Delete
+              </Button>
+            </div>
+                  </div>
+                  ))}
+                  </div>
+                  )}
+
+    {tasks.length === 0 && (
+      <div className="mt-3">
+        <p>No tasks yet. Create a new task above.</p>
       </div>
-    </Box>
-  );
+    )}
+  </div>
+</Box>
+);
 }
 
 export default TaskList;

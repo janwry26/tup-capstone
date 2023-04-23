@@ -242,20 +242,6 @@ const Sidebar = () => {
               selected={selected}
               setSelected={setSelected}
             />
-            <Item
-              title="Inventory 2"
-              to="/dashboard/inventory2"
-              icon={<Inventory2RoundedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Inventory 3"
-              to="/dashboard/inventory3"
-              icon={<Inventory2TwoToneIcon/>}
-              selected={selected}
-              setSelected={setSelected}
-            />
              <Typography
               variant="h6"
               color={colors.grey[300]}
@@ -270,13 +256,7 @@ const Sidebar = () => {
               selected={selected}
               setSelected={setSelected}
             />
-             <Item
-              title="Manage Task"
-              to="/dashboard/manage"
-              icon={<EditOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
+            
           </Box>
         </Menu>
       </ProSidebar>

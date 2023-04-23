@@ -61,7 +61,7 @@ const Inventory = () => {
   return (
     
     <div className="container mt-5">
-     <Header title="INVENTORY" subtitle="Inventory 1" fontSize="36px" mt="20px" />
+     <Header title="INVENTORY" subtitle="Inventory for medicines" fontSize="36px" mt="20px" />
       <Form onSubmit={handleAddProduct}>
         <Form.Group className="mb-3" controlId="name">
           <Form.Label>Name</Form.Label>
