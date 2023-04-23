@@ -20,6 +20,9 @@ import { ColorModeContext, useMode } from "../theme";
 import Calendar from "../scenes/calendar/calendar";
 import Task from "../scenes/task";
 import Inventory from "../scenes/inventory"
+import Observation from "../scenes/observationReport"
+import Mortality from "../scenes/mortalityReport"
+
 function DashboardMain() {
   const [theme, colorMode] = useMode();
   const [isSidebar, setIsSidebar] = useState(true);
@@ -46,6 +49,9 @@ function DashboardMain() {
             <Route path="/geography" element={<Geography />} />
             <Route path="/task" element={<Task />} />
             <Route path="/inventory1" element={<Inventory />} />
+            <Route path="/observation" element={<Observation />} />
+            <Route path="/mortality" element={<Mortality />} />
+
             </Routes>
           </main>
         </div>
