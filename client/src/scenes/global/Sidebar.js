@@ -18,10 +18,11 @@ import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
 import Inventory2OutlinedIcon from '@mui/icons-material/Inventory2Outlined';
-import Inventory2RoundedIcon from '@mui/icons-material/Inventory2Rounded';
-import Inventory2TwoToneIcon from '@mui/icons-material/Inventory2TwoTone';
 import AddTaskIcon from '@mui/icons-material/AddTask';
-import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
+import PreviewIcon from '@mui/icons-material/Preview';
+import MonitorHeartIcon from '@mui/icons-material/MonitorHeart';
+import PetsIcon from '@mui/icons-material/Pets';
+import MedicalInformationIcon from '@mui/icons-material/MedicalInformation';
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -256,7 +257,48 @@ const Sidebar = () => {
               selected={selected}
               setSelected={setSelected}
             />
-            
+             <Typography
+              variant="h6"
+              color={colors.grey[300]}
+              sx={{ m: "15px 0 5px 20px" }}
+            >
+             Reports
+            </Typography>
+            <Item
+              title="Observation Report"
+              to="/dashboard/observation"
+              icon={<PreviewIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              title="Mortality Report"
+              to="/dashboard/mortality"
+              icon={<MonitorHeartIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+             <Typography
+              variant="h6"
+              color={colors.grey[300]}
+              sx={{ m: "15px 0 5px 20px" }}
+            >
+            Records
+            </Typography>
+            <Item
+              title="Animal Records"
+              to="/dashboard/animal"
+              icon={<PetsIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+             <Item
+              title="Medical History"
+              to="/dashboard/medical"
+              icon={<MedicalInformationIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
           </Box>
         </Menu>
       </ProSidebar>
