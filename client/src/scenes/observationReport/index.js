@@ -74,7 +74,7 @@ const ObservationReport = () => {
             />
           </FormGroup>
           <p>Current date and time: {dateTime}</p>
-          <Button type="submit" color="primary">
+          <Button type="submit" color="success">
             Submit
           </Button>
         </Form>
