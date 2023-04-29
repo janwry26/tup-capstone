@@ -23,23 +23,33 @@ import PreviewIcon from '@mui/icons-material/Preview';
 import MonitorHeartIcon from '@mui/icons-material/MonitorHeart';
 import PetsIcon from '@mui/icons-material/Pets';
 import MedicalInformationIcon from '@mui/icons-material/MedicalInformation';
-const Item = ({ title, to, icon, selected, setSelected }) => {
+const Item = ({ title, to, icon, selected, setSelected, disabled }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+
+  const handleClick = () => {
+    if (!disabled) {
+      setSelected(title);
+    }
+  };
+
   return (
     <MenuItem
       active={selected === title}
       style={{
         color: colors.grey[100],
+        pointerEvents: disabled ? 'none' : 'auto',
+        opacity: disabled ? 0.5 : 1,
       }}
-      onClick={() => setSelected(title)}
+      onClick={handleClick}
       icon={icon}
     >
       <Typography>{title}</Typography>
-      <Link to={to} />
+      {disabled ? null : <Link to={to} />}
     </MenuItem>
   );
 };
+
 
 const Sidebar = () => {
   const theme = useTheme();
@@ -149,6 +159,8 @@ const Sidebar = () => {
               icon={<PeopleOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
+              disabled={true}
+              
             />
             <Item
               title="Contacts Information"
@@ -156,6 +168,7 @@ const Sidebar = () => {
               icon={<ContactsOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
+              disabled={true}
             />
             <Item
               title="Invoices Balances"
