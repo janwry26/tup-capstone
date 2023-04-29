@@ -19,12 +19,7 @@
     overflow-x: hidden;
 
   }
-  h2{
-    color: white;
-    font-size: 16px;
-    text-align: center;
-    padding-bottom: 20px;
-  }
+
   .login-box .user-box {
     position: relative;
   }
@@ -40,7 +35,12 @@
     outline: none;
     background: transparent;
   }
-  
+  h2{
+    color: white;
+    font-size: 16px;
+    text-align: center;
+    padding-bottom: 20px;
+  }
   .login-box .user-box label {
     position: absolute;
     top: 0;
