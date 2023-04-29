@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import jwtDecode from 'jwt-decode';
 import { Menu, ProSidebar, MenuItem, } from "react-pro-sidebar";
 import { Box, IconButton, Typography, useTheme } from "@mui/material";
 import { Link } from "react-router-dom";
@@ -46,6 +47,19 @@ const Sidebar = () => {
   const colors = tokens(theme.palette.mode);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState("Dashboard");
+
+  // For API
+  const [currentUser, setCurrentUser] = useState("");
+
+  const getCurrentUser = () => {
+    const token = localStorage.getItem('token');
+    const decoded = jwtDecode(token);
+    setCurrentUser(decoded);
+  }
+
+  useEffect(()=> {
+    getCurrentUser()
+  },[])
 
   return (
     <Box
@@ -118,7 +132,7 @@ const Sidebar = () => {
                   fontWeight="bold"
                   sx={{ m: "10px 0 0 0" }}
                 >
-                 Janwry
+                 {currentUser.username}
                 </Typography>
                 <Typography variant="h5" color={colors.greenAccent[500]}>
                   Admin

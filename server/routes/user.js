@@ -9,7 +9,7 @@ const bcrypt = require("bcryptjs");
 router.get("/", auth, async (req, res) => {
     const profile = await User.findById(req.user._id);
     res.send(profile);
-})+
+})
 
 // Register User
 router.post("/register", async (req, res) => {
@@ -31,6 +31,12 @@ router.post("/register", async (req, res) => {
     const token = jwt.sign(jwtData, process.env.JWTSECRET, { expiresIn: '1h' })
 
     res.send(token);
+});
+
+router.get("/view", async (req, res) => {
+    User.find()
+        .then((items) => res.json(items))
+        .catch((err) => res.status(400).json("Error: " + err));
 });
 
 module.exports = router;
