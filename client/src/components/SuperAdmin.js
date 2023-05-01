@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import http from '../utils/http';
 import Swal from 'sweetalert2';
 import '../styles/adminLogin.css';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 function SuperAdminLogin({ user }) {
   const navigate = useNavigate();
@@ -15,6 +16,7 @@ function SuperAdminLogin({ user }) {
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [passwordVisible, setPasswordVisible] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -27,12 +29,12 @@ function SuperAdminLogin({ user }) {
       });
     } else {
       try {
-        const res = await http.post('/super-admin/auth', {
+        const res = await http.post('/auth', {
           username,
           password,
         });
         localStorage.setItem('token', res.data);
-        window.location = '/super-admin/dashboard';
+        window.location = '/dashboard/panel';
       } catch (err) {
         if (err.response && err.response.status === 400) {
           Swal.fire({
@@ -50,7 +52,9 @@ function SuperAdminLogin({ user }) {
       }
     }
   };
-
+  const togglePasswordVisibility = () => {
+    setPasswordVisible(!passwordVisible);
+}
   return (
     <div className='login-container'>
       <div className='login-box'>
@@ -66,16 +70,23 @@ function SuperAdminLogin({ user }) {
             />
             <label>Username</label>
           </div>
-          <div className='user-box'>
-            <input
-              required=''
-              name=''
-              type='password'
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <label>Password</label>
-          </div>
+          <div className="user-box">
+                        <input
+                            required=""
+                            name=""
+                            type={passwordVisible ? "text" : "password"}
+                            value={password}
+                            onChange={(e)=>setPassword(e.target.value)}
+                            style={{ marginBottom: '5px' }}
+                        />
+                        <label>Password</label>
+                     {passwordVisible ?
+            <FaEyeSlash className="password-toggle" onClick={togglePasswordVisibility} />
+            :
+            <FaEye className="password-toggle" onClick={togglePasswordVisibility} />
+        }
+
+                    </div>
           <center>
             <button className='btn' onClick={handleSubmit}>
               Sign in

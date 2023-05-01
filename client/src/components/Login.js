@@ -78,7 +78,7 @@ function Login({user}){
                         />
                         <label>Username</label>
                     </div>
-                    <div className="user-box">
+                   <div className="user-box">
                         <input
                             required=""
                             name=""
@@ -88,7 +88,8 @@ function Login({user}){
                             style={{ marginBottom: '5px' }}
                         />
                         <label>Password</label>
-                        {passwordVisible ?
+                        <label>Password</label>
+                                    {passwordVisible ?
                             <FaEyeSlash className="password-toggle" onClick={togglePasswordVisibility} />
                             :
                             <FaEye className="password-toggle" onClick={togglePasswordVisibility} />
