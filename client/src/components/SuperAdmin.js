@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import http from '../utils/http';
 import Swal from 'sweetalert2';
-import '../styles/adminLogin.css';
+import '../styles/login.css';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 function SuperAdminLogin({ user }) {
