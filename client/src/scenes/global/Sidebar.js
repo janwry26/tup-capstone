@@ -60,15 +60,22 @@ const Sidebar = () => {
 
   // For API
   const [currentUser, setCurrentUser] = useState("");
+  const [isAdmin, setIsAdmin] = useState(false);
 
   const getCurrentUser = () => {
     const token = localStorage.getItem('token');
     const decoded = jwtDecode(token);
     setCurrentUser(decoded);
+    if (decoded.username === "Admin" || decoded.username === "Super Admin") {
+      setIsAdmin(true);
+    } else {
+      setIsAdmin(false);
+    }
   }
 
   useEffect(()=> {
     getCurrentUser()
+    console.log(isAdmin);
   },[])
 
   return (
@@ -173,7 +180,7 @@ const Sidebar = () => {
               icon={<PeopleOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
-              disabled={true}
+              disabled={!isAdmin}
               
             />
             <Item
@@ -182,7 +189,7 @@ const Sidebar = () => {
               icon={<ContactsOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
-              disabled={true}
+              disabled={!isAdmin}
             />
             <Item
               title="Invoices Balances"
@@ -205,6 +212,7 @@ const Sidebar = () => {
               icon={<PersonOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
+              disabled={!isAdmin}
             />
             <Item
               title="Calendar"
@@ -283,6 +291,7 @@ const Sidebar = () => {
               icon={<AddTaskIcon />}
               selected={selected}
               setSelected={setSelected}
+              disabled={!isAdmin}
             />
              <Typography
               variant="h6"

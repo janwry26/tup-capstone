@@ -13,15 +13,24 @@ if (localStorage.getItem("token")) {
     logUser = jwtDecode(jwt);
 }
 
+let logAdmin;
+if (localStorage.getItem("token")) {
+    const jwt = localStorage.getItem("token");
+    setAuthToken(jwt);
+    logAdmin = jwtDecode(jwt);
+}
+
 function App() {
   const user = logUser;
   console.log("User: ", user)
+  const admin = logAdmin;
+  console.log("Admin: ", admin)
   return (
     <BrowserRouter>
       <div className='App'>
         <Navbar/>
         <div className='main'>
-          <Routing user={user} />
+          <Routing user={user} admin={admin} />
         </div>
       </div>
     </BrowserRouter>

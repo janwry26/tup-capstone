@@ -33,7 +33,7 @@ function Login({user}){
     }
 
     const handleSubmit = async () => {
-        await http.post("/auth", {
+        await http.post("/auth/user", {
             username,
             password
         })
