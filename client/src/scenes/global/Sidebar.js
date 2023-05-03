@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import jwtDecode from 'jwt-decode';
 import { Menu, ProSidebar, MenuItem, } from "react-pro-sidebar";
 import { Box, IconButton, Typography, useTheme } from "@mui/material";
 import { Link } from "react-router-dom";
@@ -57,6 +58,25 @@ const Sidebar = () => {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState("Dashboard");
 
+  // For API
+  const [currentUser, setCurrentUser] = useState("");
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  const getCurrentUser = () => {
+    const token = localStorage.getItem('token');
+    const decoded = jwtDecode(token);
+    setCurrentUser(decoded);
+    if (decoded.username === "Admin" || decoded.username === "Super Admin") {
+      setIsAdmin(true);
+    } else {
+      setIsAdmin(false);
+    }
+  }
+
+  useEffect(()=> {
+    getCurrentUser()
+  },[])
+
   return (
     <Box
       sx={{
@@ -99,7 +119,6 @@ const Sidebar = () => {
                 alignItems="center"
                 ml="15px"
               >
-               
                 <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
                   <MenuOutlinedIcon />
                 </IconButton>
@@ -126,10 +145,10 @@ const Sidebar = () => {
                   fontWeight="bold"
                   sx={{ m: "10px 0 0 0" }}
                 >
-                 Janwry
+                 {currentUser.username}
                 </Typography>
                 <Typography variant="h5" color={colors.greenAccent[500]}>
-                  Admin
+                  {isAdmin ? "ADMIN" : "USER"}
                 </Typography>
               </Box>
             </Box>
@@ -151,23 +170,20 @@ const Sidebar = () => {
             >
               Data
             </Typography>
-            <Item
+            {isAdmin && <Item
               title="Manage Team"
               to="/dashboard/team"
               icon={<PeopleOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
-              disabled={true}
-              
-            />
-            <Item
+            />}
+            {isAdmin && <Item
               title="Contacts Information"
               to="/dashboard/contacts"
               icon={<ContactsOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
-              disabled={true}
-            />
+            />}
             <Item
               title="Invoices Balances"
               to="/dashboard/invoices"
@@ -183,13 +199,13 @@ const Sidebar = () => {
             >
               Pages
             </Typography>
-            <Item
+            {isAdmin && <Item
               title="Profile Form"
               to="/dashboard/form"
               icon={<PersonOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
-            />
+            />}
             <Item
               title="Calendar"
               to="/dashboard/calendar"
@@ -261,13 +277,13 @@ const Sidebar = () => {
             >
              Task
             </Typography>
-            <Item
+            {isAdmin && <Item
               title="Create Task"
               to="/dashboard/task"
               icon={<AddTaskIcon />}
               selected={selected}
               setSelected={setSelected}
-            />
+            />}
              <Typography
               variant="h6"
               color={colors.grey[300]}
