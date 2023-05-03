@@ -128,7 +128,7 @@ const Inventory = () => {
     </thead>
     <tbody>
       {products.map((product, index) => (
-        <tr key={product.inventoryID}>
+        <tr style={{color: "white"}} key={product.inventoryID}>
           <td>{product.inventoryID}</td>
           <td>
             <Form.Control
@@ -182,8 +182,12 @@ const Inventory = () => {
               }
             />
           </td>
-          <td>
+          <td  >
             <Button
+              style={{
+                marginTop: '0',
+                padding: '6px 12px'
+              }}
               variant="danger"
               onClick={() => handleDeleteProduct(index)}
             >

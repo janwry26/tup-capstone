@@ -172,73 +172,121 @@ const AnimalRecords = () => {
 </Form>
 
 
-      <Table responsive striped bordered hover className="mt-5"  style={{ color: "white" }}>
-        <thead>
-        <tr>
-        <th>Name</th>
-        <th>Species</th>
-        <th>Age</th>
-        <th>Gender</th>
-        <th>Action</th>
-        </tr>
-        </thead>
-    <tbody>
-    {animals.map((animal, index) => (
-    <tr key={index}>
-    <td>
-    <Form.Control
-    type="text"
-    defaultValue={animal.name}
-    onChange={(event) =>
-    handleEditAnimal(index, "name", event.target.value)
-    }
-    />
-    </td>
-    <td>
-    <Form.Control
-    type="text"
-    defaultValue={animal.species}
-    onChange={(event) =>
-    handleEditAnimal(index, "species", event.target.value)
-    }
-    />
-    </td>
-    <td>
-    <Form.Control
-    type="number"
-    defaultValue={animal.age}
-    min="1"
-    step="1"
-    onChange={(event) =>
-    handleEditAnimal(index, "age", event.target.value)
-    }
-    />
-    </td>
-    <td>
-    <Form.Select
-    defaultValue={animal.gender}
-    onChange={(event) =>
-    handleEditAnimal(index, "gender", event.target.value)
-    }
-    >
-    <option value="male">Male</option>
-    <option value="female">Female</option>
-    <option value="unknown">Unknown</option>
-    </Form.Select>
-    </td>
-    <td>
-    <Button
-    variant="danger"
-    className="me-2"
-    onClick={() => handleDeleteAnimal(index)}
-    >
-    <FaTrash />
-    </Button>
-    </td>
+<Table striped bordered hover style={{ color: "white" }}>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Species</th>
+      <th>Age</th>
+      <th>Gender</th>
+      <th>Animal ID</th>
+      <th>Breed Type</th>
+      <th>Weight (kg)</th>
+      <th>Birth Date</th>
+      <th>Actions</th>
     </tr>
+  </thead>
+  <tbody>
+    {animals.map((animal, index) => (
+      <tr key={index}>
+        <td>
+          <Form.Control
+            type="text"
+            value={animal.name}
+            onChange={(event) =>
+              handleEditAnimal(index, "name", event.target.value)
+            }
+          />
+        </td>
+        <td>
+          <Form.Control
+            as="select"
+            value={animal.species}
+            onChange={(event) =>
+              handleEditAnimal(index, "species", event.target.value)
+            }
+          >
+            <option value="">Select species</option>
+            <option value="Mammal">Mammal</option>
+            <option value="Bird">Bird</option>
+            <option value="Amphibians">Amphibians</option>
+            <option value="Reptiles">Reptiles</option>
+            <option value="Fish">Fish</option>
+            <option value="Insects">Insects</option>
+          </Form.Control>
+        </td>
+        <td>
+          <Form.Control
+            type="number"
+            value={animal.age}
+            onChange={(event) =>
+              handleEditAnimal(index, "age", event.target.value)
+            }
+          />
+        </td>
+        <td>
+          <Form.Control
+            as="select"
+            value={animal.gender}
+            onChange={(event) =>
+              handleEditAnimal(index, "gender", event.target.value)
+            }
+          >
+            <option value="">Select gender</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="unknown">Unknown</option>
+          </Form.Control>
+        </td>
+        <td>
+          <Form.Control
+            type="text"
+            value={animal.animalID}
+            onChange={(event) =>
+              handleEditAnimal(index, "animalID", event.target.value)
+            }
+          />
+        </td>
+        <td>
+          <Form.Control
+            type="text"
+            value={animal.breedType}
+            onChange={(event) =>
+              handleEditAnimal(index, "breedType", event.target.value)
+            }
+          />
+        </td>
+        <td>
+          <Form.Control
+            type="number"
+            value={animal.weight}
+            onChange={(event) =>
+              handleEditAnimal(index, "weight", event.target.value)
+            }
+          />
+        </td>
+        <td>
+          <Form.Control
+            type="date"
+            value={animal.birthDate}
+            onChange={(event) =>
+              handleEditAnimal(index, "birthDate", event.target.value)
+            }
+          />
+        </td>
+        <td>
+          <Button  style={{
+                marginTop: '0',
+                padding: '6px 12px'
+              }} variant="danger" onClick={() => handleDeleteAnimal(index)}>
+            <FaTrash />
+          </Button>
+        </td>
+      </tr>
     ))}
-    </tbody>
-    </Table>
+  </tbody>
+</Table>
+
     </div>
     );
     };
