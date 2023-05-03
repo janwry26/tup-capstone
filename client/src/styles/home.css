@@ -8,13 +8,15 @@
 
 }
 .title{
-    font-size: 35px;
+    font-size: 30px;
     text-align: center;
+
 }
 p.lead{
     text-align: justify;
     inline-size: 400px;
     overflow-wrap: break-word;
+
 }
 .btn-primary{
     color: black;
@@ -31,7 +33,6 @@ button.btn1{
     color: black;
     background-color: transparent;   
     width: 185px;
-    padding: 3px;
     font-size: 12px;
     height: 40px;
 }
@@ -59,11 +60,20 @@ button.btn2{
 
 @media screen and (max-width: 1024px) {
    .hero-section{
-    padding-top: 100px;
+    padding-top: 80px;
     height:100vh;
-
     
     }
+    .title{
+        font-size: 25px;
+        text-align: center;
+        inline-size: 370px;
+    
+    }
+    button.btn1{
+      margin-top: -5px;
+    }
+   
     p.lead{
         font-size: 14px;
         width: 80%;
@@ -72,7 +82,6 @@ button.btn2{
     div.col-lg-6{
         display: flex;
         flex-direction: column;
-        justify-content: center;
         align-items: center;
     }
     div.col-lg-6 h1{

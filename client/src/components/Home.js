@@ -14,12 +14,12 @@ function Home(){
                 ANIMAL HEALTHCARE MANAGEMENT SYSTEM 
             </h1>
             <p className="lead">Zoos and aquaria today focus on providing top-notch care for the animals under their care. They're working on a new management system to keep tabs on the animals' health, so they can quickly identify and treat any problems. The goal is to make sure the animals are healthy and happy, and to support the larger mission of conservation.</p>
-            <div className="d-grid gap-2 d-md-flex justify-content-md-start ">
+            <div className="d-grid gap-3 d-md-flex justify-content-md-center home-button">
               <Link to="/login">
-              <button type="button" className="btn btn2 btn-primary btn-lg me-md-1">Login</button>
+              <button type="button" className="btn btn2 btn-primary btn-lg">Login</button>
               </Link>
               <a href='mailto:janwryd@gmail.com'>
-              <button type="button" className="btn btn1 btn-primary btn-lg  me-md-1">Contact Admin</button>
+              <button type="button" className="btn btn1 btn-primary btn-lg">Contact Admin</button>
               </a>
             </div>
           </div>

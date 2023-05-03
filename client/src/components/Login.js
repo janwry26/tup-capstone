@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import '../styles/login.css';
 import http from '../utils/http';
 import Swal from 'sweetalert2';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 function Login({user}){
     let navigate = useNavigate();
@@ -15,11 +16,12 @@ function Login({user}){
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [passwordVisible, setPasswordVisible] = useState(false);
 
     function validation(e) {
         e.preventDefault();
 
-        if (username == "" || password == "") {
+        if (username === "" || password === "") {
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
@@ -55,36 +57,53 @@ function Login({user}){
             }
         });
     };
+
+    const togglePasswordVisibility = () => {
+        setPasswordVisible(!passwordVisible);
+    }
+
     return(
         <div className='login-container'>
-        <div className="login-box">
-            <form>
-                <div className="user-box">
-                    <input
-                        required="" 
-                        name=""
-                        type="text"
-                        value={username}
-                        onChange={(e)=>setUsername(e.target.value)}
+            <div className="login-box">
+                <h2>LOGIN FOR FOR USER</h2>
+
+                <form>
+                    <div className="user-box">
+                        <input
+                            required=""
+                            name=""
+                            type="text"
+                            value={username}
+                            onChange={(e)=>setUsername(e.target.value)}
                         />
-                    <label>Username</label>
-                </div>
-                <div className="user-box">
-                    <input 
-                        required="" 
-                        name="" 
-                        type="password"
-                        value={password}
-                        onChange={(e)=>setPassword(e.target.value)}
+                        <label>Username</label>
+                    </div>
+                   <div className="user-box">
+                        <input
+                            required=""
+                            name=""
+                            type={passwordVisible ? "text" : "password"}
+                            value={password}
+                            onChange={(e)=>setPassword(e.target.value)}
+                            style={{ marginBottom: '5px' }}
                         />
-                    <label>Password</label>
-                </div><center>
-                <button className='btn' onClick={validation}>
-                    Sign in
-                </button></center>
-            </form>
-        </div>
+                        <label>Password</label>
+                        <label>Password</label>
+                                    {passwordVisible ?
+                            <FaEyeSlash className="password-toggle" onClick={togglePasswordVisibility} />
+                            :
+                            <FaEye className="password-toggle" onClick={togglePasswordVisibility} />
+                        }
+                    </div>
+                    <center>
+                        <button className='btn' onClick={validation}>
+                            Sign in
+                        </button>
+                    </center>
+                </form>
+            </div>
         </div>
     )
 }
+
 export default Login;
