@@ -75,7 +75,6 @@ const Sidebar = () => {
 
   useEffect(()=> {
     getCurrentUser()
-    console.log(isAdmin);
   },[])
 
   return (
@@ -120,9 +119,6 @@ const Sidebar = () => {
                 alignItems="center"
                 ml="15px"
               >
-                <Typography variant="h3" color={colors.grey[100]}>
-                  ADMIN
-                </Typography>
                 <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
                   <MenuOutlinedIcon />
                 </IconButton>
@@ -152,7 +148,7 @@ const Sidebar = () => {
                  {currentUser.username}
                 </Typography>
                 <Typography variant="h5" color={colors.greenAccent[500]}>
-                  Admin
+                  {isAdmin ? "ADMIN" : "USER"}
                 </Typography>
               </Box>
             </Box>
@@ -174,23 +170,20 @@ const Sidebar = () => {
             >
               Data
             </Typography>
-            <Item
+            {isAdmin && <Item
               title="Manage Team"
               to="/dashboard/team"
               icon={<PeopleOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
-              disabled={!isAdmin}
-              
-            />
-            <Item
+            />}
+            {isAdmin && <Item
               title="Contacts Information"
               to="/dashboard/contacts"
               icon={<ContactsOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
-              disabled={!isAdmin}
-            />
+            />}
             <Item
               title="Invoices Balances"
               to="/dashboard/invoices"
@@ -206,14 +199,13 @@ const Sidebar = () => {
             >
               Pages
             </Typography>
-            <Item
+            {isAdmin && <Item
               title="Profile Form"
               to="/dashboard/form"
               icon={<PersonOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
-              disabled={!isAdmin}
-            />
+            />}
             <Item
               title="Calendar"
               to="/dashboard/calendar"
@@ -285,14 +277,13 @@ const Sidebar = () => {
             >
              Task
             </Typography>
-            <Item
+            {isAdmin && <Item
               title="Create Task"
               to="/dashboard/task"
               icon={<AddTaskIcon />}
               selected={selected}
               setSelected={setSelected}
-              disabled={!isAdmin}
-            />
+            />}
              <Typography
               variant="h6"
               color={colors.grey[300]}

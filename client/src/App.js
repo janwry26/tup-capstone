@@ -21,10 +21,13 @@ if (localStorage.getItem("token")) {
 }
 
 function App() {
+  
   const user = logUser;
-  console.log("User: ", user)
   const admin = logAdmin;
-  console.log("Admin: ", admin)
+
+  user ? console.log("User: ", user) : console.log("Admin: ", admin);
+  
+  
   return (
     <BrowserRouter>
       <div className='App'>
