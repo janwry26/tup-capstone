@@ -90,7 +90,7 @@ const Inventory = () => {
             required
           />
         </Form.Group>
-
+   {/* dasddasdaasada */}
         <Form.Group className="mb-3" controlId="quantity">
           <Form.Label>Quantity</Form.Label>
           <Form.Control

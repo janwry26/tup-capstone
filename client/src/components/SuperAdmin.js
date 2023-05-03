@@ -5,23 +5,23 @@ import Swal from 'sweetalert2';
 import '../styles/login.css';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
-function SuperAdminLogin({ user }) {
+function SuperAdminLogin({ admin }) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (user) {
+    if (admin) {
       navigate(-1);
     }
-  }, [user, navigate]);
+  }, [admin, navigate]);
 
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passwordVisible, setPasswordVisible] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (username === '' || password === '') {
+    if (email === '' || password === '') {
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
@@ -29,8 +29,8 @@ function SuperAdminLogin({ user }) {
       });
     } else {
       try {
-        const res = await http.post('/auth', {
-          username,
+        const res = await http.post('/auth/admin', {
+          email,
           password,
         });
         localStorage.setItem('token', res.data);
@@ -40,7 +40,7 @@ function SuperAdminLogin({ user }) {
           Swal.fire({
             icon: 'error',
             title: 'Oops...',
-            text: 'Invalid username or password',
+            text: 'Invalid email or password',
           });
         } else {
           Swal.fire({
@@ -64,11 +64,11 @@ function SuperAdminLogin({ user }) {
             <input
               required=''
               name=''
-              type='text'
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              type='email'
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
-            <label>Username</label>
+            <label>Email</label>
           </div>
           <div className="user-box">
                         <input
