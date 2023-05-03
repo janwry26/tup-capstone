@@ -2,7 +2,8 @@ import { useState } from "react";
 import Header from "../../components/Header";
 import { Button, Form } from "react-bootstrap";
 import Swal from "sweetalert2";
-import {Box} from "@mui/material"
+import { Box } from "@mui/material";
+
 function TaskList() {
   const [tasks, setTasks] = useState([]);
   const [newTask, setNewTask] = useState("");
@@ -10,7 +11,14 @@ function TaskList() {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (!newTask) return;
-    setTasks([...tasks, { text: newTask, id: Date.now(), completed: false }]);
+    const task = {
+      taskID: Date.now(),
+      staffID: 1, // replace with the actual staff ID
+      taskDescription: newTask,
+      taskStatus: "Incomplete",
+      taskAccomplishDate: null,
+    };
+    setTasks([...tasks, task]);
     setNewTask("");
   };
 
@@ -25,7 +33,7 @@ function TaskList() {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        setTasks(tasks.filter((task) => task.id !== id));
+        setTasks(tasks.filter((task) => task.taskID !== id));
         Swal.fire("Deleted!", "Your task has been deleted.", "success");
       }
     });
@@ -50,7 +58,7 @@ function TaskList() {
       if (result.isConfirmed) {
         setTasks(
           tasks.map((task) =>
-            task.id === id ? { ...task, text: result.value } : task
+            task.taskID === id ? { ...task, taskDescription: result.value } : task
           )
         );
         Swal.fire("Updated!", "Your task has been updated.", "success");
@@ -61,7 +69,13 @@ function TaskList() {
   const handleComplete = (id) => {
     setTasks(
       tasks.map((task) =>
-        task.id === id ? { ...task, completed: !task.completed } : task
+        task.taskID === id
+          ? {
+              ...task,
+              taskStatus: "Complete",
+              taskAccomplishDate: new Date().toLocaleString(),
+            }
+          : task
       )
     );
   };
@@ -84,11 +98,10 @@ function TaskList() {
               onChange={(event) => setNewTask(event.target.value)}
               style={{ marginBottom: "10px" }}
             />
-           
-              <Button type="submit" color="success" variant="success">
-                Create
-              </Button>
-          
+
+            <Button type="submit" color="success" variant="success">
+              Create
+            </Button>
           </Form.Group>
         </Form>
         <h2 className="mt-4">TASK CREATED BELOW:</h2>
@@ -96,38 +109,44 @@ function TaskList() {
         {tasks.length > 0 && (
           <div className="mt-3">
             {tasks.map((task) => (
-              <div key={task.id} className="d-flex align-items-center ">
-                <Form.Check
-                  type="checkbox"
-                  id={`task-${task.id}`}
-                  label={task.text}
-                  checked={task.completed}
-                  onChange={() => handleComplete(task.id)}
-                  className="flex-grow-1"
-                />
-              <div className="d-flex">
-              <Button
-                onClick={() => handleUpdate(task.id, task.text)}
-                variant="info"
-                className="me-2"
-              >
-                Update
-              </Button>
-              <Button
-                onClick={() => handleDelete(task.id)}
-                variant="danger"
-              >
-                Delete
-              </Button>
-            </div>
-                  </div>
-                  ))}
-                  </div>
-                  )}
+              <div
+                key={task.taskID}
+                className="d-flex justify-content-between
+align-items-center p-3 mb-3 shadow-sm"
+>
+<div>
+<h5>{task.taskDescription}</h5>
+<p>Assigned to Staff ID {task.staffID}</p>
+<p>Status: {task.taskStatus}</p>
+{task.taskAccomplishDate && (
+<p>Completed on: {task.taskAccomplishDate}</p>
+)}
+</div>
+<div>
+{task.taskStatus !== "Complete" && (
+<Button variant="success" onClick={() => handleComplete(task.taskID)}>
+Complete
+</Button>
+)}
+<Button
+variant="warning"
+className="mx-2"
+onClick={() => handleUpdate(task.taskID, task.taskDescription)}
+>
+Edit
+</Button>
+<Button variant="danger" onClick={() => handleDelete(task.taskID)}>
+Delete
+</Button>
+</div>
+</div>
+))}
+</div>
+)}
 
     {tasks.length === 0 && (
       <div className="mt-3">
-        <p>No tasks yet. Create a new task above.</p>
+        <p>No tasks have been added yet. Please add a task.</p>
       </div>
     )}
   </div>

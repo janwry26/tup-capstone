@@ -3,15 +3,19 @@ import { Form, Button, Table } from "react-bootstrap";
 import { FaPlus, FaMinus, FaTrash } from "react-icons/fa";
 import Header from "../../components/Header";
 import Swal from "sweetalert2";
+
 const Inventory = () => {
   const [products, setProducts] = useState([]);
 
   const handleAddProduct = (event) => {
     event.preventDefault();
     const product = {
-      name: event.target.name.value,
-      price: event.target.price.value,
+      inventoryID: products.length + 1,
+      itemName: event.target.name.value,
+      itemType: event.target.type.value,
+      itemDescription: event.target.description.value,
       quantity: event.target.quantity.value,
+      expDate: event.target.expDate.value,
     };
     setProducts([...products, product]);
     event.target.reset();
@@ -45,6 +49,7 @@ const Inventory = () => {
       }
     })
   };
+
   const handleEditProduct = (index, key, value) => {
     const newProducts = [...products];
     newProducts[index][key] = value;
@@ -59,65 +64,105 @@ const Inventory = () => {
   };
 
   return (
-    
     <div className="container mt-5">
-     <Header title="INVENTORY" subtitle="Inventory for medicines" fontSize="36px" mt="20px" />
+      <Header
+        title="INVENTORY"
+        subtitle="Inventory for medicines"
+        fontSize="36px"
+        mt="20px"
+      />
       <Form onSubmit={handleAddProduct}>
         <Form.Group className="mb-3" controlId="name">
           <Form.Label>Name</Form.Label>
-          <Form.Control type="text" placeholder="Enter product name" required/>
+          <Form.Control type="text" placeholder="Enter product name" required />
         </Form.Group>
 
-        <Form.Group className="mb-3" controlId="price">
-          <Form.Label>Price</Form.Label>
-          <Form.Control type="number" placeholder="Enter product price" min="1" step="1" required />
+        <Form.Group className="mb-3" controlId="type">
+          <Form.Label>Type</Form.Label>
+          <Form.Control type="text" placeholder="Enter product type" required />
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="description">
+          <Form.Label>Description</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Enter product description"
+            required
+          />
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="quantity">
           <Form.Label>Quantity</Form.Label>
-          <Form.Control type="number" placeholder="Enter product quantity" min="0" step="1" required />
+          <Form.Control
+            type="number"
+            placeholder="Enter product quantity"
+            min="0"
+            step="1"
+            required
+          />
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="expDate">
+          <Form.Label>Expiration Date</Form.Label>
+          <Form.Control type="date" required />
         </Form.Group>
 
         <div className="d-grid gap-2">
-          <Button variant="success" type="submit" size="lg" className="mb-3">
-            Add product <FaPlus className="ms-2" />
-          </Button>
-        </div>
-      </Form>
+          <Button variant="success" type="submit" size="lg" className="mr-3">
+<FaPlus /> Add Product
+</Button>
+</div>
+</Form>
 
-      <Table responsive striped bordered hover className="mt-5 bg-light">
-  <thead>
-    <tr>
-      <th>#</th>
-      <th>Name</th>
-      <th>Price</th>
-      <th>Quantity</th>
-      <th>Action</th>
-    </tr>
-  </thead>
-  <tbody>
-    {products.map((product, index) => (
-      <tr key={index}>
-       <td className="align-middle">{index + 1}</td>
-        <td className="align-middle">
+  <Table striped bordered hover className="mt-4" style={{ color: "white" }}>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Quantity</th>
+        <th>Expiration Date</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {products.map((product, index) => (
+        <tr key={product.inventoryID}>
+          <td>{product.inventoryID}</td>
+          <td>
             <Form.Control
-            type="text"
-            defaultValue={product.name}
-            onChange={(e) => handleEditProduct(index, "name", e.target.value)}
-            readOnly
+              type="text"
+              value={product.itemName}
+              onChange={(event) =>
+                handleEditProduct(index, "itemName", event.target.value)
+              }
             />
-        </td>
-        <td className="align-middle">
-          <Form.Control
-            type="number"
-            min="1"
-            step="1"
-            defaultValue={product.price}
-            onChange={(e) => handleEditProduct(index, "price", e.target.value)}
-          />
-        </td>
-        <td className="align-middle">
-          <div  className="d-flex align-items-center">
+          </td>
+          <td>
+            <Form.Control
+              type="text"
+              value={product.itemType}
+              onChange={(event) =>
+                handleEditProduct(index, "itemType", event.target.value)
+              }
+            />
+          </td>
+          <td>
+            <Form.Control
+              type="text"
+              value={product.itemDescription}
+              onChange={(event) =>
+                handleEditProduct(
+                  index,
+                  "itemDescription",
+                  event.target.value
+                )
+              }
+            />
+          </td>
+          <td>
+            <div className="d-flex justify-content-between align-items-center">
             <Form.Control
               type="number"
               min="0"
@@ -126,19 +171,29 @@ const Inventory = () => {
               onChange={(e) => handleEditProduct(index, "quantity", e.target.value)}
               className="mx-2"
             />
-          </div>
-        </td>
-        <td className="text-center">
-  <Button className="align-middle" variant="danger" size="sm" onClick={() => handleDeleteProduct(index)}>
-    <FaTrash />
-  </Button>
-</td>
-      </tr>
-    ))}
-  </tbody>
-</Table>
-
-
+            </div>
+          </td>
+          <td>
+            <Form.Control
+              type="date"
+              value={product.expDate}
+              onChange={(event) =>
+                handleEditProduct(index, "expDate", event.target.value)
+              }
+            />
+          </td>
+          <td>
+            <Button
+              variant="danger"
+              onClick={() => handleDeleteProduct(index)}
+            >
+              <FaTrash />
+            </Button>
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </Table>
 </div>
 );
 };
