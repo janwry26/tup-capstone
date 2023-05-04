@@ -7,20 +7,23 @@ import { Box } from "@mui/material";
 function TaskList() {
   const [tasks, setTasks] = useState([]);
   const [newTask, setNewTask] = useState("");
+  const [selectedStaffId, setSelectedStaffId] = useState("");
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (!newTask) return;
+    if (!newTask || selectedStaffId === 0) return;
     const task = {
       taskID: Date.now(),
-      staffID: 1, // replace with the actual staff ID
+      staffID: selectedStaffId,
       taskDescription: newTask,
       taskStatus: "Incomplete",
       taskAccomplishDate: null,
     };
     setTasks([...tasks, task]);
     setNewTask("");
+    setSelectedStaffId(0);
   };
+  
 
   const handleDelete = (id) => {
     Swal.fire({
@@ -89,58 +92,59 @@ function TaskList() {
           fontSize="36px"
           mt="20px"
         />
-        <Form onSubmit={handleSubmit}>
-          <Form.Group>
-            <Form.Control
-              type="text"
-              placeholder="Add task here..."
-              value={newTask}
-              onChange={(event) => setNewTask(event.target.value)}
-              style={{ marginBottom: "10px" }}
-            />
+       <Form onSubmit={handleSubmit}>
+  <Form.Group>
+    <Form.Control
+      type="text"
+      placeholder="Add task here..."
+      value={newTask}
+      onChange={(event) => setNewTask(event.target.value)}
+      style={{ marginBottom: "10px" }}
+    />
+    <Form.Control
+      type="text"
+      placeholder="Assign to staff ID"
+      value={selectedStaffId}
+      onChange={(event) => setSelectedStaffId(event.target.value)}
+      style={{ marginBottom: "10px" }}
+    />
+    <Button type="submit" color="success" variant="success">
+      Create
+    </Button>
+  </Form.Group>
+</Form>
 
-            <Button type="submit" color="success" variant="success">
-              Create
-            </Button>
-          </Form.Group>
-        </Form>
         <h2 className="mt-4">TASK CREATED BELOW:</h2>
 
         {tasks.length > 0 && (
           <div className="mt-3">
             {tasks.map((task) => (
-              <div
-                key={task.taskID}
-                className="d-flex justify-content-between
-align-items-center p-3 mb-3 shadow-sm"
->
-<div>
-<h5>{task.taskDescription}</h5>
-<p>Assigned to Staff ID {task.staffID}</p>
-<p>Status: {task.taskStatus}</p>
-{task.taskAccomplishDate && (
-<p>Completed on: {task.taskAccomplishDate}</p>
-)}
-</div>
-<div>
-{task.taskStatus !== "Complete" && (
-<Button variant="success" onClick={() => handleComplete(task.taskID)}>
-Complete
-</Button>
-)}
-<Button
-variant="warning"
-className="mx-2"
-onClick={() => handleUpdate(task.taskID, task.taskDescription)}
->
-Edit
-</Button>
-<Button variant="danger" onClick={() => handleDelete(task.taskID)}>
-Delete
-</Button>
-</div>
-</div>
+  <div key={task.taskID} className="d-flex justify-content-between align-items-center p-3 mb-3 shadow-sm">
+    <div>
+      <h5>{task.taskDescription}</h5>
+      <p>Assigned to Staff ID {task.staffID}</p>
+      <p>Status: {task.taskStatus}</p>
+      {task.taskAccomplishDate && (
+        <p>Completed on: {task.taskAccomplishDate}</p>
+      )}
+    </div>
+    <div>
+      {task.taskStatus !== "Complete" && (
+        <Button variant="success" onClick={() => handleComplete(task.taskID)}>
+          Complete
+        </Button>
+      )}
+      <Button variant="warning" className="mx-2" onClick={() => handleUpdate(task.taskID, task.taskDescription)}>
+        Edit
+      </Button>
+      <Button variant="danger" onClick={() => handleDelete(task.taskID)}>
+        Delete
+      </Button>
+    </div>
+  </div>
 ))}
+
+
 </div>
 )}
 

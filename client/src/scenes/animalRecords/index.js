@@ -67,49 +67,6 @@ const AnimalRecords = () => {
         fontSize="36px"
         mt="20px"
       />
-      {/* <Form onSubmit={handleAddAnimal}>
-        <Form.Group className="mb-3" controlId="name">
-          <Form.Label>Name</Form.Label>
-          <Form.Control type="text" placeholder="Enter animal name" required />
-        </Form.Group>
-
-        <Form.Group className="mb-3" controlId="species">
-        <Form.Label>Species</Form.Label>
-        <Form.Select required>
-            <option value="">Select species</option>
-            <option value="Mammal">Mammal</option>
-            <option value="Bird">Bird</option>
-            <option value="Amphibians">Amphibians</option>
-            <option value="Reptiles">Reptiles</option>
-            <option value="Fish">Fish</option>
-            <option value="Insects">Insects</option>
-
-           
-        </Form.Select>
-        </Form.Group>
-
-
-        <Form.Group className="mb-3" controlId="age">
-          <Form.Label>Age</Form.Label>
-          <Form.Control type="number" placeholder="Enter animal age" min="1" step="1" required />
-        </Form.Group>
-
-        <Form.Group className="mb-3" controlId="gender">
-          <Form.Label>Gender</Form.Label>
-          <Form.Select required>
-            <option value="">Select gender</option>
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-            <option value="unknown">Unknown</option>
-          </Form.Select>
-        </Form.Group>
-
-        <div className="d-grid gap-2">
-          <Button variant="success" type="submit" size="lg" className="mb-3">
-            Add animal <FaPlus className="ms-2" />
-          </Button>
-        </div>
-      </Form> */}
       <Form onSubmit={handleAddAnimal}>
   <Form.Group className="mb-3" controlId="name">
     <Form.Label>Name</Form.Label>
