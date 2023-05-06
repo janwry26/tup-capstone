@@ -58,7 +58,7 @@ function SuperAdminLogin({ admin }) {
   return (
     <div className='login-container'>
       <div className='login-box'>
-        <h2>LOGIN FOR FOR ADMIN</h2>
+        <h2>Login Form for Admin</h2>
         <form>
           <div className='user-box'>
             <input

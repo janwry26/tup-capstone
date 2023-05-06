@@ -7,7 +7,6 @@ import Topbar from "../scenes/global/Topbar";
 import Sidebar from "../scenes/global/Sidebar";
 import Panel from "../scenes/panel";
 import Team from "../scenes/team";
-import Invoices from "../scenes/invoices";
 import Contacts from "../scenes/contacts";
 import Bar from "../scenes/bar";
 import Form from "../scenes/form";
@@ -23,6 +22,7 @@ import Inventory from "../scenes/inventory"
 import Observation from "../scenes/observationReport"
 import Mortality from "../scenes/mortalityReport"
 import AnimalRecords from "../scenes/animalRecords";
+import MedicalHistory from "../scenes/medicalHistory"
 function DashboardMain() {
   const [theme, colorMode] = useMode();
   const [isSidebar, setIsSidebar] = useState(true);
@@ -38,7 +38,6 @@ function DashboardMain() {
             <Routes>
             <Route path="/panel" element={<Panel />} />
             <Route path="/contacts" element={<Contacts />} />
-            <Route path="/invoices" element={<Invoices />} />
             <Route path="/form" element={<Form />} />
             <Route path="/faq" element={<FAQ />} />
             <Route path="/team" element={<Team />} />
@@ -52,6 +51,7 @@ function DashboardMain() {
             <Route path="/observation" element={<Observation />} />
             <Route path="/mortality" element={<Mortality />} />
             <Route path="/animal" element={<AnimalRecords />} />
+            <Route path="/medical" element={<MedicalHistory />} />
 
             </Routes>
           </main>

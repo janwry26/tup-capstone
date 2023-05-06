@@ -65,7 +65,7 @@ function Login({user}){
     return(
         <div className='login-container'>
             <div className="login-box">
-                <h2>LOGIN FOR FOR USER</h2>
+                <h2>Login form for user</h2>
 
                 <form>
                     <div className="user-box">
