@@ -1,12 +1,11 @@
 import { useState } from "react";
-import FullCalendar from '@fullcalendar/react';
-import { formatDate } from '@fullcalendar/core';
-
+import FullCalendar from "@fullcalendar/react";
+import { formatDate } from "@fullcalendar/core";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import listPlugin from "@fullcalendar/list";
-import Swal from 'sweetalert2'; // import SweetAlert2 library
+import Swal from "sweetalert2";
 import {
   Box,
   List,
@@ -61,17 +60,20 @@ const Calendar = () => {
       }
     });
   };
+
   return (
     <Box m="20px">
       <Header title="Calendar" subtitle="Full Calendar Interactive Page" />
 
-      <Box display="flex" justifyContent="space-between">
+      <Box display="flex" flexDirection={{ xs: "column", md: "row" }}>
         {/* CALENDAR SIDEBAR */}
         <Box
           flex="1 1 20%"
           backgroundColor={colors.primary[400]}
           p="15px"
           borderRadius="4px"
+          mb={{ xs: "20px", md: "0" }}
+          mr={{ xs: "0", md: "15px" }}
         >
           <Typography variant="h5">Events</Typography>
           <List>
@@ -102,7 +104,7 @@ const Calendar = () => {
         </Box>
 
         {/* CALENDAR */}
-        <Box flex="1 1 100%" ml="15px">
+        <Box flex="1 1 100%">
           <FullCalendar
             height="75vh"
             plugins={[
@@ -114,33 +116,33 @@ const Calendar = () => {
             headerToolbar={{
               left: "prev,next today",
               center: "title",
-              right: "dayGridMonth,timeGridWeek,timeGridDay,listMonth",
-            }}
-            initialView="dayGridMonth"
-            editable={true}
-            selectable={true}
-            selectMirror={true}
-            dayMaxEvents={true}
-            select={handleDateClick}
-            eventClick={handleEventClick}
-            eventsSet={(events) => setCurrentEvents(events)}
-            initialEvents={[
-              {
-                id: "12315",
-                title: "Happy Anniversary",
-                date: "2023-06-11",
-              },
-              {
-                id: "5123",
-                title: "Timed event",
-                date: "",
-              },
-            ]}
-          />
-        </Box>
-      </Box>
-    </Box>
-  );
+              right: "dayGridMonth,timeGridWeek,time,GridDay,listMonth",
+  }}
+initialView="dayGridMonth"
+editable={true}
+selectable={true}
+selectMirror={true}
+dayMaxEvents={true}
+select={handleDateClick}
+eventClick={handleEventClick}
+eventsSet={(events) => setCurrentEvents(events)}
+initialEvents={[
+{
+id: "12315",
+title: "Happy Anniversary",
+date: "2023-06-11",
+},
+{
+id: "5123",
+title: "Timed event",
+date: "",
+},
+]}
+/>
+</Box>
+</Box>
+</Box>
+);
 };
 
 export default Calendar;

@@ -1,115 +1,182 @@
 import { useState } from "react";
-import { Form, FormGroup, Label, Input, Button } from "reactstrap";
-import Swal from "sweetalert2";
+import { Form, Button, Table } from "react-bootstrap";
+import { FaPlus, FaTrash } from "react-icons/fa";
 import Header from "../../components/Header";
-import {Box} from "@mui/material"
+import Swal from "sweetalert2";
 
 const MortalityReport = () => {
-  const [animal, setAnimal] = useState("");
-  const [cause, setCause] = useState("");
-  const [date, setDate] = useState("");
-  const [time, setTime] = useState("");
+  const [reports, setReports] = useState([]);
 
-  const handleAnimalChange = (event) => {
-    setAnimal(event.target.value);
-  };
-
-  const handleCauseChange = (event) => {
-    setCause(event.target.value);
-  };
-
-  const handleDateChange = (event) => {
-    setDate(event.target.value);
-  };
-
-  const handleTimeChange = (event) => {
-    setTime(event.target.value);
-  };
-
-  const handleSubmit = (event) => {
+  const handleAddReport = (event) => {
     event.preventDefault();
-    if (!animal || !cause || !date || !time) return;
+    const report = {
+      animalID: event.target.animalID.value,
+      staffID: event.target.staffID.value,
+      causeOfDeath: event.target.causeOfDeath.value,
+      deathDate: event.target.deathDate.value,
+      deathTime: event.target.deathTime.value,
+      dateReported: new Date().toISOString(),
+    };
+    setReports([...reports, report]);
+    event.target.reset();
+  };
 
+  const handleDeleteReport = (index) => {
     Swal.fire({
-      title: "Are you sure?",
-      text: "You want to submit this mortality report?",
-      icon: "warning",
+      title: 'Are you sure?',
+      text: 'You will not be able to recover this report!',
+      icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, submit it!",
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, cancel!',
+      reverseButtons: true
     }).then((result) => {
       if (result.isConfirmed) {
-        console.log(`Animal: ${animal}, Cause: ${cause}, Date: ${date}, Time: ${time}`);
-        setAnimal("");
-        setCause("");
-        setDate("");
-        setTime("");
-        Swal.fire("Submitted!", "Your mortality report has been submitted.", "success");
+        const newReports = [...reports];
+        newReports.splice(index, 1);
+        setReports(newReports);
+        Swal.fire(
+          'Deleted!',
+          'Your report has been deleted.',
+          'success'
+        )
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.fire(
+          'Cancelled',
+          'Your report is safe :)',
+          'error'
+        )
       }
-    });
+    })
   };
 
   return (
-    <Box p="20px" width="80%" margin="0 auto" paddingTop="50px">
-      <div>
-        <Header
-          title="Mortality Report"
-          subtitle="Fill up the form below to report an animal death."
-          fontSize="36px"
-          mt="20px"
-        />
-        <Form onSubmit={handleSubmit}>
-          <FormGroup>
-            <Label for="animal">Animal:</Label>
-            <Input
-              type="text"
-              id="animal"
-              name="animal"
-              value={animal}
-              onChange={handleAnimalChange}
-              required
-            />
-          </FormGroup>
-          <FormGroup>
-            <Label for="cause">Cause of Death:</Label>
-            <Input
-              type="textarea"
-              id="cause"
-              name="cause"
-              value={cause}
-              onChange={handleCauseChange}
-              required
-            />
-          </FormGroup>
-          <FormGroup>
-            <Label for="date">Date of Death:</Label>
-            <Input
-              type="date"
-              id="date"
-              name="date"
-              value={date}
-              onChange={handleDateChange}
-              required
-            />
-          </FormGroup>
-          <FormGroup>
-            <Label for="time">Time of Death:</Label>
-            <Input
-              type="time"
-              id="time"
-              name="time"
-              value={time}
-              onChange={handleTimeChange}
-              required
-            />
-          </FormGroup>
-          <Button type="submit" color="success">
-            Submit
+    <div className="container mt-5">
+      <Header
+        title="Mortality Report"
+        subtitle="Report on animal mortality"
+        fontSize="36px"
+        mt="20px"
+      />
+      <Form onSubmit={handleAddReport}>
+        <Form.Group className="mb-3" controlId="animalID">
+          <Form.Label>Animal ID</Form.Label>
+          <Form.Control type="text" placeholder="Enter animal ID" required />
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="staffID">
+          <Form.Label>Staff ID</Form.Label>
+          <Form.Control type="text" placeholder="Enter staff ID" required />
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="causeOfDeath">
+          <Form.Label>Cause of Death</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Enter cause of death"
+            required
+          />
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="deathDate">
+          <Form.Label>Death Date</Form.Label>
+          <Form.Control type="date" required />
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="deathTime">
+          <Form.Label>Death Time</Form.Label>
+          <Form.Control type="time" required />
+        </Form.Group>
+
+        <div className="d-grid gap-2">
+          <Button variant="success" type="submit" size="lg" className="mr-3">
+            <FaPlus /> Add Report
           </Button>
-        </Form>
-      </div>
-    </Box>
+        </div>
+      </Form>
+
+      <Table striped bordered hover className="mt-4" style={{ color: "white" }}>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Animal ID</th>
+            <th>Staff ID</th>
+
+
+            <th>Cause of Death</th>
+            <th>Death Date</th>
+            <th>Death Time</th>
+            <th>Date Reported</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {reports.map((report, index) => (
+            <tr style={{ color: "white" }} key={index}>
+              <td>{index + 1}</td>
+              <td>
+                <Form.Control
+                  type="text"
+                  value={report.animalID}
+                  onChange={(event) =>
+                    handleEditReport(index, "animalID", event.target.value)
+                  }
+                />
+              </td>
+              <td>
+                <Form.Control
+                  type="text"
+                  value={report.staffID}
+                  onChange={(event) =>
+                    handleEditReport(index, "staffID", event.target.value)
+                  }
+                />
+              </td>
+              <td>
+                <Form.Control
+                  type="text"
+                  value={report.causeOfDeath}
+                  onChange={(event) =>
+                    handleEditReport(index, "causeOfDeath", event.target.value)
+                  }
+                />
+              </td>
+              <td>
+                <Form.Control
+                  type="date"
+                  value={report.deathDate}
+                  onChange={(event) =>
+                    handleEditReport(index, "deathDate", event.target.value)
+                  }
+                />
+              </td>
+              <td>
+                <Form.Control
+                  type="time"
+                  value={report.deathTime}
+                  onChange={(event) =>
+                    handleEditReport(index, "deathTime", event.target.value)
+                  }
+                />
+              </td>
+              <td>{report.dateReported}</td>
+              <td>
+                <Button
+                  style={{
+                    marginTop: "0",
+                    padding: "6px 12px",
+                  }}
+                  variant="danger"
+                  onClick={() => handleDeleteReport(index)}
+                >
+                  <FaTrash />
+                </Button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </Table>
+    </div>
   );
 };
 
