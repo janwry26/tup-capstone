@@ -10,7 +10,6 @@ const AnimalRecords = () => {
   const handleAddAnimal = (event) => {
     event.preventDefault();
     const animal = {
-      name: event.target.name.value,
       species: event.target.species.value,
       age: event.target.age.value,
       gender: event.target.gender.value,
@@ -68,10 +67,7 @@ const AnimalRecords = () => {
         mt="20px"
       />
       <Form onSubmit={handleAddAnimal}>
-  <Form.Group className="mb-3" controlId="name">
-    <Form.Label>Name</Form.Label>
-    <Form.Control type="text" placeholder="Enter animal name" required />
-  </Form.Group>
+
 
   <Form.Group className="mb-3" controlId="species">
         <Form.Label>Species</Form.Label>
@@ -132,7 +128,6 @@ const AnimalRecords = () => {
 <Table striped bordered hover style={{ color: "white" }}>
   <thead>
     <tr>
-      <th>Name</th>
       <th>Species</th>
       <th>Age</th>
       <th>Gender</th>
@@ -146,15 +141,7 @@ const AnimalRecords = () => {
   <tbody>
     {animals.map((animal, index) => (
       <tr key={index}>
-        <td>
-          <Form.Control
-            type="text"
-            value={animal.name}
-            onChange={(event) =>
-              handleEditAnimal(index, "name", event.target.value)
-            }
-          />
-        </td>
+       
         <td>
           <Form.Control
             as="select"

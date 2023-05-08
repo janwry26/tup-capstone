@@ -1,3 +1,4 @@
+import React from "react";
 import { Box, Button, TextField } from "@mui/material";
 import { Formik } from "formik";
 import * as yup from "yup";
@@ -9,6 +10,40 @@ const Form = () => {
 
   const handleFormSubmit = (values) => {
     console.log(values);
+  };
+
+  const phoneRegExp = /^09\d{9}$/;
+
+  const checkoutSchema = yup.object().shape({
+    firstName: yup.string().required("First Name is required"),
+    lastName: yup.string().required("Last Name is required"),
+    email: yup.string().email("Invalid email").required("Email is required"),
+    contact: yup
+      .string()
+      .matches(phoneRegExp, "Contact number must start with 09 and have 11 digits")
+      .required("Contact Number is required"),
+    password: yup
+      .string()
+      .required("Password is required")
+      .min(8, "Password must be at least 8 characters long"),
+    confirmPassword: yup
+      .string()
+      .oneOf([yup.ref("password")], "Passwords must match")
+      .required("Confirm Password is required"),
+    username: yup
+      .string()
+      .required("Username is required")
+      .min(8, "Username must be at least 8 characters long"),
+  });
+
+  const initialValues = {
+    firstName: "",
+    lastName: "",
+    email: "",
+    contact: "",
+    password: "",
+    confirmPassword: "",
+    username: "",
   };
 
   return (
@@ -30,7 +65,7 @@ const Form = () => {
         }) => (
           <form onSubmit={handleSubmit}>
             <Box
-            background="white"
+              background="white"
               display="grid"
               gap="30px"
               gridTemplateColumns="repeat(4, minmax(0, 1fr))"
@@ -64,6 +99,19 @@ const Form = () => {
                 helperText={touched.lastName && errors.lastName}
                 sx={{ gridColumn: "span 2" }}
               />
+               <TextField
+                fullWidth
+                variant="filled"
+                type="text"
+                label="Username"
+                onBlur={handleBlur}
+                onChange={handleChange}
+                value={values.username}
+                name="username"
+                error={!!touched.username && !!errors.username}
+                helperText={touched.username && errors.username}
+                sx={{ gridColumn: "span 4" }}
+              />
               <TextField
                 fullWidth
                 variant="filled"
@@ -91,65 +139,43 @@ const Form = () => {
                 sx={{ gridColumn: "span 4" }}
               />
               <TextField
-              fullWidth
-              variant="filled"
-              type="password"
-              label="Password"
-              onBlur={handleBlur}
-              onChange={handleChange}
-              value={values.password}
-              name="password"
-              error={!!touched.password && !!errors.password}
-              helperText={touched.password && errors.password}
-              sx={{ gridColumn: "span 4" }}
-            />
-  <TextField
-  fullWidth
-  variant="filled"
-  type="password"
-  label="Confirm Password"
-  onBlur={handleBlur}
-  onChange={handleChange}
-  value={values.confirmPassword}
-  name="confirmPassword"
-  error={!!touched.confirmPassword && !!errors.confirmPassword}
-  helperText={touched.confirmPassword && errors.confirmPassword}
-  sx={{ gridColumn: "span 4" }}
-/>
-            </Box>
-            <Box display="flex" justifyContent="end" mt="20px">
+                fullWidth
+                variant="filled"
+                type="password"
+                label="Password"
+                onBlur={handleBlur}
+                onChange={handleChange}
+                value={values.password}
+                name="password"
+                error={!!touched.password && !!errors.password}
+                helperText={touched.password && errors.password}
+                sx={{ gridColumn: "span 4" }}
+              />
+              <TextField
+                fullWidth
+                variant="filled"
+                type="password"
+                label="Confirm Password"
+                onBlur={handleBlur}
+                onChange={handleChange}
+                value={values.confirmPassword}
+                name="confirmPassword"
+                error={!!touched.confirmPassword && !!errors.confirmPassword}
+                helperText={touched.confirmPassword && errors.confirmPassword}
+                sx={{ gridColumn: "span 4" }}
+              />
+             
+            <Box display="flex" justifyContent="start" mt="20px">
               <Button type="submit" color="secondary" variant="contained">
                 Create New User
               </Button>
+            </Box>
             </Box>
           </form>
         )}
       </Formik>
     </Box>
   );
-};
-
-const phoneRegExp =
-  /^((\+[1-9]{1,4}[ -]?)|(\([0-9]{2,3}\)[ -]?)|([0-9]{2,4})[ -]?)*?[0-9]{3,4}[ -]?[0-9]{3,4}$/;
-
-  const checkoutSchema = yup.object().shape({
-    firstName: yup.string().required("required"),
-    lastName: yup.string().required("required"),
-    email: yup.string().email("invalid email").required("required"),
-    contact: yup
-      .string()
-      .matches(phoneRegExp, "Phone number is not valid")
-      .required("required"),
-    password: yup.string().required("required").min(8, "Password must be at least 8 characters long"),
-    confirmPassword: yup.string().oneOf([yup.ref('password')], 'Passwords must match').required("required")
-  });
-  
-const initialValues = {
-  firstName: "",
-  lastName: "",
-  email: "",
-  contact: "",
-  password: "",
 };
 
 export default Form;
