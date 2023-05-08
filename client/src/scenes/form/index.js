@@ -5,11 +5,25 @@ import * as yup from "yup";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Header from "../../components/Header";
 
+// For API
+import http from '../../utils/http';
+
 const Form = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
 
   const handleFormSubmit = (values) => {
     console.log(values);
+    http.post('/user/register', values)
+      .then((res) => {
+        //console.log(res); //jsonwebtoken
+        if (res.statusCode === 200) {
+          alert("User Created"); //Change to Sweet Alert
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        alert(err.response.data); //Change to Sweet Alert
+      })
   };
 
   const phoneRegExp = /^09\d{9}$/;

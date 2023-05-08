@@ -14,7 +14,7 @@ router.get("/", auth, async (req, res) => {
 // Register User
 router.post("/register", async (req, res) => {
 
-    const { lastName, firstName, email, contactNum, username } = req.body;
+    const { lastName, firstName, email, contact, username } = req.body;
     //Hash Password
     const password = bcrypt.hashSync(req.body.password, 10);
     // Checking User
@@ -24,7 +24,7 @@ router.post("/register", async (req, res) => {
     }
 
     // Save User Into Database
-    user = new User({  lastName, firstName, email, contactNum, username, password });
+    user = new User({  lastName, firstName, email, contactNum: contact, username, password });
     await user.save();
 
     const jwtData = {_id: user.id, username: user.username, email: user.email}
