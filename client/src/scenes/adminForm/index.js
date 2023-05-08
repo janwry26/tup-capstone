@@ -15,8 +15,6 @@ const AdminForm = () => {
   const phoneRegExp = /^09\d{9}$/;
 
   const checkoutSchema = yup.object().shape({
-    firstName: yup.string().required("First Name is required"),
-    lastName: yup.string().required("Last Name is required"),
     email: yup.string().email("Invalid email").required("Email is required"),
     contact: yup
       .string()
@@ -37,8 +35,6 @@ const AdminForm = () => {
   });
 
   const initialValues = {
-    firstName: "",
-    lastName: "",
     email: "",
     contact: "",
     password: "",
@@ -73,32 +69,7 @@ const AdminForm = () => {
                 "& > div": { gridColumn: isNonMobile ? undefined : "span 4" },
               }}
             >
-              <TextField
-                fullWidth
-                variant="filled"
-                type="text"
-                label="First Name"
-                onBlur={handleBlur}
-                onChange={handleChange}
-                value={values.firstName}
-                name="firstName"
-                error={!!touched.firstName && !!errors.firstName}
-                helperText={touched.firstName && errors.firstName}
-                sx={{ gridColumn: "span 2" }}
-              />
-              <TextField
-                fullWidth
-                variant="filled"
-                type="text"
-                label="Last Name"
-                onBlur={handleBlur}
-                onChange={handleChange}
-                value={values.lastName}
-                name="lastName"
-                error={!!touched.lastName && !!errors.lastName}
-                helperText={touched.lastName && errors.lastName}
-                sx={{ gridColumn: "span 2" }}
-              />
+              
                <TextField
                 fullWidth
                 variant="filled"
