@@ -24,6 +24,7 @@ import PreviewIcon from '@mui/icons-material/Preview';
 import MonitorHeartIcon from '@mui/icons-material/MonitorHeart';
 import PetsIcon from '@mui/icons-material/Pets';
 import MedicalInformationIcon from '@mui/icons-material/MedicalInformation';
+import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 const Item = ({ title, to, icon, selected, setSelected, disabled }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -195,12 +196,19 @@ const Sidebar = () => {
               Pages
             </Typography>
             {isAdmin && <Item
-              title="Profile Form"
+              title="User Form"
               to="/dashboard/form"
               icon={<PersonOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />}
+            <Item
+              title="Admin Form"
+              to="/dashboard/adminForm"
+              icon={<AdminPanelSettingsIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
             <Item
               title="Calendar"
               to="/dashboard/calendar"

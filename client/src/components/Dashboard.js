@@ -10,6 +10,7 @@ import Team from "../scenes/team";
 import Contacts from "../scenes/contacts";
 import Bar from "../scenes/bar";
 import Form from "../scenes/form";
+import AdminForm from "../scenes/adminForm";
 import Line from "../scenes/line";
 import Pie from "../scenes/pie";
 import FAQ from "../scenes/faq";
@@ -39,6 +40,7 @@ function DashboardMain() {
             <Route path="/panel" element={<Panel />} />
             <Route path="/contacts" element={<Contacts />} />
             <Route path="/form" element={<Form />} />
+            <Route path="/adminForm" element={<AdminForm />} />
             <Route path="/faq" element={<FAQ />} />
             <Route path="/team" element={<Team />} />
             <Route path="/line" element={<Line />} />

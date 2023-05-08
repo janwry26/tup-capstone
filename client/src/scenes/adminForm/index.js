@@ -5,7 +5,7 @@ import * as yup from "yup";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Header from "../../components/Header";
 
-const Form = () => {
+const AdminForm = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
 
   const handleFormSubmit = (values) => {
@@ -48,7 +48,7 @@ const Form = () => {
 
   return (
     <Box m="20px">
-      <Header title="CREATE USER" subtitle="Create a new user profile" />
+      <Header title="CREATE ADMIN" subtitle="Create a new admin profile" />
 
       <Formik
         onSubmit={handleFormSubmit}
@@ -165,9 +165,9 @@ const Form = () => {
                 sx={{ gridColumn: "span 4" }}
               />
              
-            <Box display="flex" justifyContent="start" mt="20px">
+            <Box display="flex" justifyContent="start" mt="20px" >
               <Button type="submit" color="secondary" variant="contained" sx={{color:"white"}}>
-                Create New User
+                Create New Admin
               </Button>
             </Box>
             </Box>
@@ -178,4 +178,4 @@ const Form = () => {
   );
 };
 
-export default Form;
+export default AdminForm;
