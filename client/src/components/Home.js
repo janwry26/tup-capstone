@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import Hero from "../assets/images/hero/hero1.png";
+import Hero2 from "../assets/images/hero/hero2.png";
 import '../styles/home.css'
 import { SlArrowDown,SlArrowUp } from 'react-icons/sl';
 function Home() {
@@ -42,7 +44,32 @@ function Home() {
   return (
     <div className="main-container">
       <div id="page1" className="first-container transition">
-        <h1>first page</h1>
+        <div className='container1'>
+            <div className="left">
+            <img src={Hero2}/>
+
+            </div>
+            <div className='middle'>
+              <h1>Animal Healthcare Management System</h1>
+              <p>
+              Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+              </p>
+              <div className='btn-container'>
+               <Link to="/login">
+                  <button type="button" className="btnLogin">LOGIN</button>
+              </Link>
+              <a href='mailto:janwryd@gmail.com'>
+                
+              <button className="btnContactAdmin">
+                CONTACT ADMIN
+              </button>
+              </a>
+              </div>
+            </div>
+            <div className='right'>
+                <img src={Hero}/>
+            </div>
+        </div>
         <button id="btn1"><SlArrowDown  className='first-page-icon'/></button>
       </div>
       <div id="page2" className="second-container hidden1 transition">
