@@ -15,13 +15,8 @@
   width: 100%;
   padding-top: 50px;
   height: 100vh;
-  background: rgb(176, 171, 171);
-  background: linear-gradient(
-    90deg,
-    rgba(176, 171, 171, 1) 0%,
-    rgba(200, 217, 217, 1) 32%,
-    rgba(121, 116, 116, 1) 100%
-  );
+  background-color: rgb(209, 203, 203);
+
   overflow-x: hidden;
 }
 
