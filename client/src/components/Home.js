@@ -44,32 +44,21 @@ function Home() {
   return (
     <div className="main-container">
       <div id="page1" className="first-container transition">
-        <div className='container1'>
-            <div className="left">
-            <img src={Hero2}/>
-
-            </div>
             <div className='middle'>
-              <h1>Animal Healthcare Management System</h1>
+              <h1><span>Animal</span>  Healthcare Management System</h1>
               <p>
-              Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+              Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+              Lorem Ipsum is simply dummy text. 
               </p>
               <div className='btn-container'>
                <Link to="/login">
                   <button type="button" className="btnLogin">LOGIN</button>
               </Link>
-              <a href='mailto:janwryd@gmail.com'>
-                
-              <button className="btnContactAdmin">
-                CONTACT ADMIN
-              </button>
-              </a>
               </div>
             </div>
             <div className='right'>
                 <img src={Hero}/>
             </div>
-        </div>
         <button id="btn1"><SlArrowDown  className='first-page-icon'/></button>
       </div>
       <div id="page2" className="second-container hidden1 transition">

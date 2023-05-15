@@ -4,8 +4,7 @@
     align-items: center;
     font-size: 1.2rem;
     padding: 0 30px;
-    background-color: #222;
-    box-shadow: 0 5px 15px rgba(0,0,0,.25);
+    background-color: transparent !important;
     width: 95%;
     height: 70px;
     border-radius: 20px;
@@ -38,7 +37,7 @@
 }
 .nav-links{
     text-decoration: none;
-    color: white;
+    color: rgb(0, 0, 0);
     padding: 0.7rem 1rem;
     white-space: nowrap;
 }
@@ -53,7 +52,7 @@
     transition: all 0.2s ease-in-out;
 }
 .fa-bars,.fa-times{
-   color: #fff;
+   color: #000000;
    cursor: pointer;
 }
 .menu-icons{

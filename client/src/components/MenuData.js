@@ -13,7 +13,7 @@ export const MenuData = [
     },
 
     {
-        title: 'FAQ',
+        title: 'Contact Admin',
         url:"#",
         cName:"nav-links",
         icon:"fa-solid  fa-question-circle"
