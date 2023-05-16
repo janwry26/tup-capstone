@@ -4,6 +4,7 @@ import { Formik } from "formik";
 import * as yup from "yup";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Header from "../../components/Header";
+import Swal from "sweetalert2";
 
 // For API
 import http from '../../utils/http';
@@ -15,16 +16,25 @@ const Form = () => {
     console.log(values);
     http.post('/user/register', values)
       .then((res) => {
-        //console.log(res); //jsonwebtoken
-        if (res.statusCode === 200) {
-          alert("User Created"); //Change to Sweet Alert
+        if (res.status === 200) {
+          Swal.fire({
+            icon: 'success',
+            title: 'User Created',
+            text: 'The user has been successfully created.',
+          });
         }
+        
       })
       .catch((err) => {
         console.log(err);
-        alert(err.response.data); //Change to Sweet Alert
-      })
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: err.response.data,
+        });
+      });
   };
+  
 
   const phoneRegExp = /^09\d{9}$/;
 
