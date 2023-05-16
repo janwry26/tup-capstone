@@ -88,7 +88,7 @@ function SuperAdminLogin({ admin }) {
 
                     </div>
           <center>
-            <button className='btn' onClick={handleSubmit}>
+            <button className='btnSignin' onClick={handleSubmit}>
               Sign in
             </button>
           </center>

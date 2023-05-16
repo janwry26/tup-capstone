@@ -8,7 +8,7 @@
   background: rgba(24, 20, 20, 0.987);
   box-sizing: border-box;
   box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
-  border-radius: 10px;
+  border-radius: 20px;
 }
 
 .login-container {
@@ -21,10 +21,12 @@
 }
 
 h2 {
-  color: white;
-  font-size: 16px;
+  color: rgb(110, 180, 110);
+  font-size: 24px;
   text-align: center;
   padding-bottom: 20px;
+  
+  
 }
 
 .login-box .user-box {
@@ -35,7 +37,7 @@ h2 {
   width: 100%;
   padding: 10px 0;
   font-size: 16px;
-  color: #fff;
+  color: rgb(110, 180, 110);
   margin-bottom: 30px;
   border: none;
   border-bottom: 1px solid #fff;
@@ -49,7 +51,7 @@ h2 {
   left: 0;
   padding: 10px 0;
   font-size: 16px;
-  color: #fff;
+  color:rgb(110, 180, 110) ;
   pointer-events: none;
   transition: 0.5s;
 }
@@ -58,30 +60,30 @@ h2 {
 .login-box .user-box input:valid ~ label {
   top: -20px;
   left: 0;
-  color: #bdb8b8;
+  color: #fff;
   font-size: 12px;
 }
 
-.btn {
+
+.btnSignin {
   position: relative;
   display: inline-block;
   padding: 10px 20px;
-  color: #ffffff;
   font-size: 16px;
+  color: #fff;
+  background-color: rgb(110, 180, 110); 
   text-decoration: none;
   text-transform: uppercase;
   overflow: hidden;
   transition: 0.5s;
   margin-top: 40px;
   letter-spacing: 4px;
-  border-radius: 15px;
+  border-radius: 20px;
+  font-weight: bolder;
 }
 
-.btn:hover {
-  /* background: #1e201e; */
-  color: #fff;
-  border-bottom: 1px solid white;
-  /* box-shadow: 0 0 5px #f8f8f8, 0 0 25px #c6cdc6, 0 0 50px #848684, 0 0 100px #2c2c2c; */
+.btnSignin:hover{
+  background-color: rgb(58, 163, 58);
 }
 
 .password-toggle {
@@ -117,5 +119,8 @@ animation: btn-anim2 2s linear infinite;
   div.login-box{
     width: 300px;
     padding: 25px;
+  }
+  h2{
+    font-size: 20px;
   }
 }

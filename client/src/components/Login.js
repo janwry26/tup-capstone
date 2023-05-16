@@ -98,7 +98,7 @@ function Login({user}){
                         }
                     </div>
                     <center>
-                        <button className='btn' onClick={validation}>
+                        <button className='btnSignin' onClick={validation}>
                             Sign in
                         </button>
                     </center>
