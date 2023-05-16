@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Form, Button, Table } from "react-bootstrap";
+import { Form, Button } from "react-bootstrap";
 import { Box, Dialog, DialogTitle, DialogContent, DialogActions, TextField } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { FaPlus, FaMinus, FaTrash, FaEdit } from "react-icons/fa";
@@ -100,7 +100,7 @@ const Inventory = () => {
   const colors = tokens(theme.palette.mode);
 
   return (
-    <Box m="20px">
+    <Box m="20px" width="90%" margin="0 auto">
       <Header
         title="INVENTORY"
         subtitle="Inventory for medicines"
@@ -145,8 +145,8 @@ const Inventory = () => {
           <Form.Control type="date" required />
         </Form.Group>
 
-        <div className="d-grid gap-2">
-          <Button variant="success" type="submit" size="md" className="mr-3">
+        <div className="d-grid gap-2" style={{marginTop:"-20px", marginBottom: "20px"}}>
+          <Button variant="success" type="submit"  style={{width:"300px"}} >
             <FaPlus /> Add Product
           </Button>
         </div>
@@ -155,6 +155,7 @@ const Inventory = () => {
       <Box
         m="40px 0 0 0"
         height="75vh"
+        margin= "0 auto"
         sx={{
           // Styling for the DataGrid
           "& .MuiDataGrid-root": {
@@ -232,7 +233,7 @@ const Inventory = () => {
       <Dialog open={editDialogOpen} onClose={handleEditDialogClose}>
       <DialogTitle>Edit Product</DialogTitle>
 <DialogContent>
-  <Form onSubmit={handleEditProduct}>
+  <Form onSubmit={handleEditProduct} >
     <Form.Group className="mb-3" controlId="editName">
       <Form.Label>Name</Form.Label>
       <Form.Control
