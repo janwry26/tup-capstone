@@ -37,7 +37,7 @@
     text-align: justify;
 }
 .middle h1 span{
-    color: rgb(110, 180, 110);
+    color: #2e7c67;
     font-size: 65px;
 }
 .right img{
@@ -63,7 +63,7 @@
     border: none;
     border-radius: 20px;
     letter-spacing: 2px;
-    background-color: rgb(110, 180, 110);
+    background-color: #2e7c67;
     font-weight: bold;
     font-size: 18px;
     color: rgb(255, 255, 255);
