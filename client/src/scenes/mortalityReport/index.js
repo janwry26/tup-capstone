@@ -1,21 +1,28 @@
 import { useState } from "react";
-import { Form, Button, Table } from "react-bootstrap";
-import { FaPlus, FaTrash } from "react-icons/fa";
+import { Form, Button } from "react-bootstrap";
+import { Box, Dialog, DialogTitle, DialogContent, DialogActions, TextField } from "@mui/material";
+import { DataGrid, GridToolbar } from "@mui/x-data-grid";
+import { FaPlus, FaTrash, FaEdit } from "react-icons/fa";
 import Header from "../../components/Header";
 import Swal from "sweetalert2";
+import { useTheme } from "@mui/material";
+import { tokens } from "../../theme";
 
 const MortalityReport = () => {
   const [reports, setReports] = useState([]);
+  const [editDialogOpen, setEditDialogOpen] = useState(false);
+  const [editReport, setEditReport] = useState(null);
 
   const handleAddReport = (event) => {
     event.preventDefault();
     const report = {
+      id: Date.now(),
       animalID: event.target.animalID.value,
       staffID: event.target.staffID.value,
       causeOfDeath: event.target.causeOfDeath.value,
       deathDate: event.target.deathDate.value,
       deathTime: event.target.deathTime.value,
-      dateReported: new Date().toISOString(),
+      dateReported: event.target.dateReported.value,
     };
     setReports([...reports, report]);
     event.target.reset();
@@ -23,38 +30,73 @@ const MortalityReport = () => {
 
   const handleDeleteReport = (index) => {
     Swal.fire({
-      title: 'Are you sure?',
-      text: 'You will not be able to recover this report!',
-      icon: 'warning',
+      title: "Are you sure?",
+      text: "You will not be able to recover this report!",
+      icon: "warning",
       showCancelButton: true,
-      confirmButtonText: 'Yes, delete it!',
-      cancelButtonText: 'No, cancel!',
-      reverseButtons: true
+      confirmButtonText: "Yes, delete it!",
+      cancelButtonText: "No, cancel!",
+      reverseButtons: true,
     }).then((result) => {
       if (result.isConfirmed) {
         const newReports = [...reports];
         newReports.splice(index, 1);
         setReports(newReports);
-        Swal.fire(
-          'Deleted!',
-          'Your report has been deleted.',
-          'success'
-        )
+        Swal.fire("Deleted!", "Your report has been deleted.", "success");
       } else if (result.dismiss === Swal.DismissReason.cancel) {
-        Swal.fire(
-          'Cancelled',
-          'Your report is safe :)',
-          'error'
-        )
+        Swal.fire("Cancelled", "Your report is safe :)", "error");
       }
-    })
+    });
   };
 
+  const handleEditReport = (params, event) => {
+    const { id, field, props } = params;
+    const { value } = event.target;
+    const newReports = reports.map((report) => {
+      if (report.id === id) {
+        return { ...report, [field]: value };
+      }
+      return report;
+    });
+    setReports(newReports);
+  };
+
+  const handleEditDialogOpen = (report) => {
+    setEditReport(report);
+    setEditDialogOpen(true);
+  };
+
+  const handleEditDialogClose = () => {
+    setEditDialogOpen(false);
+  };
+
+  const handleEditDialogSave = () => {
+    const newReports = reports.map((report) => {
+      if (report.id === editReport.id) {
+        return {
+          ...report,
+          animalID: document.getElementById("editAnimalID").value,
+          staffID: document.getElementById("editStaffID").value,
+          causeOfDeath: document.getElementById("editCauseOfDeath").value,
+          deathDate: document.getElementById("editDeathDate").value,
+          deathTime: document.getElementById("editDeathTime").value,
+          dateReported: document.getElementById("editDateReported").value,
+        };
+      }
+      return report;
+    });
+    setReports(newReports);
+    setEditDialogOpen(false);
+  };
+
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
+
   return (
-    <div className="container mt-5">
+    <Box m="20px" width="90%" margin="0 auto">
       <Header
-        title="Mortality Report"
-        subtitle="Report on animal mortality"
+        title="MORTALITY REPORT"
+        subtitle="Manage mortality reports"
         fontSize="36px"
         mt="20px"
       />
@@ -71,11 +113,7 @@ const MortalityReport = () => {
 
         <Form.Group className="mb-3" controlId="causeOfDeath">
           <Form.Label>Cause of Death</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="Enter cause of death"
-            required
-          />
+          <Form.Control type="text" placeholder="Enter cause of death" required />
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="deathDate">
@@ -88,95 +126,165 @@ const MortalityReport = () => {
           <Form.Control type="time" required />
         </Form.Group>
 
-        <div className="d-grid gap-2">
-          <Button variant="success" type="submit" size="lg" className="mr-3">
+        <Form.Group className="mb-3" controlId="dateReported">
+          <Form.Label>Date Reported</Form.Label>
+          <Form.Control type="date" required />
+        </Form.Group>
+
+        <div className="d-grid gap-2" style={{ marginTop: "-20px", marginBottom: "20px" }}>
+          <Button className="btnSignin" variant="success" type="submit" style={{ width: "300px" }}>
             <FaPlus /> Add Report
           </Button>
         </div>
       </Form>
 
-      <Table striped bordered hover className="mt-4" style={{ color: "white" }}>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Animal ID</th>
-            <th>Staff ID</th>
+      <Box
+        m="40px 0 0 0"
+        height="75vh"
+        margin="0 auto"
+        sx={{
+          // Styling for the DataGrid
+          "& .MuiDataGrid-root": {
+            border: "none",
+          },
+          "& .MuiDataGrid-cell": {
+            borderBottom: "none",
+          },
+          "& .MuiDataGrid-columnHeaders": {
+            backgroundColor: colors.greenAccent[700],
+            borderBottom: "none",
+          },
+          "& .MuiDataGrid-virtualScroller": {
+            backgroundColor: colors.primary[400],
+          },
+          "& .MuiDataGrid-footerContainer": {
+            borderTop: "none",
+            backgroundColor: colors.greenAccent[700],
+          },
+          "& .MuiCheckbox-root": {
+            color: `${colors.greenAccent[200]} !important`,
+          },
+          "& .MuiDataGrid-toolbarContainer .MuiButton-text": {
+            color: `${colors.grey[100]} !important`,
+          },
+        }}
+      >
+        <DataGrid
+          rows={reports}
+          columns={[
+            { field: "animalID", headerName: "Animal ID", flex: 1 },
+            { field: "staffID", headerName: "Staff ID", flex: 1 },
+            { field: "causeOfDeath", headerName: "Cause of Death", flex: 1 },
+            { field: "deathDate", headerName: "Death Date", flex: 1 },
+            { field: "deathTime", headerName: "Death Time", flex: 1 },
+            {
+              field: "dateReported",
+              headerName: "Date Reported",
+              flex: 1,
+            },
+            {
+              field: "actions",
+              headerName: "",
+              sortable: false,
+              filterable: false,
+              renderCell: (params) => (
+                <div style={{ marginTop: "5px auto" }}>
+                  <Button
+                    variant="danger"
+                    onClick={() => handleDeleteReport(params.rowIndex)}
+                    style={{ padding: "6px 12px" }}
+                  >
+                    <FaTrash />
+                  </Button>
+                  <Button
+                    variant="primary"
+                    onClick={() => handleEditDialogOpen(params.row)}
+                    style={{ padding: "6px 12px" }}
+                  >
+                    <FaEdit />
+                  </Button>
+                </div>
+              ),
+              flex: 0.5,
+            },
+          ]}
+          components={{ Toolbar: GridToolbar }}
+        />
+      </Box>
 
+      {/* Edit Dialog */}
+      <Dialog open={editDialogOpen} onClose={handleEditDialogClose}>
+        <DialogTitle>Edit Report</DialogTitle>
+        <DialogContent>
+          <Form onSubmit={handleEditReport}>
+            <Form.Group className="mb-3" controlId="editAnimalID">
+              <Form.Label>Animal ID</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Enter animal ID"
+                defaultValue={editReport ? editReport.animalID : ""}
+                required
+              />
+            </Form.Group>
 
-            <th>Cause of Death</th>
-            <th>Death Date</th>
-            <th>Death Time</th>
-            <th>Date Reported</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          {reports.map((report, index) => (
-            <tr style={{ color: "white" }} key={index}>
-              <td>{index + 1}</td>
-              <td>
-                <Form.Control
-                  type="text"
-                  value={report.animalID}
-                  onChange={(event) =>
-                    handleEditReport(index, "animalID", event.target.value)
-                  }
-                />
-              </td>
-              <td>
-                <Form.Control
-                  type="text"
-                  value={report.staffID}
-                  onChange={(event) =>
-                    handleEditReport(index, "staffID", event.target.value)
-                  }
-                />
-              </td>
-              <td>
-                <Form.Control
-                  type="text"
-                  value={report.causeOfDeath}
-                  onChange={(event) =>
-                    handleEditReport(index, "causeOfDeath", event.target.value)
-                  }
-                />
-              </td>
-              <td>
-                <Form.Control
-                  type="date"
-                  value={report.deathDate}
-                  onChange={(event) =>
-                    handleEditReport(index, "deathDate", event.target.value)
-                  }
-                />
-              </td>
-              <td>
-                <Form.Control
-                  type="time"
-                  value={report.deathTime}
-                  onChange={(event) =>
-                    handleEditReport(index, "deathTime", event.target.value)
-                  }
-                />
-              </td>
-              <td>{report.dateReported}</td>
-              <td>
-                <Button
-                  style={{
-                    marginTop: "0",
-                    padding: "6px 12px",
-                  }}
-                  variant="danger"
-                  onClick={() => handleDeleteReport(index)}
-                >
-                  <FaTrash />
-                </Button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </Table>
-    </div>
+            <Form.Group className="mb-3" controlId="editStaffID">
+              <Form.Label>Staff ID</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Enter staff ID"
+                defaultValue={editReport ? editReport.staffID : ""}
+                required
+              />
+            </Form.Group>
+
+            <Form.Group className="mb-3" controlId="editCauseOfDeath">
+              <Form.Label>Cause of Death</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Enter cause of death"
+                defaultValue={editReport ? editReport.causeOfDeath : ""}
+                required
+              />
+            </Form.Group>
+
+            <Form.Group className="mb-3" controlId="editDeathDate">
+              <Form.Label>Death Date</Form.Label>
+              <Form.Control
+                type="date"
+                defaultValue={editReport ? editReport.deathDate : ""}
+                required
+              />
+            </Form.Group>
+
+            <Form.Group className="mb-3" controlId="editDeathTime">
+              <Form.Label>Death Time</Form.Label>
+              <Form.Control
+                type="time"
+                defaultValue={editReport ? editReport.deathTime : ""}
+                required
+              />
+            </Form.Group>
+
+            <Form.Group className="mb-3" controlId="editDateReported">
+              <Form.Label>Date Reported</Form.Label>
+              <Form.Control
+                type="date"
+                defaultValue={editReport ? editReport.dateReported : ""}
+                required
+              />
+            </Form.Group>
+          </Form>
+        </DialogContent>
+        <DialogActions>
+          <Button variant="warning" onClick={handleEditDialogClose}>
+            Cancel
+          </Button>
+          <Button variant="success" color="danger" onClick={handleEditDialogSave} type="submit">
+            Save
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </Box>
   );
 };
 
