@@ -1,83 +1,119 @@
-import React, { useState } from "react";
-import { Form, Button, Table } from "react-bootstrap";
-import { FaPlus, FaMinus, FaTrash } from "react-icons/fa";
+import { useState } from "react";
+import { Form, Button } from "react-bootstrap";
+import { Box, Dialog, DialogTitle, DialogContent, DialogActions, TextField } from "@mui/material";
+import { DataGrid, GridToolbar } from "@mui/x-data-grid";
+import { FaPlus, FaTrash, FaEdit } from "react-icons/fa";
 import Header from "../../components/Header";
 import Swal from "sweetalert2";
+import { useTheme } from "@mui/material";
+import { tokens } from "../../theme";
 
 const MedicalHistory = () => {
-  const [records, setRecords] = useState([]);
+  const [reports, setReports] = useState([]);
+  const [editDialogOpen, setEditDialogOpen] = useState(false);
+  const [editReport, setEditReport] = useState(null);
 
-  const handleAddRecord = (event) => {
+  const handleAddReport = (event) => {
     event.preventDefault();
-    const record = {
+    const report = {
+      id: Date.now(),
       animalId: event.target.animalId.value,
       staffId: event.target.staffId.value,
       healthDescription: event.target.healthDescription.value,
       nextCheckupDate: event.target.nextCheckupDate.value,
       medication: event.target.medication.value,
-      vaccinationStatus: event.target.vaccinationStatus.value
+      vaccinationStatus: event.target.vaccinationStatus.value,
     };
-    setRecords([...records, record]);
+    setReports([...reports, report]);
     event.target.reset();
   };
 
-  const handleDeleteRecord = (index) => {
+  const handleDeleteReport = (index) => {
     Swal.fire({
-      title: 'Are you sure?',
-      text: 'You will not be able to recover this medical record!',
-      icon: 'warning',
+      title: "Are you sure?",
+      text: "You will not be able to recover this report!",
+      icon: "warning",
       showCancelButton: true,
-      confirmButtonText: 'Yes, delete it!',
-      cancelButtonText: 'No, cancel!',
-      reverseButtons: true
+      confirmButtonText: "Yes, delete it!",
+      cancelButtonText: "No, cancel!",
+      reverseButtons: true,
     }).then((result) => {
       if (result.isConfirmed) {
-        const newRecords = [...records];
-        newRecords.splice(index, 1);
-        setRecords(newRecords);
-        Swal.fire(
-          'Deleted!',
-          'Your medical record has been deleted.',
-          'success'
-        )
+        const newReports = [...reports];
+        newReports.splice(index, 1);
+        setReports(newReports);
+        Swal.fire("Deleted!", "Your report has been deleted.", "success");
       } else if (result.dismiss === Swal.DismissReason.cancel) {
-        Swal.fire(
-          'Cancelled',
-          'Your medical record is safe :)',
-          'error'
-        )
+        Swal.fire("Cancelled", "Your report is safe :)", "error");
       }
-    })
+    });
   };
 
-  const handleEditRecord = (index, key, value) => {
-    const newRecords = [...records];
-    newRecords[index][key] = value;
-    setRecords(newRecords);
+  const handleEditReport = (params, event) => {
+    const { id, field, props } = params;
+    const { value } = event.target;
+    const newReports = reports.map((report) => {
+      if (report.id === id) {
+        return { ...report, [field]: value };
+      }
+      return report;
+    });
+    setReports(newReports);
   };
+
+  const handleEditDialogOpen = (report) => {
+    setEditReport(report);
+    setEditDialogOpen(true);
+  };
+
+  const handleEditDialogClose = () => {
+    setEditDialogOpen(false);
+  };
+
+  const handleEditDialogSave = () => {
+    const newReports = reports.map((report) => {
+      if (report.id === editReport.id) {
+        return {
+          ...report,
+          animalId: document.getElementById("editAnimalId").value,
+          staffId: document.getElementById("editStaffId").value,
+          healthDescription: document.getElementById("editHealthDescription").value,
+          nextCheckupDate: document.getElementById("editNextCheckupDate").value,
+          medication: document.getElementById("editMedication").value,
+          vaccinationStatus: document.getElementById("editVaccinationStatus").value,
+        };
+      }
+      return report;
+    });
+    setReports(newReports);
+    setEditDialogOpen(false);
+  };
+
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
 
   return (
-    <div className="container mt-5">
+    <Box m="20px" width="90%" margin="0 auto">
       <Header
         title="MEDICAL HISTORY"
-        subtitle="Record of animal medical history"
+        subtitle="Manage medical history reports"
         fontSize="36px"
         mt="20px"
       />
-      <Form onSubmit={handleAddRecord}>
+      <Form onSubmit={handleAddReport}>
         <Form.Group className="mb-3" controlId="animalId">
           <Form.Label>Animal ID</Form.Label>
-          <Form.Control type="number" placeholder="Enter animal ID" min="1" step="1" required />
+          <Form.Control type="text" placeholder="Enter animal ID" required />
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="staffId">
           <Form.Label>Staff ID</Form.Label>
-          <Form.Control type="number" placeholder="Enter staff ID" min="1" step="1" required />
+          <Form.Control type="text" placeholder="Enter staff ID" required />
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="healthDescription">
           <Form.Label>Health Description</Form.Label>
-          <Form.Control as="textarea" placeholder="Enter health description" required />
+          <Form.Control type="text" placeholder="Enter health description" required />
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="nextCheckupDate">
@@ -91,114 +127,172 @@ const MedicalHistory = () => {
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="vaccinationStatus">
-            <Form.Label>Vaccination Status</Form.Label>
-            <Form.Select required>
+          <Form.Label>Vaccination Status</Form.Label>
+          <Form.Select required>
             <option value="">Select vaccination status</option>
-            <option value="Up to date">Up to date</option>
-            <option value="Expired">Expired</option>
-            <option value="Not vaccinated">Not vaccinated</option>
-            </Form.Select>
+            <option value="Vaccinated">Vaccinated</option>
+            <option value="Not Vaccinated">Not Vaccinated</option>
+          </Form.Select>
+        </Form.Group>
+
+
+        <div className="d-grid gap-2" style={{ marginTop: "-20px", marginBottom: "20px" }}>
+          <Button className="btnSignin" variant="success" type="submit" style={{ width: "300px" }}>
+            <FaPlus /> Add Report
+          </Button>
+        </div>
+      </Form>
+
+      <Box
+        m="40px 0 0 0"
+        height="75vh"
+        margin="0 auto"
+        sx={{
+          // Styling for the DataGrid
+          "& .MuiDataGrid-root": {
+            border: "none",
+          },
+          "& .MuiDataGrid-cell": {
+            borderBottom: "none",
+          },
+          "& .MuiDataGrid-columnHeaders": {
+            backgroundColor: colors.greenAccent[700],
+            borderBottom: "none",
+          },
+          "& .MuiDataGrid-virtualScroller": {
+            backgroundColor: colors.primary[400],
+          },
+          "& .MuiDataGrid-footerContainer": {
+            borderTop: "none",
+            backgroundColor: colors.greenAccent[700],
+          },
+          "& .MuiCheckbox-root": {
+            color: `${colors.greenAccent[200]} !important`,
+          },
+          "& .MuiDataGrid-toolbarContainer .MuiButton-text": {
+            color: `${colors.grey[100]} !important`,
+          },
+        }}
+      >
+        <DataGrid
+          rows={reports}
+          columns={[
+            { field: "animalId", headerName: "Animal ID", flex: 1 },
+            { field: "staffId", headerName: "Staff ID", flex: 1 },
+            { field: "healthDescription", headerName: "Health Description", flex: 1 },
+            { field: "nextCheckupDate", headerName: "Next Checkup Date", flex: 1 },
+            { field: "medication", headerName: "Medication", flex: 1 },
+            {
+              field: "vaccinationStatus",
+              headerName: "Vaccination Status",
+              flex: 1,
+            },
+            {
+              field: "actions",
+              headerName: "",
+              sortable: false,
+              filterable: false,
+              renderCell: (params) => (
+                <div style={{ marginTop: "5px auto" }}>
+                  <Button
+                    variant="danger"
+                    onClick={() => handleDeleteReport(params.rowIndex)}
+                    style={{ padding: "6px 12px" }}
+                  >
+                    <FaTrash />
+                  </Button>
+                  <Button
+                    variant="primary"
+                    onClick={() => handleEditDialogOpen(params.row)}
+                    style={{ padding: "6px 12px" }}
+                  >
+                    <FaEdit />
+                  </Button>
+                </div>
+              ),
+              flex: 0.5,
+            },
+          ]}
+          components={{ Toolbar: GridToolbar }}
+        />
+      </Box>
+
+      {/* Edit Dialog */}
+      <Dialog open={editDialogOpen} onClose={handleEditDialogClose}>
+        <DialogTitle>Edit Report</DialogTitle>
+        <DialogContent>
+          <Form onSubmit={handleEditReport}>
+            <Form.Group className="mb-3" controlId="editAnimalId">
+              <Form.Label>Animal ID</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Enter animal ID"
+                defaultValue={editReport ? editReport.animalId : ""}
+                required
+              />
             </Form.Group>
 
-    <div className="d-grid gap-2">
-      <Button variant="success" type="submit" size="lg" className="mb-3">
-        Add record <FaPlus className="ms-2" />
-      </Button>
-    </div>
-  </Form>
+            <Form.Group className="mb-3" controlId="editStaffId">
+              <Form.Label>Staff ID</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Enter staff ID"
+                defaultValue={editReport ? editReport.staffId : ""}
+                required
+              />
+            </Form.Group>
 
-  <Table striped bordered hover style={{ color: "white" }}>
-    <thead>
-      <tr>
-        <th>Animal ID</th>
-        <th>Staff ID</th>
-        <th>Health Description</th>
-        <th>Next Checkup Date</th>
-        <th>Medication</th>
-        <th>Vaccination Status</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      {records.map((record, index) => (
-        <tr key={index}>
-          <td>
-            <Form.Control
-              type="number"
-              value={record.animalId}
-              onChange={(event) =>
-                handleEditRecord(index, "animalId", event.target.value)
-              }
-            />
-          </td>
-          <td>
-            <Form.Control
-              type="number"
-              value={record.staffId}
-              onChange={(event) =>
-                handleEditRecord(index, "staffId", event.target.value)
-              }
-            />
-          </td>
-          <td>
-            <Form.Control
-              as="textarea"
-              value={record.healthDescription}
-              onChange={(event) =>
-                handleEditRecord(index, "healthDescription", event.target.value)
-              }
-            />
-          </td>
-          <td>
-            <Form.Control
-              type="date"
-              value={record.nextCheckupDate}
-              onChange={(event) =>
-                handleEditRecord(index, "nextCheckupDate", event.target.value)
-              }
-            />
-          </td>
-          <td>
-            <Form.Control
-              type="text"
-              value={record.medication}
-              onChange={(event) =>
-                handleEditRecord(index, "medication", event.target.value)
-              }
-            />
-          </td>
-          <td>
-            <Form.Control
-              as="select"
-              value={record.vaccinationStatus}
-              onChange={(event) =>
-                handleEditRecord(index, "vaccinationStatus", event.target.value)
-              }
-            >
+            <Form.Group className="mb-3" controlId="editHealthDescription">
+              <Form.Label>Health Description</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Enter health description"
+                defaultValue={editReport ? editReport.healthDescription : ""}
+                required
+              />
+            </Form.Group>
+
+            <Form.Group className="mb-3" controlId="editNextCheckupDate">
+              <Form.Label>Next Checkup Date</Form.Label>
+              <Form.Control
+                type="date"
+                defaultValue={editReport ? editReport.nextCheckupDate : ""}
+                required
+              />
+            </Form.Group>
+
+            <Form.Group className="mb-3" controlId="editMedication">
+              <Form.Label>Medication</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Enter medication"
+                defaultValue={editReport ? editReport.medication : ""}
+                required
+              />
+            </Form.Group>
+
+            <Form.Group className="mb-3" controlId="editVaccinationStatus">
+            <Form.Label>Vaccination Status</Form.Label>
+            <Form.Select defaultValue={editReport ? editReport.vaccinationStatus : ""} required>
               <option value="">Select vaccination status</option>
-              <option value="Up to date">Up to date</option>
-              <option value="Expired">Expired</option>
-              <option value="Not vaccinated">Not vaccinated</option>
-            </Form.Control>
-          </td>
-          <td>
-            <Button
-              variant="danger"
-              onClick={() => handleDeleteRecord(index)}
-              style={{
-                marginTop: "0",
-                padding: "6px 12px",
-              }}
-            >
-              <FaTrash />
-            </Button>
-          </td>
-        </tr>
-      ))}
-    </tbody>
-  </Table>
-</div>
-);
+              <option value="Vaccinated">Vaccinated</option>
+              <option value="Not Vaccinated">Not Vaccinated</option>
+            </Form.Select>
+          </Form.Group>
+
+          </Form>
+        </DialogContent>
+        <DialogActions>
+          <Button variant="warning" onClick={handleEditDialogClose}>
+            Cancel
+          </Button>
+          <Button variant="success" color="danger" onClick={handleEditDialogSave} type="submit">
+            Save
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </Box>
+  );
 };
 
 export default MedicalHistory;
