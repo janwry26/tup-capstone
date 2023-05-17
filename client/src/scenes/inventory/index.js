@@ -146,7 +146,7 @@ const Inventory = () => {
         </Form.Group>
 
         <div className="d-grid gap-2" style={{marginTop:"-20px", marginBottom: "20px"}}>
-          <Button variant="success" type="submit"  style={{width:"300px"}} >
+          <Button variant="success" type="submit" className="btnSignin" style={{width:"300px"}} >
             <FaPlus /> Add Product
           </Button>
         </div>
@@ -165,7 +165,7 @@ const Inventory = () => {
             borderBottom: "none",
           },
           "& .MuiDataGrid-columnHeaders": {
-            backgroundColor: colors.blueAccent[700],
+            backgroundColor: colors.greenAccent[700],
             borderBottom: "none",
           },
           "& .MuiDataGrid-virtualScroller": {
@@ -173,7 +173,7 @@ const Inventory = () => {
           },
           "& .MuiDataGrid-footerContainer": {
             borderTop: "none",
-            backgroundColor: colors.blueAccent[700],
+            backgroundColor: colors.greenAccent[700],
           },
           "& .MuiCheckbox-root": {
             color: `${colors.greenAccent[200]} !important`,
@@ -205,7 +205,7 @@ const Inventory = () => {
               sortable: false,
               filterable: false,
               renderCell: (params) => (
-                <div style={{ marginBottom: '35px' }} >
+                <div style={{ margin: '5px auto' }} >
                   <Button
                     variant="danger"
                     onClick={() => handleDeleteProduct(params.rowIndex)}

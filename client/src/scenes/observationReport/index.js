@@ -134,7 +134,7 @@ const ObservationReport = () => {
     </Form.Group>
 
     <div className="d-grid gap-2" style={{marginTop:"-20px", marginBottom: "20px"}}>
-      <Button variant="success" type="submit"  style={{width:"300px"}} >
+      <Button className="btnSignin" variant="success" type="submit"  style={{width:"300px"}} >
         <FaPlus /> Add Report
       </Button>
     </div>
@@ -153,7 +153,7 @@ const ObservationReport = () => {
         borderBottom: "none",
       },
       "& .MuiDataGrid-columnHeaders": {
-        backgroundColor: colors.blueAccent[700],
+        backgroundColor: colors.greenAccent[700],
         borderBottom: "none",
       },
       "& .MuiDataGrid-virtualScroller": {
@@ -161,7 +161,7 @@ const ObservationReport = () => {
       },
       "& .MuiDataGrid-footerContainer": {
         borderTop: "none",
-        backgroundColor: colors.blueAccent[700],
+        backgroundColor: colors.greenAccent[700],
       },
       "& .MuiCheckbox-root": {
         color: `${colors.greenAccent[200]} !important`,
@@ -186,7 +186,7 @@ const ObservationReport = () => {
             sortable: false, 
              filterable: false, 
               renderCell: (params) => 
-              (<div style={{ marginBottom: '35px' }} > 
+              (<div style={{ margintop: '5px auto' }} > 
                <Button   variant="danger" onClick={() => handleDeleteReport(params.rowIndex)} 
                style={{ padding: "6px 12px" }}  >
                  <FaTrash />
@@ -260,10 +260,10 @@ const ObservationReport = () => {
       </Form>
     </DialogContent>
     <DialogActions>
-      <Button variant="outlined" onClick={handleEditDialogClose}>
+      <Button variant="warning" onClick={handleEditDialogClose}>
         Cancel
       </Button>
-      <Button variant="contained" onClick={handleEditDialogSave} type="submit">
+      <Button variant="success"  color="danger"onClick={handleEditDialogSave} type="submit">
         Save
       </Button>
     </DialogActions>
