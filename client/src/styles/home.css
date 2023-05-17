@@ -106,12 +106,17 @@
     align-items: center;
     justify-content: center;
     position: relative;
-    background-color: rgb(209, 203, 203);
+    /* background-color: rgb(209, 203, 203); */
+    background:url("../assets/images/bg/bg.jpg");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-position: center center;
+
 }
 .second-container h1{
     font-size: 50px;
     font-weight: bolder;
-    color: #2e7c67;
+    color: rgb(119,213,203);
 }
 .second-container p{
     width: 100%;
@@ -131,7 +136,7 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
-    background: rgb(184, 181, 181);
+    background: rgb(188,233,227);
     border-radius: 10px;
     transition: border-radius 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
