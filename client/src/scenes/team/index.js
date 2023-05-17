@@ -18,13 +18,7 @@ const Team = () => {
       flex: 1,
       cellClassName: "name-column--cell",
     },
-    {
-      field: "age",
-      headerName: "Age",
-      type: "number",
-      headerAlign: "left",
-      align: "left",
-    },
+  
     {
       field: "phone",
       headerName: "Phone Number",
@@ -33,6 +27,11 @@ const Team = () => {
     {
       field: "email",
       headerName: "Email",
+      flex: 1,
+    },
+    {
+      field: "username",
+      headerName: "Username",
       flex: 1,
     },
     {
@@ -91,7 +90,7 @@ const Team = () => {
             color: colors.greenAccent[300],
           },
           "& .MuiDataGrid-columnHeaders": {
-            backgroundColor: colors.blueAccent[700],
+            backgroundColor: colors.greenAccent[700],
             borderBottom: "none",
           },
           "& .MuiDataGrid-virtualScroller": {
@@ -99,7 +98,7 @@ const Team = () => {
           },
           "& .MuiDataGrid-footerContainer": {
             borderTop: "none",
-            backgroundColor: colors.blueAccent[700],
+            backgroundColor: colors.greenAccent[700],
           },
           "& .MuiCheckbox-root": {
             color: `${colors.greenAccent[200]} !important`,

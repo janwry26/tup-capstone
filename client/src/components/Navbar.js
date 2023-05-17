@@ -12,7 +12,7 @@ class Navbar extends Component {
         const hideNavbar = 
         currentRoute === '/dashboard' ||
         currentRoute === '/dashboard/team' ||
-        currentRoute === '/dashboard/contact' ||
+        currentRoute === '/dashboard/contacts' ||
         currentRoute === '/dashboard/invoices' ||
         currentRoute === '/dashboard/form' ||
         currentRoute === '/dashboard/faq' ||
