@@ -17,7 +17,10 @@
     align-items: center;
     justify-content: center;
     position: relative;
-    background-color: rgb(209, 203, 203);
+    background:url("../assets/images/bg/bg.jpg");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-position: center center;
 }
 
 .middle{
@@ -29,13 +32,14 @@
     align-self: flex-start;
     gap: 1.5rem;
     padding-top: 300px;
+    margin-left: 100px;
 }
 .middle p{
     font-size: 18px;
     text-align: justify;
 }
 .middle h1 span{
-    color: #2e7c67;
+    color: rgb(119,213,203);
     font-size: 65px;
 }
 .right img{
@@ -61,19 +65,17 @@
     border: none;
     border-radius: 20px;
     letter-spacing: 2px;
-    background-color: #2e7c67;
+    background-color:rgb(119,213,203);
     font-weight: bold;
     font-size: 18px;
     color: rgb(255, 255, 255);
+
 }
 .btnLogin:hover{
     color: white;
-    background-color: rgb(58, 163, 58);
+    background-color: rgb(107, 201, 172);
 }
-.btnContactAdmin:hover{
-    color: white;
-    background-color: rgb(132, 132, 212);
-}
+
 #btn1{
     position: absolute;
     margin: 10px ;
@@ -180,6 +182,8 @@
         flex-direction: column;
         height: 100vh;
         justify-content:center;
+        background-position: bottom;
+        background: rgb(214,237,233);
     }
     .middle h1{
         font-size: 30px;
