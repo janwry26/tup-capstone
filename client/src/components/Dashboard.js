@@ -13,7 +13,6 @@ import Form from "../scenes/form";
 import AdminForm from "../scenes/adminForm";
 import Line from "../scenes/line";
 import Pie from "../scenes/pie";
-import FAQ from "../scenes/faq";
 import Geography from "../scenes/geography";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { ColorModeContext, useMode } from "../theme";
@@ -41,7 +40,6 @@ function DashboardMain() {
             <Route path="/contacts" element={<Contacts />} />
             <Route path="/form" element={<Form />} />
             <Route path="/adminForm" element={<AdminForm />} />
-            <Route path="/faq" element={<FAQ />} />
             <Route path="/team" element={<Team />} />
             <Route path="/line" element={<Line />} />
             <Route path="/calendar" element={<Calendar />} />
