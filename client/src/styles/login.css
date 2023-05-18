@@ -118,7 +118,10 @@ animation: btn-anim2 2s linear infinite;
 
 
 @media screen and (max-width: 1024px) {
+  .login-container{
+    background: #d9ece8;
 
+  }
   div.login-box{
     width: 300px;
     padding: 25px;
