@@ -23,6 +23,7 @@ import MonitorHeartIcon from '@mui/icons-material/MonitorHeart';
 import PetsIcon from '@mui/icons-material/Pets';
 import MedicalInformationIcon from '@mui/icons-material/MedicalInformation';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
+import AssignmentIcon from '@mui/icons-material/Assignment';
 const Item = ({ title, to, icon, selected, setSelected, disabled }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -282,6 +283,13 @@ const Sidebar = () => {
               selected={selected}
               setSelected={setSelected}
             />}
+             <Item
+              title="Tasks"
+              to="/dashboard/taskUser"
+              icon={<AssignmentIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
              <Typography
               variant="h6"
               color={colors.grey[300]}
