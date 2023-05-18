@@ -114,10 +114,18 @@ const Inventory = () => {
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="type">
+        <Form.Label>Type of medicines</Form.Label>
 
+        <Form.Control as="select" required>
+          <option value="">Select a medicine</option>
+          <option value="Diazepam">Diazepam</option>
+          <option value="Meloxicam">Meloxicam</option>
+          <option value="Doxycycline">Doxycycline</option>
+          <option value="Ivermectin">Ivermectin</option>
+          <option value="Methimazole">Methimazole</option>
+          <option value="Enrofloxacin">Enrofloxacin</option>
+        </Form.Control>
 
-          <Form.Label>Type</Form.Label>
-          <Form.Control type="text" placeholder="Enter product type" required />
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="description">
@@ -245,14 +253,17 @@ const Inventory = () => {
     </Form.Group>
 
     <Form.Group className="mb-3" controlId="editType">
-      <Form.Label>Type</Form.Label>
-      <Form.Control
-        type="text"
-        placeholder="Enter product type"
-        defaultValue={editProduct ? editProduct.itemType : ""}
-        required
-      />
-    </Form.Group>
+    <Form.Label>Type of medicines</Form.Label>
+    <Form.Control as="select" defaultValue={editProduct ? editProduct.itemType : ""} required>
+      <option value="">Select a medicine</option>
+      <option value="Diazepam">Diazepam </option>
+      <option value="Meloxicam">Meloxicam</option>
+      <option value="Doxycycline">Doxycycline</option>
+      <option value="Ivermectin">Ivermectin</option>
+      <option value="Methimazole">Methimazole</option>
+      <option value="Enrofloxacin">Enrofloxacin</option>
+    </Form.Control>
+  </Form.Group>
 
     <Form.Group className="mb-3" controlId="editDescription">
       <Form.Label>Description</Form.Label>
@@ -287,10 +298,10 @@ const Inventory = () => {
   </Form>
 </DialogContent>
 <DialogActions>
-  <Button variant="outlined" onClick={handleEditDialogClose}>
+  <Button variant="warning" onClick={handleEditDialogClose}>
     Cancel
   </Button>
-  <Button variant="contained" onClick={handleEditDialogSave} type="submit">
+  <Button variant="danger" onClick={handleEditDialogSave} type="submit">
     Save
   </Button>
 </DialogActions>

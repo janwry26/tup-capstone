@@ -130,8 +130,17 @@ const AnimalRecords = () => {
 
         <Form.Group className="mb-3" controlId="breedType">
           <Form.Label>Breed Type</Form.Label>
-          <Form.Control type="text" placeholder="Enter breed type" required />
+          <Form.Control as="select" required>
+            <option value="">Select a breed type</option>
+            <option value="Lion">Lion</option>
+            <option value="Tiger">Tiger</option>
+            <option value="Giraffe">Giraffe</option>
+            <option value="Elephant">Elephant</option>
+            <option value="Zebra">Zebra</option>
+            <option value="Monkey">Monkey</option>
+          </Form.Control>
         </Form.Group>
+
 
         <Form.Group className="mb-3" controlId="weight">
           <Form.Label>Weight</Form.Label>
@@ -266,15 +275,19 @@ const AnimalRecords = () => {
               />
             </Form.Group>
 
-            <Form.Group className="mb-3" controlId="editBreedType">
-              <Form.Label>Breed Type</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter breed type"
-                defaultValue={editRecord ? editRecord.breedType : ""}
-                required
-              />
-            </Form.Group>
+           <Form.Group className="mb-3" controlId="editBreedType">
+            <Form.Label>Breed Type</Form.Label>
+            <Form.Control as="select" defaultValue={editRecord ? editRecord.breedType : ""} required>
+              <option value="">Select a breed</option>
+              <option value="Lion">Lion</option>
+              <option value="Tiger">Tiger</option>
+              <option value="Giraffe">Giraffe</option>
+              <option value="Elephant">Elephant</option>
+              <option value="Zebra">Zebra</option>
+              <option value="Monkey">Monkey</option>
+            </Form.Control>
+          </Form.Group>
+
 
             <Form.Group className="mb-3" controlId="editWeight">
               <Form.Label>Weight</Form.Label>
