@@ -24,7 +24,7 @@
 }
 
 h2 {
-  color: rgb(119,213,203);
+  color: #5cc0af;
   font-size: 24px;
   text-align: center;
   padding-bottom: 20px;
@@ -74,7 +74,7 @@ h2 {
   padding: 10px 20px;
   font-size: 16px;
   color: #fff;
-  background-color: rgb(119,213,203); 
+  background-color: #5cc0af; 
   text-decoration: none;
   text-transform: uppercase;
   overflow: hidden;
@@ -97,7 +97,19 @@ h2 {
   transform: translateY(-50%);
 }
 
-
+.btnDashBoard{
+  width: 200px;
+  margin-top: 2rem;
+  padding: 10px 20px;
+  border-radius:10px;
+  background: #2e7c67;
+  border: none;
+}
+.btnDashBoard:hover{
+  background: #3a9182;
+  transition: all 0.3s;
+  
+}
 
 .login-box a span:nth-child(1) {
   bottom: 2px;

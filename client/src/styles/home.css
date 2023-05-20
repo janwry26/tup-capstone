@@ -39,7 +39,7 @@
     text-align: justify;
 }
 .middle h1 span{
-    color: rgb(119,213,203);
+    color: #5cc0af;
     font-size: 50px;
 }
 .right img{
@@ -65,7 +65,7 @@
     border: none;
     border-radius: 20px;
     letter-spacing: 2px;
-    background-color:rgb(119,213,203);
+    background-color:#5cc0af;
     font-weight: bold;
     font-size: 20px;
     color: rgb(255, 255, 255);
@@ -116,7 +116,7 @@
 .second-container h1{
     font-size: 50px;
     font-weight: bolder;
-    color: rgb(119,213,203);
+    color: #5cc0af;
 }
 .second-container p{
     width: 100%;
