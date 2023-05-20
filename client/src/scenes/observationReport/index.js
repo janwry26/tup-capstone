@@ -107,6 +107,7 @@ const ObservationReport = () => {
               variant="filled"
               fullWidth
               required
+              type="number"
             />
     </Box>
 
@@ -118,6 +119,7 @@ const ObservationReport = () => {
               variant="filled"
               fullWidth
               required
+              type="number"
             />
     </Box>
 
@@ -129,6 +131,7 @@ const ObservationReport = () => {
               variant="filled"
               fullWidth
               required
+              type="number"
             />
     </Box>
 
@@ -146,7 +149,6 @@ const ObservationReport = () => {
     <Box marginBottom="10px">
         <InputLabel >Date Reported</InputLabel>
           <TextField
-              placeholder="Input animal ID..."
               name="dateReported"
               variant="filled"
               fullWidth
@@ -233,7 +235,7 @@ const ObservationReport = () => {
         <Form.Group className="mb-3" controlId="editAnimalID">
           <Form.Label>Animal ID</Form.Label>
           <Form.Control
-            type="text"
+            type="number"
             placeholder="Enter animal ID"
             defaultValue={editReport ? editReport.animalID : ""}
             required
@@ -243,7 +245,7 @@ const ObservationReport = () => {
         <Form.Group className="mb-3" controlId="editReportID">
           <Form.Label>Report ID</Form.Label>
           <Form.Control
-            type="text"
+            type="number"
             placeholder="Enter report ID"
             defaultValue={editReport ? editReport.reportID : ""}
             required
@@ -253,7 +255,7 @@ const ObservationReport = () => {
         <Form.Group className="mb-3" controlId="editStaffID">
           <Form.Label>Staff ID</Form.Label>
           <Form.Control
-            type="text"
+            type="number"
             placeholder="Enter staff ID"
             defaultValue={editReport ? editReport.staffID : ""}
             required

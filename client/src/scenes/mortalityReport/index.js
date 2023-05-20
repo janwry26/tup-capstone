@@ -109,6 +109,7 @@ const MortalityReport = () => {
               variant="filled"
               fullWidth
               required
+              type="number"
             />
       </Box>
 
@@ -120,6 +121,7 @@ const MortalityReport = () => {
               variant="filled"
               fullWidth
               required
+              type="number"
             />
 
         </Box>
@@ -261,7 +263,7 @@ const MortalityReport = () => {
             <Form.Group className="mb-3" controlId="editAnimalID">
               <Form.Label>Animal ID</Form.Label>
               <Form.Control
-                type="text"
+                type="number"
                 placeholder="Enter animal ID"
                 defaultValue={editReport ? editReport.animalID : ""}
                 required
@@ -271,7 +273,7 @@ const MortalityReport = () => {
             <Form.Group className="mb-3" controlId="editStaffID">
               <Form.Label>Staff ID</Form.Label>
               <Form.Control
-                type="text"
+                type="number"
                 placeholder="Enter staff ID"
                 defaultValue={editReport ? editReport.staffID : ""}
                 required
