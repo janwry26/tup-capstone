@@ -2,8 +2,8 @@ import { useState } from "react";
 import Header from "../../components/Header";
 import { Button, Form } from "react-bootstrap";
 import Swal from "sweetalert2";
-import { Box } from "@mui/material";
-
+import { Box,TextField } from "@mui/material";
+import { Select, MenuItem,InputLabel } from "@mui/material";
 function TaskList() {
   const [tasks, setTasks] = useState([]);
   const [newTask, setNewTask] = useState("");
@@ -98,51 +98,63 @@ function TaskList() {
           mt="20px"
         />
         <Form onSubmit={handleSubmit}>
-          <Form.Group>
-            <Form.Label>Task Name</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Add task name"
-              value={newTask}
-              onChange={(event) => setNewTask(event.target.value)}
-              style={{ marginBottom: "10px" }}
-            />
-            <Form.Label>Assign to Staff ID</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Assign to staff ID"
-              value={selectedStaffId}
-              onChange={(event) => setSelectedStaffId(event.target.value)}
-              style={{ marginBottom: "10px" }}
-            />
-            <Form.Label>Task ID</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Task ID"
-              value={taskID}
-              onChange={(event) => setTaskID(event.target.value)}
-              style={{ marginBottom: "10px" }}
-            />
-            <Form.Label>Due Date</Form.Label>
-            <Form.Control
-              type="date"
-              placeholder="Due Date"
-              value={taskDueDate}
-              onChange={(event) => setTaskDueDate(event.target.value)}
-              style={{ marginBottom: "10px" }}
-            />
-            <Form.Label>Task Status</Form.Label>
-            <Form.Control
-              as="select"
-              value={taskStatus}
-              onChange={(event) => setTaskStatus(event.target.value)}
-              style={{ marginBottom: "10px" }}
-            >
-              <option value="Not Complete">Not Complete</option>
-              <option value="Complete">Complete</option>
-            </Form.Control>
-           
-            <Button
+           <Box mt={2}>
+           <InputLabel >Task Name</InputLabel>
+          <TextField
+            fullWidth
+            variant="filled"
+            placeholder="Enter Task Name..."
+            value={newTask}
+            onChange={(event) => setNewTask(event.target.value)}
+          />
+        </Box>
+        <Box mt={2}>
+        <InputLabel >Staff ID</InputLabel>
+
+          <TextField
+            fullWidth
+            variant="filled"
+            placeholder="Enter Staff ID..."
+            value={selectedStaffId}
+            onChange={(event) => setSelectedStaffId(event.target.value)}
+          />
+        </Box>
+        <Box mt={2}>
+        <InputLabel >Staff ID</InputLabel>
+          <TextField
+            fullWidth
+            variant="filled"
+            placeholder="Enter Task ID"
+            value={taskID}
+            onChange={(event) => setTaskID(event.target.value)}
+          />
+        </Box>
+        <Box mt={2}>
+        <InputLabel >Due Date</InputLabel>
+          <TextField
+            fullWidth
+            variant="filled"
+            placeholder="Select Due Date"
+            type="date"
+            value={taskDueDate}
+            onChange={(event) => setTaskDueDate(event.target.value)}
+          />
+        </Box>
+        <Box mt={2}>
+        <InputLabel >Task Status</InputLabel>
+
+          <Select
+            fullWidth
+            variant="filled"
+            placeholder="Select task status"
+            value={taskStatus}
+            onChange={(event) => setTaskStatus(event.target.value)}
+          >
+            <MenuItem value="Not Complete">Not Complete</MenuItem>
+            <MenuItem value="Complete">Complete</MenuItem>
+          </Select>
+        </Box>
+        <Button
               className="btnSignin"
               type="submit"
               color="success"
@@ -150,7 +162,6 @@ function TaskList() {
             >
               Create
             </Button>
-          </Form.Group>
         </Form>
 
         <h2 className="mt-4">TASK CREATED BELOW:</h2>
