@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Form, Button } from "react-bootstrap";
-import { Box, Dialog, DialogTitle, DialogContent, DialogActions, TextField } from "@mui/material";
+import { Box, Dialog, DialogTitle, DialogContent, DialogActions, TextField,InputLabel, Select } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { FaPlus, FaTrash, FaEdit } from "react-icons/fa";
 import Header from "../../components/Header";
@@ -13,6 +13,7 @@ const AnimalRecords = () => {
   const [editDialogOpen, setEditDialogOpen] = useState(false);
   const [editRecord, setEditRecord] = useState(null);
   const genderOptions = ["Male", "Female"];
+  
   const handleAddRecord = (event) => {
     event.preventDefault();
     const record = {
@@ -95,7 +96,7 @@ const AnimalRecords = () => {
   const colors = tokens(theme.palette.mode);
 
   return (
-    <Box m="20px" width="90%" margin="0 auto">
+    <Box m="20px" width="80%" margin="0 auto">
       <Header
         title="ANIMAL RECORDS"
         subtitle="Manage animal records"
@@ -103,57 +104,95 @@ const AnimalRecords = () => {
         mt="20px"
       />
       <Form onSubmit={handleAddRecord}>
-        <Form.Group className="mb-3" controlId="species">
-          <Form.Label>Species</Form.Label>
-          <Form.Control type="text" placeholder="Enter species" required />
-        </Form.Group>
+      <Box marginBottom="10px">
+      <InputLabel >Species</InputLabel>
+          <TextField
+              placeholder="Input animal species..."
+              name="species"
+              variant="filled"
+              fullWidth
+              required
+            />
+      </Box>
 
-        <Form.Group className="mb-3" controlId="age">
-          <Form.Label>Age</Form.Label>
-          <Form.Control type="text" placeholder="Enter age" required />
-        </Form.Group>
+      <Box marginBottom="10px">
+      <InputLabel >Animal Age</InputLabel>
+          <TextField
+              placeholder="Input animal age..."
+              name="age"
+              variant="filled"
+              fullWidth
+              required
+              type="number"
+            />
+      </Box>
 
-        <Form.Group className="mb-3" controlId="gender">
-          <Form.Label>Gender</Form.Label>
-          <Form.Control as="select" required>
-            <option value="">Select gender</option>
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-          </Form.Control>
-        </Form.Group>
+      <Box marginBottom="10px">
+               <InputLabel>Animal Gender</InputLabel>
+                  <Select
+                    name="gender"
+                    native
+                    fullWidth
+                    required
+                    variant="filled"
+                  >
+                    <option value="">Select gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                  </Select>
+                </Box>
+    
+            <Box marginBottom="10px">
+            <InputLabel >Animal Id</InputLabel>
+                <TextField
+                    placeholder="Input animal ID..."
+                    name="animalID"
+                    variant="filled"
+                    fullWidth
+                    required
+                    type="number"
+                  />
+            </Box>
 
 
-        <Form.Group className="mb-3" controlId="animalID">
-          <Form.Label>Animal ID</Form.Label>
-          <Form.Control type="text" placeholder="Enter animal ID" required />
-        </Form.Group>
-
-        <Form.Group className="mb-3" controlId="breedType">
-          <Form.Label>Breed Type</Form.Label>
-          <Form.Control as="select" required>
-            <option value="">Select a breed type</option>
-            <option value="Lion">Lion</option>
-            <option value="Tiger">Tiger</option>
-            <option value="Giraffe">Giraffe</option>
-            <option value="Elephant">Elephant</option>
-            <option value="Zebra">Zebra</option>
-            <option value="Monkey">Monkey</option>
-          </Form.Control>
-        </Form.Group>
-
-
-        <Form.Group className="mb-3" controlId="weight">
-          <Form.Label>Weight</Form.Label>
-          <Form.Control type="text" placeholder="Enter weight" required />
-        </Form.Group>
-
-        <Form.Group className="mb-3" controlId="birthDate">
-          <Form.Label>Birth Date</Form.Label>
-          <Form.Control type="date" required />
-        </Form.Group>
+            <Box marginBottom="10px">
+               <InputLabel>Breed Type</InputLabel>
+                  <TextField
+                  placeholder="Input breed type"
+                    name="breedType"
+                    native
+                    fullWidth
+                    required
+                    variant="filled"
+                 />
+                </Box>
+    
+      
+                <Box marginBottom="10px">
+            <InputLabel >Animal Weight</InputLabel>
+                <TextField
+                    placeholder="Input animal weight in kg..."
+                    name="weight"
+                    variant="filled"
+                    fullWidth
+                    required
+                  />
+            </Box>
+            <Box marginBottom="10px">
+            <InputLabel >Animal Birth Date</InputLabel>
+                <TextField
+                    placeholder="Input animal birthday..."
+                    name="birthDate"
+                    variant="filled"
+                    fullWidth
+                    required
+                    type="date"
+                  />
+            </Box>
+       
 
         <div className="d-grid gap-2" style={{ marginTop: "-20px", marginBottom: "20px" }}>
-          <Button className="btnSignin" variant="success" type="submit" style={{ width: "300px" }}>
+          <Button className="btnDashBoard"  type="submit" >
             <FaPlus /> Add Record
           </Button>
         </div>
@@ -277,14 +316,8 @@ const AnimalRecords = () => {
 
            <Form.Group className="mb-3" controlId="editBreedType">
             <Form.Label>Breed Type</Form.Label>
-            <Form.Control as="select" defaultValue={editRecord ? editRecord.breedType : ""} required>
-              <option value="">Select a breed</option>
-              <option value="Lion">Lion</option>
-              <option value="Tiger">Tiger</option>
-              <option value="Giraffe">Giraffe</option>
-              <option value="Elephant">Elephant</option>
-              <option value="Zebra">Zebra</option>
-              <option value="Monkey">Monkey</option>
+            <Form.Control type="text" placeholder="input breed type" defaultValue={editRecord ? editRecord.breedType : ""} required>
+              
             </Form.Control>
           </Form.Group>
 

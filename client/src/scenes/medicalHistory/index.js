@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Form, Button } from "react-bootstrap";
-import { Box, Dialog, DialogTitle, DialogContent, DialogActions, TextField } from "@mui/material";
+import { Box, Dialog, DialogTitle, DialogContent, DialogActions, TextField,InputLabel, Select } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { FaPlus, FaTrash, FaEdit } from "react-icons/fa";
 import Header from "../../components/Header";
@@ -93,7 +93,7 @@ const MedicalHistory = () => {
   const colors = tokens(theme.palette.mode);
 
   return (
-    <Box m="20px" width="90%" margin="0 auto">
+    <Box m="20px" width="80%" margin="0 auto">
       <Header
         title="MEDICAL HISTORY"
         subtitle="Manage medical history reports"
@@ -101,43 +101,85 @@ const MedicalHistory = () => {
         mt="20px"
       />
       <Form onSubmit={handleAddReport}>
-        <Form.Group className="mb-3" controlId="animalId">
-          <Form.Label>Animal ID</Form.Label>
-          <Form.Control type="text" placeholder="Enter animal ID" required />
-        </Form.Group>
+           <Box marginBottom="10px">
+            <InputLabel >Animal Id</InputLabel>
+                <TextField
+                    placeholder="Input animal ID..."
+                    name="animalId"
+                    variant="filled"
+                    fullWidth
+                    required
+                    type="number"
+                  />
+            </Box>
 
-        <Form.Group className="mb-3" controlId="staffId">
-          <Form.Label>Staff ID</Form.Label>
-          <Form.Control type="text" placeholder="Enter staff ID" required />
-        </Form.Group>
+        
 
-        <Form.Group className="mb-3" controlId="healthDescription">
-          <Form.Label>Health Description</Form.Label>
-          <Form.Control type="text" placeholder="Enter health description" required />
-        </Form.Group>
+            <Box marginBottom="10px">
+            <InputLabel >Staff ID</InputLabel>
+              <TextField
+                  placeholder="Input staff ID..."
+                  name="staffId"
+                  variant="filled"
+                  fullWidth
+                  required
+                  type="number"
+                />
 
-        <Form.Group className="mb-3" controlId="nextCheckupDate">
-          <Form.Label>Next Checkup Date</Form.Label>
-          <Form.Control type="date" required />
-        </Form.Group>
+            </Box>
 
-        <Form.Group className="mb-3" controlId="medication">
-          <Form.Label>Medication</Form.Label>
-          <Form.Control type="text" placeholder="Enter medication" required />
-        </Form.Group>
+            <Box marginBottom="10px">
+        <InputLabel >Health Description</InputLabel>
+          <TextField
+              placeholder="Input health description..."
+              name="healthDescription"
+              variant="filled"
+              fullWidth
+              required
+            />
 
-        <Form.Group className="mb-3" controlId="vaccinationStatus">
-          <Form.Label>Vaccination Status</Form.Label>
-          <Form.Select required>
-            <option value="">Select vaccination status</option>
-            <option value="Vaccinated">Vaccinated</option>
-            <option value="Not Vaccinated">Not Vaccinated</option>
-          </Form.Select>
-        </Form.Group>
+        </Box>
+        <Box marginBottom="10px">
+        <InputLabel >Next Checkup Date</InputLabel>
+          <TextField
+              placeholder="Input next checkup date..."
+              name="nextCheckupDate"
+              variant="filled"
+              fullWidth
+              required
+              type="date"
+            />
+        </Box>
+        <Box marginBottom="10px">
+        <InputLabel >Animal Medication</InputLabel>
+          <TextField
+              placeholder="Input animal medication..."
+              name="medication"
+              variant="filled"
+              fullWidth
+              required
+            />
+        </Box>
+        <Box marginBottom="10px">
+               <InputLabel>Vaccination Status</InputLabel>
+                  <Select
+                    name="vaccinationStatus"
+                    native
+                    fullWidth
+                    required
+                    variant="filled"
+                  >
+                    <option value="">Select vaccination status</option>
+                    <option value="Vaccinated">Vaccinated</option>
+                    <option value="Not Vaccinated">Not Vaccinated</option>
+                  </Select>
+                </Box>
+
+       
 
 
         <div className="d-grid gap-2" style={{ marginTop: "-20px", marginBottom: "20px" }}>
-          <Button className="btnSignin" variant="success" type="submit" style={{ width: "300px" }}>
+          <Button className="btnDashBoard"type="submit" >
             <FaPlus /> Add Report
           </Button>
         </div>
@@ -225,7 +267,7 @@ const MedicalHistory = () => {
             <Form.Group className="mb-3" controlId="editAnimalId">
               <Form.Label>Animal ID</Form.Label>
               <Form.Control
-                type="text"
+               type="number"
                 placeholder="Enter animal ID"
                 defaultValue={editReport ? editReport.animalId : ""}
                 required
@@ -235,7 +277,7 @@ const MedicalHistory = () => {
             <Form.Group className="mb-3" controlId="editStaffId">
               <Form.Label>Staff ID</Form.Label>
               <Form.Control
-                type="text"
+                type="number"
                 placeholder="Enter staff ID"
                 defaultValue={editReport ? editReport.staffId : ""}
                 required

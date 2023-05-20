@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Form, Button } from "react-bootstrap";
-import { Box, Dialog, DialogTitle, DialogContent, DialogActions, TextField } from "@mui/material";
+import { Box, Dialog, DialogTitle, DialogContent, DialogActions, TextField,InputLabel } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
-import { FaPlus, FaMinus, FaTrash, FaEdit } from "react-icons/fa";
+import { FaPlus, FaTrash, FaEdit } from "react-icons/fa";
 import Header from "../../components/Header";
 import Swal from "sweetalert2";
 import { useTheme } from "@mui/material";
@@ -91,7 +91,7 @@ const ObservationReport = () => {
   const colors = tokens(theme.palette.mode);
 
   return (
-    <Box m="20px" width="90%" margin="0 auto">
+    <Box m="20px" width="80%" margin="0 auto">
       <Header
         title="OBSERVATION REPORT"
         subtitle="Manage observation reports"
@@ -99,42 +99,64 @@ const ObservationReport = () => {
         mt="20px"
       />
   <Form onSubmit={handleAddReport}>
-    <Form.Group className="mb-3" controlId="animalID">
-      <Form.Label>Animal ID</Form.Label>
-      <Form.Control type="text" placeholder="Enter animal ID" required />
-    </Form.Group>
+    <Box marginBottom="10px">
+        <InputLabel >Animal ID</InputLabel>
+          <TextField
+              placeholder="Input animal ID..."
+              name="animalID"
+              variant="filled"
+              fullWidth
+              required
+            />
+    </Box>
 
-    <Form.Group className="mb-3" controlId="reportID">
-      <Form.Label>Report ID</Form.Label>
-      <Form.Control type="text" placeholder="Enter report ID" required />
-    </Form.Group>
+    <Box marginBottom="10px">
+        <InputLabel >Report ID</InputLabel>
+          <TextField
+              placeholder="Input Report ID..."
+              name="reportID"
+              variant="filled"
+              fullWidth
+              required
+            />
+    </Box>
 
-    <Form.Group className="mb-3" controlId="staffID">
-      <Form.Label>Staff ID</Form.Label>
-      <Form.Control
-        type="text"
-        placeholder="Enter staff ID"
-        required
-      />
-    </Form.Group>
+    <Box marginBottom="10px">
+        <InputLabel >Staff ID</InputLabel>
+          <TextField
+              placeholder="Input staff ID..."
+              name="staffID"
+              variant="filled"
+              fullWidth
+              required
+            />
+    </Box>
 
-    <Form.Group className="mb-3" controlId="reportDescription">
-      <Form.Label>Report Description</Form.Label>
-      <Form.Control
-        as="textarea"
-        rows={3}
-        placeholder="Enter report description"
-        required
-      />
-    </Form.Group>
+    <Box marginBottom="10px">
+        <InputLabel >Report Description</InputLabel>
+          <TextField
+              placeholder="Input report Description..."
+              name="reportDescription"
+              variant="filled"
+              fullWidth
+              required
+            />
+    </Box>
 
-    <Form.Group className="mb-3" controlId="dateReported">
-      <Form.Label>Date Reported</Form.Label>
-      <Form.Control type="date" required />
-    </Form.Group>
+    <Box marginBottom="10px">
+        <InputLabel >Date Reported</InputLabel>
+          <TextField
+              placeholder="Input animal ID..."
+              name="dateReported"
+              variant="filled"
+              fullWidth
+              required
+              type="date" 
+            />
+    </Box>
 
     <div className="d-grid gap-2" style={{marginTop:"-20px", marginBottom: "20px"}}>
-      <Button className="btnSignin" variant="success" type="submit"  style={{width:"300px"}} >
+      <Button className="btnDashBoard"  type="submit"  >
         <FaPlus /> Add Report
       </Button>
     </div>

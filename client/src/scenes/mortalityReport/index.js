@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Form, Button } from "react-bootstrap";
-import { Box, Dialog, DialogTitle, DialogContent, DialogActions, TextField } from "@mui/material";
+import { Box, Dialog, DialogTitle, DialogContent, DialogActions, TextField,InputLabel, Select } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { FaPlus, FaTrash, FaEdit } from "react-icons/fa";
 import Header from "../../components/Header";
@@ -93,7 +93,7 @@ const MortalityReport = () => {
   const colors = tokens(theme.palette.mode);
 
   return (
-    <Box m="20px" width="90%" margin="0 auto">
+    <Box m="20px" width="80%" margin="0 auto">
       <Header
         title="MORTALITY REPORT"
         subtitle="Manage mortality reports"
@@ -101,38 +101,79 @@ const MortalityReport = () => {
         mt="20px"
       />
       <Form onSubmit={handleAddReport}>
-        <Form.Group className="mb-3" controlId="animalID">
-          <Form.Label>Animal ID</Form.Label>
-          <Form.Control type="text" placeholder="Enter animal ID" required />
-        </Form.Group>
+      <Box marginBottom="10px">
+      <InputLabel >Animal ID</InputLabel>
+          <TextField
+              placeholder="Input animal ID..."
+              name="animalID"
+              variant="filled"
+              fullWidth
+              required
+            />
+      </Box>
 
-        <Form.Group className="mb-3" controlId="staffID">
-          <Form.Label>Staff ID</Form.Label>
-          <Form.Control type="text" placeholder="Enter staff ID" required />
-        </Form.Group>
+      <Box marginBottom="10px">
+        <InputLabel >Staff ID</InputLabel>
+          <TextField
+              placeholder="Input staff ID..."
+              name="staffID"
+              variant="filled"
+              fullWidth
+              required
+            />
 
-        <Form.Group className="mb-3" controlId="causeOfDeath">
-          <Form.Label>Cause of Death</Form.Label>
-          <Form.Control type="text" placeholder="Enter cause of death" required />
-        </Form.Group>
+        </Box>
+        <Box marginBottom="10px">
+          <InputLabel >Cause of Death</InputLabel>
+          <TextField
+              placeholder="Input cause of death..."
+              name="causeOfDeath"
+              variant="filled"
+              fullWidth
+              required
+            />
+          </Box>  
 
-        <Form.Group className="mb-3" controlId="deathDate">
-          <Form.Label>Death Date</Form.Label>
-          <Form.Control type="date" required />
-        </Form.Group>
+          <Box marginBottom="10px">
+          <InputLabel >Death Date</InputLabel>
+          <TextField
+              placeholder="Input death date..."
+              name="deathDate"
+              variant="filled"
+              fullWidth
+              required
+              type="date"
+            />
+          </Box>
 
-        <Form.Group className="mb-3" controlId="deathTime">
-          <Form.Label>Death Time</Form.Label>
-          <Form.Control type="time" required />
-        </Form.Group>
+          <Box marginBottom="10px">
+          <InputLabel >Death Time</InputLabel>
+          <TextField
+              placeholder="Input death time..."
+              name="deathTime"
+              variant="filled"
+              fullWidth
+              required
+              type="time"
+            />
+          </Box>
 
-        <Form.Group className="mb-3" controlId="dateReported">
-          <Form.Label>Date Reported</Form.Label>
-          <Form.Control type="date" required />
-        </Form.Group>
+          <Box marginBottom="10px">
+          <InputLabel >Date Reported</InputLabel>
+          <TextField
+              placeholder="Input date reported..."
+              name="dateReported"
+              variant="filled"
+              fullWidth
+              required
+              type="date"
+
+            />
+          </Box>
+  
 
         <div className="d-grid gap-2" style={{ marginTop: "-20px", marginBottom: "20px" }}>
-          <Button className="btnSignin" variant="success" type="submit" style={{ width: "300px" }}>
+          <Button className="btnDashBoard" type="submit">
             <FaPlus /> Add Report
           </Button>
         </div>
