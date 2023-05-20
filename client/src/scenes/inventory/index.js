@@ -7,7 +7,7 @@ import Header from "../../components/Header";
 import Swal from "sweetalert2";
 import { useTheme } from "@mui/material";
 import { tokens } from "../../theme";
-
+import {  InputLabel, Select } from "@mui/material";
 const Inventory = () => {
   const [products, setProducts] = useState([]);
   const [editDialogOpen, setEditDialogOpen] = useState(false);
@@ -100,7 +100,7 @@ const Inventory = () => {
   const colors = tokens(theme.palette.mode);
 
   return (
-    <Box m="20px" width="90%" margin="0 auto">
+    <Box m="20px" width="80%" margin="0 auto">
       <Header
         title="INVENTORY"
         subtitle="Inventory for medicines"
@@ -108,53 +108,73 @@ const Inventory = () => {
         mt="20px"
       />
       <Form onSubmit={handleAddProduct}>
-        <Form.Group className="mb-3" controlId="name">
-          <Form.Label>Name</Form.Label>
-          <Form.Control type="text" placeholder="Enter product name" required />
-        </Form.Group>
+           <Box marginBottom="10px">
+               <InputLabel >Medicine</InputLabel>
+             <TextField
+                    placeholder="Input item name..."
+                    name="name"
+                    variant="filled"
+                    fullWidth
+                    required
+                  />
+           </Box>
 
-        <Form.Group className="mb-3" controlId="type">
-        <Form.Label>Type of medicines</Form.Label>
+           <Box marginBottom="10px">
+               <InputLabel>Type</InputLabel>
+                  <Select
+                    name="type"
+                    native
+                    fullWidth
+                    required
+                    variant="filled"
+                  >
+                    <option value="">Select Type of medecine</option>
+                    <option value="Diazepam">Diazepam</option>
+                    <option value="Meloxicam">Meloxicam</option>
+                    <option value="Doxycycline">Doxycycline</option>
+                    <option value="Ivermectin">Ivermectin</option>
+                    <option value="Methimazole">Methimazole</option>
+                    <option value="Enrofloxacin">Enrofloxacin</option>
+                  </Select>
+                </Box>
 
-        <Form.Control as="select" required>
-          <option value="">Select a medicine</option>
-          <option value="Diazepam">Diazepam</option>
-          <option value="Meloxicam">Meloxicam</option>
-          <option value="Doxycycline">Doxycycline</option>
-          <option value="Ivermectin">Ivermectin</option>
-          <option value="Methimazole">Methimazole</option>
-          <option value="Enrofloxacin">Enrofloxacin</option>
-        </Form.Control>
+                <Box marginBottom="10px">
+                  <InputLabel>Description</InputLabel>
+                  <TextField
+                    placeholder="Input Description"
+                    name="description"
+                    variant="filled"
+                    fullWidth
+                    required
+                  />
+                </Box>
 
-        </Form.Group>
+                <Box marginBottom="10px">
+                <InputLabel>Quantity</InputLabel>
+                <TextField
+                    placeholder="Input Quantity"
+                    name="quantity"
+                    type="number"
+                    variant="filled"
+                    fullWidth
+                    required
+                  />
+                  </Box>
 
-        <Form.Group className="mb-3" controlId="description">
-          <Form.Label>Description</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="Enter product description"
-            required
-          />
-        </Form.Group>
+                  <Box marginBottom="10px">
+                <InputLabel>Expiration Date</InputLabel>
 
-        <Form.Group className="mb-3" controlId="quantity">
-          <Form.Label>Quantity</Form.Label>
-          <Form.Control
-            type="number"
-            placeholder="Enter product quantity"
-            min="0"
-            step="1"
-            required
-          />
-        </Form.Group>
-
-        <Form.Group className="mb-3" controlId="expDate">
-          <Form.Label>Expiration Date</Form.Label>
-          <Form.Control type="date" required />
-        </Form.Group>
-
+                   <TextField
+                    placeholder="Expiration Date"
+                    name="expDate"
+                    type="date"
+                    variant="filled"
+                    fullWidth
+                    required
+                  />
+                  </Box>
         <div className="d-grid gap-2" style={{marginTop:"-20px", marginBottom: "20px"}}>
-          <Button variant="success" type="submit" className="btnSignin" style={{width:"300px"}} >
+          <Button type="submit" className="btnDashBoard">
             <FaPlus /> Add Product
           </Button>
         </div>
