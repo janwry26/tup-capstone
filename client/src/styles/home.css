@@ -40,7 +40,7 @@
 }
 .middle h1 span{
     color: rgb(119,213,203);
-    font-size: 65px;
+    font-size: 50px;
 }
 .right img{
    width: 600px;
@@ -61,13 +61,13 @@
     text-align: center;
     flex-grow: 1;
     width: 180px;
-    padding: 8px 13px;
+    padding: 10px 20px;
     border: none;
     border-radius: 20px;
     letter-spacing: 2px;
     background-color:rgb(119,213,203);
     font-weight: bold;
-    font-size: 18px;
+    font-size: 20px;
     color: rgb(255, 255, 255);
 
 }
