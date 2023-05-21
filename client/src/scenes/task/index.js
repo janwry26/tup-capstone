@@ -117,16 +117,18 @@ function TaskList() {
             placeholder="Enter Staff ID..."
             value={selectedStaffId}
             onChange={(event) => setSelectedStaffId(event.target.value)}
+            type="number"
           />
         </Box>
         <Box mt={2}>
-        <InputLabel >Staff ID</InputLabel>
+        <InputLabel >Task ID</InputLabel>
           <TextField
             fullWidth
             variant="filled"
             placeholder="Enter Task ID"
             value={taskID}
             onChange={(event) => setTaskID(event.target.value)}
+            type="number"
           />
         </Box>
         <Box mt={2}>
@@ -155,7 +157,7 @@ function TaskList() {
           </Select>
         </Box>
         <Button
-              className="btnSignin"
+              className="btnDashBoard"
               type="submit"
               color="success"
               variant="success"

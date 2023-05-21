@@ -1,5 +1,6 @@
 import React from "react";
-import { Box, Button, TextField } from "@mui/material";
+import { Box, TextField } from "@mui/material";
+import {  Button } from "react-bootstrap";
 import { Formik } from "formik";
 import * as yup from "yup";
 import useMediaQuery from "@mui/material/useMediaQuery";
@@ -43,7 +44,8 @@ const AdminForm = () => {
   };
 
   return (
-    <Box m="20px">
+    <Box m="20px" width="80%"
+    sx={{margin: "0 auto"}}>
       <Header title="CREATE ADMIN" subtitle="Create a new admin profile" />
 
       <Formik
@@ -137,7 +139,7 @@ const AdminForm = () => {
               />
              
             <Box display="flex" justifyContent="start" mt="20px" >
-              <Button type="submit" color="secondary" variant="contained" sx={{color:"white"}}>
+              <Button type="submit" className="btnDashBoard">
                 Create New Admin
               </Button>
             </Box>

@@ -1,5 +1,6 @@
 import React from "react";
-import { Box, Button, TextField } from "@mui/material";
+import { Box, TextField } from "@mui/material";
+import {  Button } from "react-bootstrap";
 import { Formik } from "formik";
 import * as yup from "yup";
 import useMediaQuery from "@mui/material/useMediaQuery";
@@ -71,7 +72,8 @@ const Form = () => {
   };
 
   return (
-    <Box m="20px">
+    <Box m="20px" width="80%"
+    sx={{margin: "0 auto"}}>
       <Header title="CREATE USER" subtitle="Create a new user profile" />
 
       <Formik
@@ -89,12 +91,14 @@ const Form = () => {
         }) => (
           <form onSubmit={handleSubmit}>
             <Box
+
               background="white"
               display="grid"
               gap="30px"
               gridTemplateColumns="repeat(4, minmax(0, 1fr))"
               sx={{
                 "& > div": { gridColumn: isNonMobile ? undefined : "span 4" },
+              
               }}
             >
               <TextField
@@ -190,7 +194,7 @@ const Form = () => {
               />
              
             <Box display="flex" justifyContent="start" mt="20px">
-              <Button type="submit" color="secondary" variant="contained" sx={{color:"white"}}>
+              <Button type="submit" className="btnDashBoard">
                 Create New User
               </Button>
             </Box>
