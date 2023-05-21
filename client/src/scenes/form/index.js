@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, TextField } from "@mui/material";
-import {  Button } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import { Formik } from "formik";
 import * as yup from "yup";
 import useMediaQuery from "@mui/material/useMediaQuery";
@@ -8,34 +8,34 @@ import Header from "../../components/Header";
 import Swal from "sweetalert2";
 
 // For API
-import http from '../../utils/http';
+import http from "../../utils/http";
 
 const Form = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
 
-  const handleFormSubmit = (values) => {
+  const handleFormSubmit = (values, { resetForm }) => {
     console.log(values);
-    http.post('/user/register', values)
+    http
+      .post("/user/register", values)
       .then((res) => {
         if (res.status === 200) {
           Swal.fire({
-            icon: 'success',
-            title: 'User Created',
-            text: 'The user has been successfully created.',
+            icon: "success",
+            title: "User Created",
+            text: "The user has been successfully created.",
           });
+          resetForm(); // Reset the form after successful submission
         }
-        
       })
       .catch((err) => {
         console.log(err);
         Swal.fire({
-          icon: 'error',
-          title: 'Error',
+          icon: "error",
+          title: "Error",
           text: err.response.data,
         });
       });
   };
-  
 
   const phoneRegExp = /^09\d{9}$/;
 
@@ -72,8 +72,7 @@ const Form = () => {
   };
 
   return (
-    <Box m="20px" width="80%"
-    sx={{margin: "0 auto"}}>
+    <Box m="20px" width="80%" sx={{ margin: "0 auto" }}>
       <Header title="CREATE USER" subtitle="Create a new user profile" />
 
       <Formik
@@ -88,20 +87,19 @@ const Form = () => {
           handleBlur,
           handleChange,
           handleSubmit,
+          isSubmitting,
         }) => (
           <form onSubmit={handleSubmit}>
             <Box
-
               background="white"
               display="grid"
               gap="30px"
               gridTemplateColumns="repeat(4, minmax(0, 1fr))"
               sx={{
                 "& > div": { gridColumn: isNonMobile ? undefined : "span 4" },
-              
               }}
             >
-              <TextField
+                  <TextField
                 fullWidth
                 variant="filled"
                 type="text"
@@ -192,8 +190,12 @@ const Form = () => {
                 helperText={touched.confirmPassword && errors.confirmPassword}
                 sx={{ gridColumn: "span 4" }}
               />
-             
-              <Button type="submit" className="btnDashBoard my-1" >
+              
+              <Button
+                type="submit"
+                className="btnDashBoard my-1"
+                disabled={isSubmitting}
+              >
                 Create New User
               </Button>
             </Box>
