@@ -193,11 +193,9 @@ const Form = () => {
                 sx={{ gridColumn: "span 4" }}
               />
              
-            <Box display="flex" justifyContent="start" mt="20px">
-              <Button type="submit" className="btnDashBoard">
+              <Button type="submit" className="btnDashBoard my-1" >
                 Create New User
               </Button>
-            </Box>
             </Box>
           </form>
         )}
