@@ -36,7 +36,7 @@ function DashboardMain() {
           <main className="content">
             <Topbar setIsSidebar={setIsSidebar} />
             <Routes>
-            <Route path="/panel" element={<Panel />} />
+            <Route path="/" element={<Panel />} />
             <Route path="/contacts" element={<Contacts />} />
             <Route path="/form" element={<Form />} />
             <Route path="/adminForm" element={<AdminForm />} />

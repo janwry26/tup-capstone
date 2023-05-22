@@ -12,6 +12,11 @@ import GeographyChart from "../../components/GeographyChart";
 import BarChart from "../../components/BarChart";
 import StatBox from "../../components/StatBox";
 import ProgressCircle from "../../components/ProgressCircle";
+import InventoryIcon from '@mui/icons-material/Inventory';
+import { Link } from 'react-router-dom';
+import PetsIcon from '@mui/icons-material/Pets';
+import PreviewIcon from '@mui/icons-material/Preview';
+import MedicalInformationIcon from '@mui/icons-material/MedicalInformation';
 
 const Dashboard = () => {
   const theme = useTheme();
@@ -23,7 +28,7 @@ const Dashboard = () => {
       <Box display="flex" justifyContent="space-between" alignItems="center">
         <Header title="DASHBOARD" subtitle="Welcome to your dashboard" />
 
-        <Box>
+        {/* <Box>
           <Button
             sx={{
               backgroundColor: colors.blueAccent[700],
@@ -36,7 +41,7 @@ const Dashboard = () => {
             <DownloadOutlinedIcon sx={{ mr: "10px" }} />
             Download Reports
           </Button>
-        </Box>
+        </Box> */}
       </Box>
 
       {/* GRID & CHARTS */}
@@ -45,83 +50,138 @@ const Dashboard = () => {
         gridTemplateColumns="repeat(12, 1fr)"
         gridAutoRows="140px"
         gap="20px"
+        color="pink"
       >
         {/* ROW 1 */}
-        <Box
+         <Box
           gridColumn="span 3"
-          backgroundColor={colors.primary[400]}
+          backgroundColor={colors.blueAccent[700]}
           display="flex"
           alignItems="center"
           justifyContent="center"
+          borderRadius="20px"
+         
         >
-          <StatBox
-            title="12,361"
-            subtitle="Emails Sent"
-            progress="0.75"
-            increase="+14%"
-            icon={
-              <EmailIcon
-                sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
-              />
-            }
-          />
+          <Link
+            to="inventory1"
+            style={{
+              textDecoration: 'none', // Remove underline
+              display: 'flex', // Preserve the flex layout
+              alignItems: 'center', // Center the content vertically
+              justifyContent: 'center', // Center the content horizontally
+              width: '100%', // Ensure the link takes full width within the parent
+            }}
+          >
+            <StatBox  
+              title="Inventory"
+              subtitle="Access Here"
+              increase="+34%"
+
+              icon={
+                <InventoryIcon
+                  sx={{ color: colors.greenAccent[500], fontSize: "26px" }}
+                />
+              }
+            />
+          </Link>
         </Box>
+
+   
+
         <Box
           gridColumn="span 3"
-          backgroundColor={colors.primary[400]}
+          backgroundColor={colors.greenAccent[100]}
           display="flex"
           alignItems="center"
           justifyContent="center"
+          borderRadius="20px"
+
         >
+           <Link
+            to="animal"
+            style={{
+              textDecoration: 'none', // Remove underline
+              display: 'flex', // Preserve the flex layout
+              alignItems: 'center', // Center the content vertically
+              justifyContent: 'center', // Center the content horizontally
+              width: '100%', // Ensure the link takes full width within the parent
+            }}
+          >
           <StatBox
-            title="431,225"
-            subtitle="Sales Obtained"
+            title="Animal Records"
+            subtitle="Access Here"
             progress="0.50"
             increase="+21%"
             icon={
-              <PointOfSaleIcon
+              <PetsIcon
                 sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
               />
             }
           />
+          </Link>
         </Box>
         <Box
           gridColumn="span 3"
-          backgroundColor={colors.primary[400]}
+          backgroundColor={colors.redAccent[100]}
           display="flex"
           alignItems="center"
           justifyContent="center"
+          borderRadius="20px"
+
         >
+           <Link
+            to="observation"
+            style={{
+              textDecoration: 'none', // Remove underline
+              display: 'flex', // Preserve the flex layout
+              alignItems: 'center', // Center the content vertically
+              justifyContent: 'center', // Center the content horizontally
+              width: '100%', // Ensure the link takes full width within the parent
+            }}
+          >
           <StatBox
-            title="32,441"
-            subtitle="New Clients"
+            title="Observation Report"
+            subtitle="Access Here"
             progress="0.30"
             increase="+5%"
             icon={
-              <PersonAddIcon
+              <PreviewIcon
                 sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
               />
             }
           />
+          </Link>
         </Box>
         <Box
           gridColumn="span 3"
-          backgroundColor={colors.primary[400]}
+          backgroundColor={colors.redAccent[200]}
           display="flex"
           alignItems="center"
           justifyContent="center"
+          borderRadius="20px"
         >
+          <Link
+            to="medical"
+            style={{
+              textDecoration: 'none', // Remove underline
+              display: 'flex', // Preserve the flex layout
+              alignItems: 'center', // Center the content vertically
+              justifyContent: 'center', // Center the content horizontally
+              width: '100%', // Ensure the link takes full width within the parent
+            }}
+          >
           <StatBox
-            title="1,325,134"
-            subtitle="Traffic Received"
+            title="Medical History"
+            subtitle="Access Here"
             progress="0.80"
             increase="+43%"
             icon={
-              <TrafficIcon
+              <MedicalInformationIcon 
                 sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
               />
             }
           />
+          </Link> 
         </Box>
 
         {/* ROW 2 */}
