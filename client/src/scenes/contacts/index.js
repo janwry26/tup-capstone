@@ -38,7 +38,7 @@ const Contacts = () => {
   ];
 
   return (
-    <Box m="20px">
+    <Box m="20px" width="80%" margin="0 auto">
       <Header
         title="CONTACTS"
         subtitle="List of Contacts for Future Reference"

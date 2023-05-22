@@ -74,7 +74,7 @@ const Team = () => {
   ];
 
   return (
-    <Box m={{ xs: "10px", md: "20px" }}>
+    <Box  width="80%" margin="0 auto">
       <Header title="TEAM" subtitle="Managing the Team Members" />
       <Box
         m={{ xs: "20px 0 0 0", md: "40px 0 0 0" }}
