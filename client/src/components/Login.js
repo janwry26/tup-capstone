@@ -40,7 +40,7 @@ function Login({user}){
         })
         .then((res) => {
             localStorage.setItem("token", res.data);
-            window.location = '/dashboard/panel';
+            window.location = '/dashboard';
         })
         .catch((err) => {
             if (err.response && err.response.status === 400) {

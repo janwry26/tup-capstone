@@ -13,11 +13,11 @@ const Topbar = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [isProfileDialogOpen, setIsProfileDialogOpen] = useState(false);
   const userProfile = {
-    username: "john_doe",
-    name: "John Doe",
-    email: "johndoe@example.com",
+    username: "janwryMock",
+    name: "Janwry DelaCruz",
+    email: "janwry@mock.com",
     contact: "1234567890",
-    role: "User",
+    role: "Admin",
   };
 
   const handleMenuOpen = (event) => {
