@@ -14,7 +14,7 @@ export const MenuData = [
 
     {
         title: 'Contact Admin',
-        url:"#",
+        url:"mailto:janwry.delacruz@tup.edu.ph",
         cName:"nav-links",
         icon:"fa-solid  fa-question-circle"
     },
