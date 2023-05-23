@@ -71,7 +71,6 @@ function Login({ user }) {
 
   return (
     <div className="login-container">
-      <Navbar />
       {isLoading && (
         <div className="loader-overlay">
           <div className="loader"></div>
