@@ -17,6 +17,7 @@ function SuperAdminLogin({ admin }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passwordVisible, setPasswordVisible] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -28,67 +29,79 @@ function SuperAdminLogin({ admin }) {
         text: 'No field must be empty',
       });
     } else {
-      try {
-        const res = await http.post('/auth/admin', {
-          email,
-          password,
-        });
-        localStorage.setItem('token', res.data);
-        window.location = '/dashboard';
-      } catch (err) {
-        if (err.response && err.response.status === 400) {
-          Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'Invalid email or password',
+      setIsLoading(true); // Start the loader
+
+      setTimeout(async () => {
+        try {
+          const res = await http.post('/auth/admin', {
+            email,
+            password,
           });
-        } else {
-          Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: err,
-          });
+          localStorage.setItem('token', res.data);
+          window.location = '/dashboard';
+        } catch (err) {
+          if (err.response && err.response.status === 400) {
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Invalid email or password',
+            });
+          } else {
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: err,
+            });
+          }
+        } finally {
+          setIsLoading(false); // Stop the loader
         }
-      }
+      }, 1500); // 1.5 seconds delay
     }
   };
+
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
-}
+  };
+
   return (
-    <div className='login-container'>
-      <div className='login-box'>
+    <div className="login-container">
+      {isLoading && (
+        <div className="loader-overlay">
+          <div className="loader"></div>
+        </div>
+      )}
+      <div className="login-box">
         <h2>Login Form for Admin</h2>
         <form>
-          <div className='user-box'>
+          <div className="user-box">
             <input
-              required=''
-              name=''
-              type='email'
+              required=""
+              name=""
+              type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
             <label>Email</label>
           </div>
           <div className="user-box">
-                        <input
-                            required=""
-                            name=""
-                            type={passwordVisible ? "text" : "password"}
-                            value={password}
-                            onChange={(e)=>setPassword(e.target.value)}
-                            style={{ marginBottom: '5px' }}
-                        />
-                        <label>Password</label>
-                     {passwordVisible ?
-            <FaEyeSlash className="password-toggle" onClick={togglePasswordVisibility} />
-            :
-            <FaEye className="password-toggle" onClick={togglePasswordVisibility} />
-        }
-
-                    </div>
+            <input
+              required=""
+              name=""
+              type={passwordVisible ? 'text' : 'password'}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              style={{ marginBottom: '5px' }}
+            />
+            <label>Password</label>
+            {passwordVisible ? (
+              <FaEyeSlash className="password-toggle" onClick={togglePasswordVisibility} />
+            ) : (
+              <FaEye className="password-toggle" onClick={togglePasswordVisibility} />
+            )}
+          </div>
           <center>
-            <button className='btnSignin' onClick={handleSubmit}>
+            <button className="btnSignin" onClick={handleSubmit}>
               Sign in
             </button>
           </center>
