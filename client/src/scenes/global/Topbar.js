@@ -12,6 +12,8 @@ const Topbar = () => {
   const colorMode = useContext(ColorModeContext);
   const [anchorEl, setAnchorEl] = useState(null);
   const [isProfileDialogOpen, setIsProfileDialogOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
   const userProfile = {
     username: "janwryMock",
     name: "Janwry DelaCruz",
@@ -29,8 +31,11 @@ const Topbar = () => {
   };
 
   const handleLogout = () => {
+    setIsLoading(true); // Show the loader
     localStorage.removeItem("token");
-    window.location = "/login";
+    setTimeout(() => {
+      window.location = "/login";
+    }, 1500);
   };
 
   const handleViewProfile = () => {
@@ -71,6 +76,11 @@ const Topbar = () => {
         >
           <MenuItem onClick={handleViewProfile}>View Profile</MenuItem>
           <MenuItem onClick={handleLogout}>Logout</MenuItem>
+          {isLoading && (
+          <div className="loader-overlay">
+            <div className="loader"></div>
+          </div>
+        )}
         </Menu>
       </Box>
 
