@@ -5,6 +5,7 @@ import { Formik } from "formik";
 import * as yup from "yup";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Header from "../../components/Header";
+import "../../styles/login.css"
 
 const AdminForm = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
@@ -44,7 +45,7 @@ const AdminForm = () => {
   };
 
   return (
-    <Box m="20px" width="80%"
+    <Box m="20px" width="80%" className="reload-animation"
     sx={{margin: "0 auto"}}>
       <Header title="CREATE ADMIN" subtitle="Create a new admin profile" />
 

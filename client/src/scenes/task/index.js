@@ -4,6 +4,8 @@ import { Button, Form } from "react-bootstrap";
 import Swal from "sweetalert2";
 import { Box,TextField } from "@mui/material";
 import { Select, MenuItem,InputLabel } from "@mui/material";
+import "../../styles/login.css"
+
 function TaskList() {
   const [tasks, setTasks] = useState([]);
   const [newTask, setNewTask] = useState("");
@@ -89,7 +91,7 @@ function TaskList() {
   };
 
   return (
-    <Box p="20px" width="80%" margin="0 auto" paddingTop="50px">
+    <Box p="20px" width="80%" margin="0 auto" paddingTop="50px" className="reload-animation">
       <div>
         <Header
           title="TASK"

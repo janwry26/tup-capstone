@@ -4,6 +4,7 @@ import { tokens } from "../../theme";
 import { mockDataContacts } from "../../data/mockData";
 import Header from "../../components/Header";
 import { useTheme } from "@mui/material";
+import "../../styles/login.css"
 
 const Contacts = () => {
   const theme = useTheme();
@@ -38,7 +39,7 @@ const Contacts = () => {
   ];
 
   return (
-    <Box m="20px" width="80%" margin="0 auto">
+    <Box m="20px" width="80%" margin="0 auto" className="reload-animation">
       <Header
         title="CONTACTS"
         subtitle="List of Contacts for Future Reference"

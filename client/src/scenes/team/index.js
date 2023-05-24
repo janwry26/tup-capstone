@@ -6,6 +6,7 @@ import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettin
 import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
 import SecurityOutlinedIcon from "@mui/icons-material/SecurityOutlined";
 import Header from "../../components/Header";
+import "../../styles/login.css"
 
 const Team = () => {
   const theme = useTheme();
@@ -74,7 +75,7 @@ const Team = () => {
   ];
 
   return (
-    <Box  width="80%" margin="0 auto">
+    <Box  width="80%" margin="0 auto" className="reload-animation">
       <Header title="TEAM" subtitle="Managing the Team Members" />
       <Box
         m={{ xs: "20px 0 0 0", md: "40px 0 0 0" }}

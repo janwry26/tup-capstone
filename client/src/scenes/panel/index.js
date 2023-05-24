@@ -17,13 +17,14 @@ import { Link } from 'react-router-dom';
 import PetsIcon from '@mui/icons-material/Pets';
 import PreviewIcon from '@mui/icons-material/Preview';
 import MedicalInformationIcon from '@mui/icons-material/MedicalInformation';
+import "../../styles/login.css"
 
 const Dashboard = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
   return (
-    <Box m="20px">
+    <Box m="20px" className="reload-animation">
       {/* HEADER */}
       <Box display="flex" justifyContent="space-between" alignItems="center">
         <Header title="DASHBOARD" subtitle="Welcome to your dashboard" />

@@ -4,7 +4,6 @@ import '../styles/login.css';
 import http from '../utils/http';
 import Swal from 'sweetalert2';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
-import Navbar from './Navbar.js';
 
 function Login({ user }) {
   let navigate = useNavigate();

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { Form, Button } from "react-bootstrap";
 import { Box, Dialog, DialogTitle, DialogContent, DialogActions, TextField } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
@@ -8,10 +8,15 @@ import Swal from "sweetalert2";
 import { useTheme } from "@mui/material";
 import { tokens } from "../../theme";
 import {  InputLabel, Select } from "@mui/material";
+import "../../styles/login.css"
 const Inventory = () => {
   const [products, setProducts] = useState([]);
   const [editDialogOpen, setEditDialogOpen] = useState(false);
   const [editProduct, setEditProduct] = useState(null);
+  // useEffect(() => {
+  //   // Perform necessary reload actions here
+  //   console.log("Component reloaded");
+  // }, []);
 
   const handleAddProduct = (event) => {
     event.preventDefault();
@@ -100,7 +105,7 @@ const Inventory = () => {
   const colors = tokens(theme.palette.mode);
 
   return (
-    <Box m="20px" width="80%" margin="0 auto">
+    <Box m="20px" width="80%" margin="0 auto" className="reload-animation">
       <Header
         title="INVENTORY"
         subtitle="Inventory for medicines"

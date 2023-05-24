@@ -7,6 +7,7 @@ import Header from "../../components/Header";
 import Swal from "sweetalert2";
 import { useTheme } from "@mui/material";
 import { tokens } from "../../theme";
+import "../../styles/login.css"
 
 const AnimalRecords = () => {
   const [records, setRecords] = useState([]);
@@ -96,7 +97,7 @@ const AnimalRecords = () => {
   const colors = tokens(theme.palette.mode);
 
   return (
-    <Box m="20px" width="80%" margin="0 auto">
+    <Box m="20px" width="80%" margin="0 auto" className="reload-animation">
       <Header
         title="ANIMAL RECORDS"
         subtitle="Manage animal records"

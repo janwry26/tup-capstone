@@ -6,6 +6,7 @@ import * as yup from "yup";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Header from "../../components/Header";
 import Swal from "sweetalert2";
+import "../../styles/login.css"
 
 // For API
 import http from "../../utils/http";
@@ -72,7 +73,7 @@ const Form = () => {
   };
 
   return (
-    <Box m="20px" width="80%" sx={{ margin: "0 auto" }}>
+    <Box m="20px" className="reload-animation" width="80%" sx={{ margin: "0 auto" }}>
       <Header title="CREATE USER" subtitle="Create a new user profile" />
 
       <Formik
