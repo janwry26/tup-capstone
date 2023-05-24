@@ -1,11 +1,7 @@
-import { Box, Button, IconButton, Typography, useTheme } from "@mui/material";
+import { Box, IconButton, Typography, useTheme } from "@mui/material";
 import { tokens } from "../../theme";
 import { mockTransactions } from "../../data/mockData";
 import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
-import EmailIcon from "@mui/icons-material/Email";
-import PointOfSaleIcon from "@mui/icons-material/PointOfSale";
-import PersonAddIcon from "@mui/icons-material/PersonAdd";
-import TrafficIcon from "@mui/icons-material/Traffic";
 import Header from "../../components/Header";
 import LineChart from "../../components/LineChart";
 import GeographyChart from "../../components/GeographyChart";
@@ -18,7 +14,7 @@ import PetsIcon from '@mui/icons-material/Pets';
 import PreviewIcon from '@mui/icons-material/Preview';
 import MedicalInformationIcon from '@mui/icons-material/MedicalInformation';
 import "../../styles/login.css"
-
+import "./style.css";
 const Dashboard = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -51,17 +47,17 @@ const Dashboard = () => {
         gridTemplateColumns="repeat(12, 1fr)"
         gridAutoRows="140px"
         gap="20px"
-        color="pink"
       >
         {/* ROW 1 */}
          <Box
+           className="row1"
           gridColumn="span 3"
           backgroundColor={colors.blueAccent[700]}
           display="flex"
           alignItems="center"
           justifyContent="center"
           borderRadius="20px"
-         
+        
         >
           <Link
             to="inventory1"
@@ -90,6 +86,7 @@ const Dashboard = () => {
    
 
         <Box
+         className="row1"
           gridColumn="span 3"
           backgroundColor={colors.greenAccent[100]}
           display="flex"
@@ -122,6 +119,7 @@ const Dashboard = () => {
           </Link>
         </Box>
         <Box
+        className="row1"
           gridColumn="span 3"
           backgroundColor={colors.redAccent[100]}
           display="flex"
@@ -154,6 +152,7 @@ const Dashboard = () => {
           </Link>
         </Box>
         <Box
+        className="row1"
           gridColumn="span 3"
           backgroundColor={colors.redAccent[200]}
           display="flex"
@@ -187,6 +186,7 @@ const Dashboard = () => {
 
         {/* ROW 2 */}
         <Box
+         className="row1"
           gridColumn="span 8"
           gridRow="span 2"
           backgroundColor={colors.primary[400]}
@@ -227,6 +227,7 @@ const Dashboard = () => {
           </Box>
         </Box>
         <Box
+         className="row1"
           gridColumn="span 4"
           gridRow="span 2"
           backgroundColor={colors.primary[400]}
@@ -279,6 +280,7 @@ const Dashboard = () => {
 
         {/* ROW 3 */}
         <Box
+         className="row1"
           gridColumn="span 4"
           gridRow="span 2"
           backgroundColor={colors.primary[400]}
@@ -305,6 +307,7 @@ const Dashboard = () => {
           </Box>
         </Box>
         <Box
+         className="row1"
           gridColumn="span 4"
           gridRow="span 2"
           backgroundColor={colors.primary[400]}
@@ -321,6 +324,7 @@ const Dashboard = () => {
           </Box>
         </Box>
         <Box
+         className="row1"
           gridColumn="span 4"
           gridRow="span 2"
           backgroundColor={colors.primary[400]}
