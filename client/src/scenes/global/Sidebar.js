@@ -80,9 +80,8 @@ const Sidebar = () => {
     <Box
       sx={{
         // overflow: "auto",
-        height: "auto",
-        // scrollbarColor: "auto",
-        // overflowX: "hidden",
+        height: "100vh",
+       scrollBehavior: "smooth",
        
         "& .pro-sidebar-inner": {
           background: `${colors.primary[400]} !important`,
