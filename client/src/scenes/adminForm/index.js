@@ -139,9 +139,11 @@ const AdminForm = () => {
                 sx={{ gridColumn: "span 4" }}
               />
              
-              <Button type="submit" className="btnDashBoard my-1">
-                Create New Admin
-              </Button>
+                <div className="d-grid gap-2" style={{marginTop:"-20px", marginBottom: "20px"}}>
+                    <Button type="submit" className="btnDashBoard"   >
+                       Create User
+                    </Button>
+                </div>
             </Box>
           </form>
         )}

@@ -190,6 +190,7 @@ const Inventory = () => {
         height="75vh"
         margin= "0 auto"
         sx={{
+         
           // Styling for the DataGrid
           "& .MuiDataGrid-root": {
             border: "none",
@@ -217,6 +218,7 @@ const Inventory = () => {
         }}
       >
         <DataGrid
+        className="table"
           rows={products}
           columns={[
             { field: "inventoryID", headerName: "#", flex: 0.5 },
@@ -234,28 +236,31 @@ const Inventory = () => {
             { field: "expDate", headerName: "Expiration Date", flex: 1 },
             {
               field: "actions",
-              headerName: "",
+              headerName: "Actions",
+              align:"center",
               sortable: false,
               filterable: false,
               renderCell: (params) => (
-                <div style={{ margin: '5px auto' }} >
+                <div>
                   <Button
+                  className="mx-1"
+                    size="sm"
                     variant="danger"
                     onClick={() => handleDeleteProduct(params.rowIndex)}
-                    style={{ padding: "6px 12px" }}
                   >
                     <FaTrash />
                   </Button>
                   <Button
+                    size="sm"
+                 
                     variant="primary"
                     onClick={() => handleEditDialogOpen(params.row)}
-                    style={{ padding: "6px 12px" }}
                   >
                     <FaEdit />
                   </Button>
                 </div>
               ),
-              flex: 0.5,
+              flex:0.5,
             },
           ]}
           components={{ Toolbar: GridToolbar }}
