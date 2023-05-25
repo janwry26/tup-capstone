@@ -98,7 +98,7 @@ h2 {
   transform: translateY(-50%);
 }
 
-.btnDashBoard{
+Button.btnDashBoard{
   width: 200px;
   margin-top: 2rem;
   padding: 10px 20px;
@@ -106,7 +106,7 @@ h2 {
   background: #2e7c67;
   border: none;
 }
-.btnDashBoard:hover{
+Button.btnDashBoard:hover{
   background: #3a9182;
   transition: all 0.3s;
   
@@ -217,7 +217,7 @@ animation: btn-anim2 2s linear infinite;
   h2{
     font-size: 20px;
   }
-  .btnDashBoard{
+  Button.btnDashBoard{
     width: 100%;
   }
 }
