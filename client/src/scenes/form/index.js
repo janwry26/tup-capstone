@@ -191,26 +191,11 @@ const Form = () => {
                 helperText={touched.confirmPassword && errors.confirmPassword}
                 sx={{ gridColumn: "span 4" }}
               />
-<<<<<<< HEAD
-
-                  <div className="d-grid gap-2" style={{marginTop:"-20px", marginBottom: "20px"}}>
-                    <Button type="submit" className="btnDashBoard"   disabled={isSubmitting}>
-=======
-{/*               
-              <Button
-                type="submit"
-                className="btnDashBoard my-1"
-                disabled={isSubmitting}
-              >
-                Create New User
-              </Button> */}
-
-          <div className="d-grid gap-2" style={{marginTop:"-20px", marginBottom: "20px"}}>
-                    <Button type="submit" className="btnDashBoard">
->>>>>>> 32556ab1f219e9853af17a954da984e7cbe3b848
+                    <div className="d-grid gap-2" style={{marginTop:"-20px", marginBottom: "20px"}}>
+                    <Button type="submit" className="btnDashBoard"   disbaled={isSubmitting}>
                        Create User
                     </Button>
-                  </div>
+                </div>
             </Box>
           </form>
         )}
