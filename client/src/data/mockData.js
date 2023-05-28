@@ -1,4 +1,9 @@
 import { tokens } from "../theme";
+import http from "../utils/http";
+
+http.get('/admin/view', (req, res) => {
+  console.log(res)
+})
 
 export const mockDataTeam = [
   {

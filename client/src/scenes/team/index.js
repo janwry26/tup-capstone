@@ -7,8 +7,21 @@ import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
 import SecurityOutlinedIcon from "@mui/icons-material/SecurityOutlined";
 import Header from "../../components/Header";
 import "../../styles/login.css"
+import http from "../../utils/http";
+import { useEffect, useState } from "react";
 
 const Team = () => {
+  const [teamData, setTeamData] = useState({});
+  const getTeam = () => {
+    http.get('/admin/view')
+        // .then((res) => setTeamData(res.data));
+        .then((res) => console.log(res.data));
+  }
+
+  useEffect(() => {
+    getTeam();
+  },[])
+  
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const columns = [
