@@ -9,10 +9,35 @@ import { useTheme } from "@mui/material";
 import { tokens } from "../../theme";
 import {  InputLabel, Select } from "@mui/material";
 import "../../styles/login.css"
+import http from "../../utils/http";
+
 const Inventory = () => {
   const [products, setProducts] = useState([]);
+  const [temp, setTemp] = useState([]);
   const [editDialogOpen, setEditDialogOpen] = useState(false);
   const [editProduct, setEditProduct] = useState(null);
+
+  const getProducts = () => {
+    http.get('/inventory/view')
+        .then((res) => {
+          const products = res.data.map((product, key) => ({
+            id: key+1,
+            _id: product._id,
+            expDate: product.expDate,
+            itemDescription: product.itemDescription,
+            itemName: product.itemName,
+            itemType: product.itemType,
+            quantity: product.quantity,
+          }));
+          setProducts(products);
+        })
+        .catch((err) => console.log(err));
+  }
+
+  useEffect(() => {
+    getProducts();
+  },[])
+
   // useEffect(() => {
   //   // Perform necessary reload actions here
   //   console.log("Component reloaded");
@@ -20,20 +45,20 @@ const Inventory = () => {
 
   const handleAddProduct = (event) => {
     event.preventDefault();
-    const product = {
-      id: Date.now(),
-      inventoryID: products.length + 1,
+    http.post('/inventory/add', {
       itemName: event.target.name.value,
       itemType: event.target.type.value,
       itemDescription: event.target.description.value,
       quantity: event.target.quantity.value,
       expDate: event.target.expDate.value,
-    };
-    setProducts([...products, product]);
+    }).then((res) => {
+      console.log(res);
+      window.location.reload();
+    })
     event.target.reset();
   };
 
-  const handleDeleteProduct = (index) => {
+  const handleDeleteProduct = (_id) => {
     Swal.fire({
       title: "Are you sure?",
       text: "You will not be able to recover this product!",
@@ -44,13 +69,16 @@ const Inventory = () => {
       reverseButtons: true,
     }).then((result) => {
       if (result.isConfirmed) {
-        const newProducts = [...products];
-        newProducts.splice(index, 1);
-        setProducts(newProducts);
-        Swal.fire("Deleted!", "Your product has been deleted.", "success");
+        http.delete(`/inventory/delete/${_id}`)
+          .then((res) => {
+            console.log(res);
+            Swal.fire("Deleted!", "Your product has been deleted.", "success").then(window.location.reload())
+          })
+          .catch((err) => console.log(err));
       } else if (result.dismiss === Swal.DismissReason.cancel) {
         Swal.fire("Cancelled", "Your product is safe :)", "error");
       }
+      
     });
   };
 
@@ -221,7 +249,7 @@ const Inventory = () => {
         className="table"
           rows={products}
           columns={[
-            { field: "inventoryID", headerName: "#", flex: 0.5 },
+            { field: "id", headerName: "#", flex: 0.5 },
             { field: "itemName", headerName: "Name", flex: 1 },
             { field: "itemType", headerName: "Type", flex: 1 },
             { field: "itemDescription", headerName: "Description", flex: 1 },
@@ -246,7 +274,7 @@ const Inventory = () => {
                   className="mx-1"
                     size="sm"
                     variant="danger"
-                    onClick={() => handleDeleteProduct(params.rowIndex)}
+                    onClick={() => handleDeleteProduct(params.row._id)}
                   >
                     <FaTrash />
                   </Button>
