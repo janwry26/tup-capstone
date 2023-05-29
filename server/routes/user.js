@@ -39,4 +39,30 @@ router.get("/view", async (req, res) => {
         .catch((err) => res.status(400).json("Error: " + err));
 });
 
+router.put("/edit/:id", async (req, res) => {
+    User.findByIdAndUpdate({ _id: req.params.id }, {
+        lastName: req.body.lastName, 
+        firstName: req.body.firstName,
+        email: req.body.email, 
+        contactNum: req.body.contactNum, 
+        username: req.body.username
+    })
+    .then((doc) => {
+        console.log(doc);
+        res.send("Account updated successfully");
+    })
+    .catch((err) => res.send(err + "\nFailed to update Account"));
+});
+
+router.put("/change-password/:id", async (req, res) => {
+    const newPassword = bcrypt.hashSync(req.body.newPassword, 10);
+
+    User.findByIdAndUpdate({ _id: req.params.id }, { password: newPassword })
+    .then((doc) => {
+        console.log(doc);
+        res.send("Password changed successfully");
+    })
+    .catch((err) => res.send(err + "\nFailed to change password"));
+});
+
 module.exports = router;

@@ -15,7 +15,9 @@ const Team = () => {
   const getTeam = () => {
     http.get('/admin/view')
         // .then((res) => setTeamData(res.data));
-        .then((res) => console.log(res.data));
+        .then((res) => {
+          
+        });
   }
 
   useEffect(() => {

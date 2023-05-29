@@ -19,4 +19,19 @@ router.post("/add", async (req, res) => {
     res.send("animalID #" + animalID + " has been recorded");
 })
 
+router.put("/edit/:id", async (req, res) => {
+    Animal.findByIdAndUpdate({ _id: req.params.id }, {
+        breedType: req.body.breedType, 
+        species: req.body.species,
+        weight: req.body.weight, 
+        gender: req.body.gender, 
+        age: req.body.age,
+        birthDate: req.body.birthDate
+    })
+    .then(() => {
+        res.send("Animal updated successfully");
+    })
+    .catch((err) => res.send(err + "\nFailed to update animal"));
+});
+
 module.exports = router;
