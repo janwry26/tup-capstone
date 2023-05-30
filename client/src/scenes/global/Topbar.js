@@ -77,9 +77,9 @@ const Topbar = () => {
           <MenuItem onClick={handleViewProfile}>View Profile</MenuItem>
           <MenuItem onClick={handleLogout}>Logout</MenuItem>
           {isLoading && (
-          <div className="loader-overlay">
-            <div className="loader"></div>
-          </div>
+         <div className="loader-overlayLogout">
+         <div className="loaderLogout"></div>
+       </div>
         )}
         </Menu>
       </Box>
