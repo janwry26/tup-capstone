@@ -45,43 +45,55 @@ const Inventory = () => {
 
   const handleAddProduct = (event) => {
     event.preventDefault();
-    http.post('/inventory/add', {
-      itemName: event.target.name.value,
-      itemType: event.target.type.value,
-      itemDescription: event.target.description.value,
-      quantity: event.target.quantity.value,
-      expDate: event.target.expDate.value,
-    }).then((res) => {
-      console.log(res);
-      window.location.reload();
-    })
+    http
+      .post('/inventory/add', {
+        itemName: event.target.name.value,
+        itemType: event.target.type.value,
+        itemDescription: event.target.description.value,
+        quantity: event.target.quantity.value,
+        expDate: event.target.expDate.value,
+      })
+      .then((res) => {
+        console.log(res);
+        Swal.fire({
+          title: 'Success',
+          text: 'Product added to inventory',
+          icon: 'success',
+          timer: 700, // Show the alert for 2 seconds
+          showConfirmButton: false
+        });
+        getProducts(); // Refresh the products list
+      })
+      .catch((err) => console.log(err));
     event.target.reset();
   };
+  
 
   const handleDeleteProduct = (_id) => {
     Swal.fire({
-      title: "Are you sure?",
-      text: "You will not be able to recover this product!",
-      icon: "warning",
+      title: 'Are you sure?',
+      text: 'You will not be able to recover this product!',
+      icon: 'warning',
       showCancelButton: true,
-      confirmButtonText: "Yes, delete it!",
-      cancelButtonText: "No, cancel!",
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, cancel!',
       reverseButtons: true,
     }).then((result) => {
       if (result.isConfirmed) {
-        http.delete(`/inventory/delete/${_id}`)
+        http
+          .delete(`/inventory/delete/${_id}`)
           .then((res) => {
             console.log(res);
-            Swal.fire("Deleted!", "Your product has been deleted.", "success").then(window.location.reload())
+            Swal.fire('Deleted!', 'Your product has been deleted.', 'success');
+            getProducts(); // Refresh the products list
           })
           .catch((err) => console.log(err));
       } else if (result.dismiss === Swal.DismissReason.cancel) {
-        Swal.fire("Cancelled", "Your product is safe :)", "error");
+        Swal.fire('Cancelled', 'Your product is safe :)', 'error');
       }
-      
     });
   };
-
+  
   const handleEditProduct = (params, event) => {
     const { id, field, props } = params;
     const { value } = event.target;
@@ -111,22 +123,28 @@ const Inventory = () => {
   };
 
   const handleEditDialogSave = () => {
-    const newProducts = products.map((product) => {
-      if (product.id === editProduct.id) {
-        return {
-          ...product,
-          itemName: document.getElementById("editName").value,
-          itemType: document.getElementById("editType").value,
-          itemDescription: document.getElementById("editDescription").value,
-          quantity: document.getElementById("editQuantity").value,
-          expDate: document.getElementById("editExpDate").value,
-        };
-      }
-      return product;
-    });
-    setProducts(newProducts);
-    setEditDialogOpen(false);
+    const editedProduct = {
+      itemName: document.getElementById("editName").value,
+      itemType: document.getElementById("editType").value,
+      itemDescription: document.getElementById("editDescription").value,
+      quantity: document.getElementById("editQuantity").value,
+      expDate: document.getElementById("editExpDate").value,
+    };
+  
+    http
+      .put(`/inventory/edit/${editProduct._id}`, editedProduct)
+      .then((res) => {
+        console.log(res);
+        const updatedProducts = products.map((product) =>
+          product._id === editProduct._id ? { ...product, ...editedProduct } : product
+        );
+        setProducts(updatedProducts);
+        setEditDialogOpen(false);
+        Swal.fire('Success', 'Product updated successfully!', 'success');
+      })
+      .catch((err) => console.log(err));
   };
+  
   
 
   const theme = useTheme();
