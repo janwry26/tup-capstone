@@ -23,6 +23,10 @@ import MonitorHeartIcon from '@mui/icons-material/MonitorHeart';
 import PetsIcon from '@mui/icons-material/Pets';
 import MedicalInformationIcon from '@mui/icons-material/MedicalInformation';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
+import pf1 from "../../assets/images/random-profiles/pf1.jpg";
+import pf2 from "../../assets/images/random-profiles/pf2.jpg";
+import pf3 from "../../assets/images/random-profiles/pf3.jpg";
+import pf4 from "../../assets/images/random-profiles/pf4.jpg";
 const Item = ({ title, to, icon, selected, setSelected, disabled }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -75,6 +79,23 @@ const Sidebar = () => {
   useEffect(()=> {
     getCurrentUser()
   },[])
+  const [imageUrl, setImageUrl] = useState('');
+  useEffect(() => {
+    // List of image URLs
+    const imageList = [
+      pf1,
+      pf2,
+      pf3,
+      pf4,
+      // Add more image URLs as needed
+    ];
+
+    // Generate a random index
+    const randomIndex = Math.floor(Math.random() * imageList.length);
+
+    // Set the random image URL
+    setImageUrl(imageList[randomIndex]);
+  }, []);
 
   return (
     <Box
@@ -132,7 +153,7 @@ const Sidebar = () => {
                   alt="profile-user"
                   width="100px"
                   height="100px"
-                  src={`../../../assets/user.jpg`}
+                  src={imageUrl}
                   
                   style={{ cursor: "pointer", borderRadius: "50%" }}
                 />
