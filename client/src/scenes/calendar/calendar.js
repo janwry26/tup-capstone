@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import FullCalendar from "@fullcalendar/react";
 import { formatDate } from "@fullcalendar/core";
 import dayGridPlugin from "@fullcalendar/daygrid";
@@ -16,6 +16,7 @@ import {
 } from "@mui/material";
 import Header from "../../components/Header";
 import { tokens } from "../../theme";
+import "../../styles/loader.css"
 
 const Calendar = () => {
   const theme = useTheme();
@@ -61,6 +62,22 @@ const Calendar = () => {
     });
   };
 
+  const [isLoading, setIsLoading] = useState(true); 
+  useEffect(() => {
+    // Simulate loading delay
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+
+    return () => clearTimeout(timer); // Clean up the timer on unmount
+  }, []);
+
+  if (isLoading) {
+    return <div className="loader-overlay1">
+    <h1>Loading...</h1>
+    <div className="loader1"></div>
+  </div> // Render the loader while loading
+  }
   return (
     <Box m="20px">
       <Header title="Calendar" subtitle="Full Calendar Interactive Page" />
@@ -129,7 +146,7 @@ eventsSet={(events) => setCurrentEvents(events)}
 initialEvents={[
 {
 id: "12315",
-title: "Happy Anniversary",
+title: "sample",
 date: "2023-06-11",
 },
 {

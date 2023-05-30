@@ -4,12 +4,27 @@ import { tokens } from "../../theme";
 import { mockDataContacts } from "../../data/mockData";
 import Header from "../../components/Header";
 import { useTheme } from "@mui/material";
-import "../../styles/login.css"
-
+import { useState,useEffect } from "react";
+import "../../styles/loader.css"
 const Contacts = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  const [isLoading, setIsLoading] = useState(true); 
+  useEffect(() => {
+    // Simulate loading delay
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
 
+    return () => clearTimeout(timer); // Clean up the timer on unmount
+  }, []);
+
+  if (isLoading) {
+    return <div className="loader-overlay1">
+    <h1>Loading...</h1>
+    <div className="loader1"></div>
+  </div> // Render the loader while loading
+  }
   const columns = [
     { field: "id", headerName: "ID", flex: 0.5 },
   

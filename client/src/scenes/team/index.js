@@ -6,9 +6,9 @@ import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettin
 import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
 import SecurityOutlinedIcon from "@mui/icons-material/SecurityOutlined";
 import Header from "../../components/Header";
-import "../../styles/login.css"
 import http from "../../utils/http";
 import { useEffect, useState } from "react";
+import "../../styles/loader.css"
 
 const Team = () => {
   const [teamData, setTeamData] = useState({});
@@ -26,6 +26,22 @@ const Team = () => {
   
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  const [isLoading, setIsLoading] = useState(true); 
+  useEffect(() => {
+    // Simulate loading delay
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+
+    return () => clearTimeout(timer); // Clean up the timer on unmount
+  }, []);
+
+  if (isLoading) {
+    return <div className="loader-overlay1">
+    <h1>Loading...</h1>
+    <div className="loader1"></div>
+  </div> // Render the loader while loading
+  }
   const columns = [
     { field: "id", headerName: "ID" },
     {

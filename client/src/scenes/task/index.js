@@ -1,11 +1,10 @@
-import { useState } from "react";
 import Header from "../../components/Header";
 import { Button, Form } from "react-bootstrap";
 import Swal from "sweetalert2";
 import { Box,TextField } from "@mui/material";
 import { Select, MenuItem,InputLabel } from "@mui/material";
-import "../../styles/login.css"
-
+import { useState,useEffect } from "react";
+import "../../styles/loader.css"
 function TaskList() {
   const [tasks, setTasks] = useState([]);
   const [newTask, setNewTask] = useState("");
@@ -89,6 +88,23 @@ function TaskList() {
       )
     );
   };
+
+  const [isLoading, setIsLoading] = useState(true); 
+  useEffect(() => {
+    // Simulate loading delay
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+
+    return () => clearTimeout(timer); // Clean up the timer on unmount
+  }, []);
+
+  if (isLoading) {
+    return <div className="loader-overlay1">
+    <h1>Loading...</h1>
+    <div className="loader1"></div>
+  </div> // Render the loader while loading
+  }
 
   return (
     <Box p="20px" width="80%" margin="0 auto" paddingTop="50px" className="reload-animation">

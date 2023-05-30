@@ -14,65 +14,63 @@
     align-items: center;
     z-index: 9999;
   }
-.loader1 {
-    width: 160px;
-    height: 185px;
+  .loader1{
+    display: block;
     position: relative;
+    height: 32px;
+    width: 200px;
     background: #fff;
-    border-radius: 100px 100px 0 0;
+    border:2px solid #fff;
+    color: #5cc0af;
+    overflow: hidden;
   }
-  .loader1:after {
-    content: "";
+  .loader1::before{
+    content: '';
+    background: #5cc0af;
     position: absolute;
-    width: 100px;
-    height: 125px;
-    left: 50%;
-    top: 25px;
-    transform: translateX(-50%);
-    background-image: radial-gradient(circle, #000 48%, transparent 55%),
-      radial-gradient(circle, #000 48%, transparent 55%),
-      radial-gradient(circle, #fff 30%, transparent 45%),
-      radial-gradient(circle, #000 48%, transparent 51%),
-      linear-gradient(#000 20px, transparent 0),
-      linear-gradient(#cfecf9 60px, transparent 0),
-      radial-gradient(circle, #cfecf9 50%, transparent 51%),
-      radial-gradient(circle, #cfecf9 50%, transparent 51%);
-    background-repeat: no-repeat;
-    background-size: 16px 16px, 16px 16px, 10px 10px, 42px 42px, 12px 3px,
-      50px 25px, 70px 70px, 70px 70px;
-    background-position: 25px 10px, 55px 10px, 36px 44px, 50% 30px, 50% 85px,
-      50% 50px, 50% 22px, 50% 45px;
-    animation: faceLift 3s linear infinite alternate;
-  }
-  .loader1:before {
-    content: "";
-    position: absolute;
-    width: 140%;
-    height: 125px;
-    left: -20%;
+    left: 0;
     top: 0;
-    background-image: radial-gradient(circle, #fff 48%, transparent 50%),
-      radial-gradient(circle, #fff 48%, transparent 50%);
-    background-repeat: no-repeat;
-    background-size: 65px 65px;
-    background-position: 0px 12px, 145px 12px;
-    animation: earLift 3s linear infinite alternate;
+    width: 0;
+    height: 100%;
+    animation: loading 10s linear infinite;
+  }
+  .loader1:after{
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    font-size: 24px;
+    line-height: 32px;
+    color: rgb(0, 0, 0);
+    mix-blend-mode: multiplying;  
+    animation: percentage 10s linear infinite;
   }
   
-  @keyframes faceLift {
-    0% {
-      transform: translateX(-60%);
-    }
-    100% {
-      transform: translateX(-30%);
-    }
+  @keyframes loading {
+    0% { width: 0 }
+    100% { width: 100% }
   }
-  @keyframes earLift {
-    0% {
-      transform: translateX(10px);
-    }
-    100% {
-      transform: translateX(0px);
-    }
+  @keyframes percentage {
+    0% { content: "0%"}
+    5% { content: "5%"}
+    10% { content: "10%"}
+    20% { content: "20%"}
+    30% { content: "30%"}
+    40% { content: "40%"}
+    50% { content: "50%"}
+    60% { content: "60%"}
+    70% { content: "70%"}
+    80% { content: "80%"}
+    90% { content: "90%"}
+    95% { content: "95%"}
+    96% { content: "96%"}
+    97% { content: "97%"}
+    98% { content: "98%"}
+    99% { content: "99%"}
+    100% { content: "100%"}
   }
-    
+  
+  

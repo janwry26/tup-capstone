@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { Form, Button } from "react-bootstrap";
 import { Box, Dialog, DialogTitle, DialogContent, DialogActions, TextField,InputLabel, Select } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
@@ -7,7 +7,7 @@ import Header from "../../components/Header";
 import Swal from "sweetalert2";
 import { useTheme } from "@mui/material";
 import { tokens } from "../../theme";
-import "../../styles/login.css"
+import "../../styles/loader.css"
 
 const AnimalRecords = () => {
   const [records, setRecords] = useState([]);
@@ -95,9 +95,24 @@ const AnimalRecords = () => {
 
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  const [isLoading, setIsLoading] = useState(true); 
+  useEffect(() => {
+    // Simulate loading delay
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
 
+    return () => clearTimeout(timer); // Clean up the timer on unmount
+  }, []);
+
+  if (isLoading) {
+    return <div className="loader-overlay1">
+    <h1>Loading...</h1>
+    <div className="loader1"></div>
+  </div> // Render the loader while loading
+  }
   return (
-    <Box m="20px" width="80%" margin="0 auto" className="reload-animation">
+    <Box m="20px" width="80%" margin="0 auto">
       <Header
         title="ANIMAL RECORDS"
         subtitle="Manage animal records"

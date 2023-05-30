@@ -5,10 +5,27 @@ import { Formik } from "formik";
 import * as yup from "yup";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Header from "../../components/Header";
-import "../../styles/login.css"
+import { useState,useEffect } from "react";
+import "../../styles/loader.css"
 
 const AdminForm = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
+  const [isLoading, setIsLoading] = useState(true); 
+  useEffect(() => {
+    // Simulate loading delay
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+
+    return () => clearTimeout(timer); // Clean up the timer on unmount
+  }, []);
+
+  if (isLoading) {
+    return <div className="loader-overlay1">
+    <h1>Loading...</h1>
+    <div className="loader1"></div>
+  </div> // Render the loader while loading
+  }
 
   const handleFormSubmit = (values) => {
     console.log(values);
@@ -45,7 +62,7 @@ const AdminForm = () => {
   };
 
   return (
-    <Box m="20px" width="80%" className="reload-animation"
+    <Box m="20px" width="80%"
     sx={{margin: "0 auto"}}>
       <Header title="CREATE ADMIN" subtitle="Create a new admin profile" />
 

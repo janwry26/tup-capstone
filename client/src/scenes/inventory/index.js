@@ -8,14 +8,14 @@ import Swal from "sweetalert2";
 import { useTheme } from "@mui/material";
 import { tokens } from "../../theme";
 import {  InputLabel, Select } from "@mui/material";
-import "../../styles/login.css"
 import http from "../../utils/http";
-
+import "../../styles/loader.css"
 const Inventory = () => {
   const [products, setProducts] = useState([]);
   const [temp, setTemp] = useState([]);
   const [editDialogOpen, setEditDialogOpen] = useState(false);
   const [editProduct, setEditProduct] = useState(null);
+  const [isLoading, setIsLoading] = useState(true); 
 
   const getProducts = () => {
     http.get('/inventory/view')
@@ -131,6 +131,21 @@ const Inventory = () => {
 
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  useEffect(() => {
+    // Simulate loading delay
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 250);
+
+    return () => clearTimeout(timer); // Clean up the timer on unmount
+  }, []);
+
+  if (isLoading) {
+    return <div className="loader-overlay1">
+    <h1>Loading...</h1>
+    <div className="loader1"></div>
+  </div> // Render the loader while loading
+  }
 
   return (
     <Box m="20px" width="80%" margin="0 auto" className="reload-animation">

@@ -6,8 +6,8 @@ import * as yup from "yup";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Header from "../../components/Header";
 import Swal from "sweetalert2";
-import "../../styles/login.css"
-
+import { useState,useEffect } from "react";
+import "../../styles/loader.css"
 // For API
 import http from "../../utils/http";
 
@@ -71,9 +71,25 @@ const Form = () => {
     confirmPassword: "",
     username: "",
   };
+  const [isLoading, setIsLoading] = useState(true); 
+  useEffect(() => {
+    // Simulate loading delay
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+
+    return () => clearTimeout(timer); // Clean up the timer on unmount
+  }, []);
+
+  if (isLoading) {
+    return <div className="loader-overlay1">
+    <h1>Loading...</h1>
+    <div className="loader1"></div>
+  </div> // Render the loader while loading
+  }
 
   return (
-    <Box m="20px" className="reload-animation" width="80%" sx={{ margin: "0 auto" }}>
+    <Box m="20px" width="80%" sx={{ margin: "0 auto" }}>
       <Header title="CREATE USER" subtitle="Create a new user profile" />
 
       <Formik
