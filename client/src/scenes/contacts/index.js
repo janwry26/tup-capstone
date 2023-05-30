@@ -4,12 +4,13 @@ import { tokens } from "../../theme";
 import { mockDataContacts } from "../../data/mockData";
 import Header from "../../components/Header";
 import { useTheme } from "@mui/material";
-import { useState,useEffect } from "react";
-import "../../styles/loader.css"
+import { useState, useEffect } from "react";
+import "../../styles/loader.css";
+
 const Contacts = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const [isLoading, setIsLoading] = useState(true); 
+  const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     // Simulate loading delay
     const timer = setTimeout(() => {
@@ -20,21 +21,27 @@ const Contacts = () => {
   }, []);
 
   if (isLoading) {
-    return <div className="loader-overlay1">
-    <h1>Loading...</h1>
-    <div className="loader1"></div>
-  </div> // Render the loader while loading
+    return (
+      <div className="loader-overlay1">
+        <h1>Loading...</h1>
+        <div className="loader1"></div>
+      </div>
+    ); // Render the loader while loading
   }
   const columns = [
     { field: "id", headerName: "ID", flex: 0.5 },
-  
     {
-      field: "name",
-      headerName: "Name",
+      field: "firstName",
+      headerName: "First Name",
       flex: 1,
       cellClassName: "name-column--cell",
     },
-  
+    {
+      field: "lastName",
+      headerName: "Last Name",
+      flex: 1,
+      cellClassName: "name-column--cell",
+    },
     {
       field: "phone",
       headerName: "Phone Number",
@@ -46,11 +53,10 @@ const Contacts = () => {
       flex: 1,
     },
     {
-      field: "usename",
+      field: "username",
       headerName: "Username",
       flex: 1,
     },
-   
   ];
 
   return (
