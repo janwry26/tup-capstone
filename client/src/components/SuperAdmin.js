@@ -67,9 +67,9 @@ function SuperAdminLogin({ admin }) {
   return (
     <div className="login-container">
       {isLoading && (
-        <div className="loader-overlay">
-          <div className="loader"></div>
-        </div>
+        <div className="loader-overlayLogin">
+        <div className="loaderLogin"></div>
+      </div>
       )}
       <div className="login-box">
         <h2>Login Form for Admin</h2>
