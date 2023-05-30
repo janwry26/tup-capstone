@@ -8,25 +8,25 @@ import SecurityOutlinedIcon from "@mui/icons-material/SecurityOutlined";
 import Header from "../../components/Header";
 import http from "../../utils/http";
 import { useEffect, useState } from "react";
-import "../../styles/loader.css"
+import "../../styles/loader.css";
 
 const Team = () => {
   const [teamData, setTeamData] = useState({});
   const getTeam = () => {
-    http.get('/admin/view')
-        // .then((res) => setTeamData(res.data));
-        .then((res) => {
-          
-        });
-  }
+    http.get("/admin/view")
+      // .then((res) => setTeamData(res.data));
+      .then((res) => {
+        // Process the response data and set it in the state
+      });
+  };
 
   useEffect(() => {
     getTeam();
-  },[])
-  
+  }, []);
+
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const [isLoading, setIsLoading] = useState(true); 
+  const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     // Simulate loading delay
     const timer = setTimeout(() => {
@@ -37,20 +37,27 @@ const Team = () => {
   }, []);
 
   if (isLoading) {
-    return <div className="loader-overlay1">
-    <h1>Loading...</h1>
-    <div className="loader1"></div>
-  </div> // Render the loader while loading
+    return (
+      <div className="loader-overlay1">
+        <h1>Loading...</h1>
+        <div className="loader1"></div>
+      </div>
+    ); // Render the loader while loading
   }
   const columns = [
     { field: "id", headerName: "ID" },
     {
-      field: "name",
-      headerName: "Name",
+      field: "firstName",
+      headerName: "First Name",
       flex: 1,
       cellClassName: "name-column--cell",
     },
-  
+    {
+      field: "lastName",
+      headerName: "Last Name",
+      flex: 1,
+      cellClassName: "name-column--cell",
+    },
     {
       field: "phone",
       headerName: "Phone Number",
@@ -73,40 +80,40 @@ const Team = () => {
       renderCell: ({ row: { access } }) => {
         return (
           <Box
-          width="60%"
-          m="0 auto"
-          p="5px"
-          display="flex"
-          justifyContent="center"
-          backgroundColor={
-            access === "admin"
-              ? colors.greenAccent[600]
-              : access === "manager"
-              ? colors.greenAccent[700]
-              : colors.greenAccent[700]
-          }
-          borderRadius="4px"
-        >
-          {access === "admin" && <AdminPanelSettingsOutlinedIcon />}
-          {access === "manager" && <SecurityOutlinedIcon />}
-          {access === "user" && <LockOpenOutlinedIcon />}
-          <Typography
-            color={colors.grey[100]}
-            sx={{
-              ml: { xs: "0", md: "5px" },
-              display: { xs: "none", md: "block" },
-            }}
+            width="60%"
+            m="0 auto"
+            p="5px"
+            display="flex"
+            justifyContent="center"
+            backgroundColor={
+              access === "admin"
+                ? colors.greenAccent[600]
+                : access === "manager"
+                ? colors.greenAccent[700]
+                : colors.greenAccent[700]
+            }
+            borderRadius="4px"
           >
-            {access}
-          </Typography>
-        </Box>
+            {access === "admin" && <AdminPanelSettingsOutlinedIcon />}
+            {access === "manager" && <SecurityOutlinedIcon />}
+            {access === "user" && <LockOpenOutlinedIcon />}
+            <Typography
+              color={colors.grey[100]}
+              sx={{
+                ml: { xs: "0", md: "5px" },
+                display: { xs: "none", md: "block" },
+              }}
+            >
+              {access}
+            </Typography>
+          </Box>
         );
       },
     },
   ];
 
   return (
-    <Box  width="80%" margin="0 auto" className="reload-animation">
+    <Box width="80%" margin="0 auto" className="reload-animation">
       <Header title="TEAM" subtitle="Managing the Team Members" />
       <Box
         m={{ xs: "20px 0 0 0", md: "40px 0 0 0" }}
