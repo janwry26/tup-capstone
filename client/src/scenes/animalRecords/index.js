@@ -8,6 +8,7 @@ import Swal from "sweetalert2";
 import { useTheme } from "@mui/material";
 import { tokens } from "../../theme";
 import "../../styles/loader.css"
+import http from "../../utils/http";
 
 const AnimalRecords = () => {
   const [records, setRecords] = useState([]);
@@ -30,6 +31,29 @@ const AnimalRecords = () => {
     setRecords([...records, record]);
     event.target.reset();
   };
+  
+  const getAnimalRecord = () => {
+    http.get('/animal/view')
+        .then((res) => {
+          const records = res.data.map((record, key) => ({
+            id: key+1,
+            _id: record._id,
+            species: record.species,
+            age: record.age,
+            gender: record.gender,
+           animalID: record.animalID,
+            breedType: record.breedType,
+            weight: record.weight,
+            birthDate: record.birthDate,
+          }));
+          setRecords(records);
+        })
+        .catch((err) => console.log(err));
+  }
+
+  useEffect(() => {
+    getAnimalRecord();
+  },[])
 
   const handleDeleteRecord = (index) => {
     Swal.fire({
@@ -139,7 +163,6 @@ const AnimalRecords = () => {
               variant="filled"
               fullWidth
               required
-              type="number"
             />
       </Box>
 
@@ -166,8 +189,7 @@ const AnimalRecords = () => {
                     variant="filled"
                     fullWidth
                     required
-                    type="number"
-                  />
+                    />
             </Box>
 
 

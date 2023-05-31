@@ -10,6 +10,7 @@ const animalSchema = new mongoose.Schema({
     gender: { type: String },
     age: { type: String },
     birthDate: { type: Date },
+    species: { type: String},
 });
 
 animalSchema.pre('save', setAnimalID);
