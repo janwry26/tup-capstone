@@ -8,47 +8,62 @@ import { useTheme } from "@mui/material";
 import { tokens } from "../../theme";
 import { useState,useEffect } from "react";
 import "../../styles/loader.css"
+import http from "../../utils/http";
 
 const MedicalHistory = () => {
   const [reports, setReports] = useState([]);
   const [editDialogOpen, setEditDialogOpen] = useState(false);
   const [editReport, setEditReport] = useState(null);
 
+
+  const getHealthReport = () => {
+    http.get('/health-report/view')
+        .then((res) => {
+          const reports = res.data.map((report, key) => ({
+            id: key+1,
+            _id: report._id,
+            animalID: report.animalID,
+            staffID: report.staffID,
+            healthDescription: report.healthDescription,
+            nextCheckupDate: report.nextCheckupDate,
+            medication: report.medication,
+            vaccineStatus: report.vaccineStatus,
+          }));
+          setReports(reports);
+        })
+        .catch((err) => console.log(err));
+  }
+
+  useEffect(() => {
+    getHealthReport();
+  },[])
+
   const handleAddReport = (event) => {
     event.preventDefault();
-    const report = {
-      id: Date.now(),
-      animalId: event.target.animalId.value,
-      staffId: event.target.staffId.value,
-      healthDescription: event.target.healthDescription.value,
-      nextCheckupDate: event.target.nextCheckupDate.value,
-      medication: event.target.medication.value,
-      vaccinationStatus: event.target.vaccinationStatus.value,
-    };
-    setReports([...reports, report]);
+    http
+      .post('/health-report/add', {
+        animalID: event.target.animalID.value,
+        staffID: event.target.staffID.value,
+        healthDescription: event.target.healthDescription.value,
+        nextCheckupDate: event.target.nextCheckupDate.value,
+        medication: event.target.medication.value,
+        vaccineStatus: event.target.vaccineStatus.value,
+      })
+      .then((res) => {
+        console.log(res);
+        Swal.fire({
+          title: 'Success',
+          text: 'Product added to inventory',
+          icon: 'success',
+          timer: 700, // Show the alert for 2 seconds
+          showConfirmButton: false
+        });
+        getHealthReport(); // Refresh the products list
+      })
+      .catch((err) => console.log(err));
     event.target.reset();
   };
 
-  const handleDeleteReport = (index) => {
-    Swal.fire({
-      title: "Are you sure?",
-      text: "You will not be able to recover this report!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonText: "Yes, delete it!",
-      cancelButtonText: "No, cancel!",
-      reverseButtons: true,
-    }).then((result) => {
-      if (result.isConfirmed) {
-        const newReports = [...reports];
-        newReports.splice(index, 1);
-        setReports(newReports);
-        Swal.fire("Deleted!", "Your report has been deleted.", "success");
-      } else if (result.dismiss === Swal.DismissReason.cancel) {
-        Swal.fire("Cancelled", "Your report is safe :)", "error");
-      }
-    });
-  };
 
   const handleEditReport = (params, event) => {
     const { id, field, props } = params;
@@ -62,6 +77,7 @@ const MedicalHistory = () => {
     setReports(newReports);
   };
 
+
   const handleEditDialogOpen = (report) => {
     setEditReport(report);
     setEditDialogOpen(true);
@@ -71,23 +87,77 @@ const MedicalHistory = () => {
     setEditDialogOpen(false);
   };
 
+ 
+
   const handleEditDialogSave = () => {
-    const newReports = reports.map((report) => {
-      if (report.id === editReport.id) {
-        return {
-          ...report,
-          animalId: document.getElementById("editAnimalId").value,
-          staffId: document.getElementById("editStaffId").value,
-          healthDescription: document.getElementById("editHealthDescription").value,
-          nextCheckupDate: document.getElementById("editNextCheckupDate").value,
-          medication: document.getElementById("editMedication").value,
-          vaccinationStatus: document.getElementById("editVaccinationStatus").value,
-        };
+    const editedReport = {
+      animalID: document.getElementById("editAnimalId").value,
+      staffID: document.getElementById("editStaffId").value,
+      healthDescription: document.getElementById("editHealthDescription").value,
+     nextCheckupDate: document.getElementById("editNextCheckupDate").value,
+      medication: document.getElementById("editMedication").value,
+      vaccineStatus: document.getElementById("editVaccinationStatus").value,
+    };
+  
+    http
+      .put(`/health-report/edit/${editReport._id}`, editedReport)
+      .then((res) => {
+        console.log(res);
+        const updatedReports = reports.map((report) =>
+          report._id === editReport._id ? { ...report, ...editedReport } : report
+        );
+        setReports(updatedReports);
+        setEditDialogOpen(false);
+        Swal.fire('Success', 'Product updated successfully!', 'success');
+      })
+      .catch((err) => console.log(err));
+  };
+
+  
+  // const handleDeleteReport = (index) => {
+  //   Swal.fire({
+  //     title: "Are you sure?",
+  //     text: "You will not be able to recover this report!",
+  //     icon: "warning",
+  //     showCancelButton: true,
+  //     confirmButtonText: "Yes, delete it!",
+  //     cancelButtonText: "No, cancel!",
+  //     reverseButtons: true,
+  //   }).then((result) => {
+  //     if (result.isConfirmed) {
+  //       const newReports = [...reports];
+  //       newReports.splice(index, 1);
+  //       setReports(newReports);
+  //       Swal.fire("Deleted!", "Your report has been deleted.", "success");
+  //     } else if (result.dismiss === Swal.DismissReason.cancel) {
+  //       Swal.fire("Cancelled", "Your report is safe :)", "error");
+  //     }
+  //   });
+  // };
+
+  const handleDeleteReport = (_id) => {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You will not be able to recover this product!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, cancel!',
+      reverseButtons: true,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        http
+          .delete(`/health-report/delete/${_id}`)
+          .then((res) => {
+            console.log(res);
+            Swal.fire('Deleted!', 'Your product has been deleted.', 'success');
+            getHealthReport(); // Refresh the products list
+          })
+          .catch((err) => console.log(err));
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.fire('Cancelled', 'Your product is safe :)', 'error');
       }
-      return report;
     });
-    setReports(newReports);
-    setEditDialogOpen(false);
   };
 
   const theme = useTheme();
@@ -121,11 +191,10 @@ const MedicalHistory = () => {
             <InputLabel >Animal Id</InputLabel>
                 <TextField
                     placeholder="Input animal ID..."
-                    name="animalId"
+                    name="animalID"
                     variant="filled"
                     fullWidth
                     required
-                    type="number"
                   />
             </Box>
 
@@ -135,11 +204,10 @@ const MedicalHistory = () => {
             <InputLabel >Staff ID</InputLabel>
               <TextField
                   placeholder="Input staff ID..."
-                  name="staffId"
+                  name="staffID"
                   variant="filled"
                   fullWidth
                   required
-                  type="number"
                 />
 
             </Box>
@@ -179,7 +247,7 @@ const MedicalHistory = () => {
         <Box marginBottom="10px">
                <InputLabel>Vaccination Status</InputLabel>
                   <Select
-                    name="vaccinationStatus"
+                    name="vaccineStatus"
                     native
                     fullWidth
                     required
@@ -235,13 +303,13 @@ const MedicalHistory = () => {
         <DataGrid
           rows={reports}
           columns={[
-            { field: "animalId", headerName: "Animal ID", flex: 1 },
-            { field: "staffId", headerName: "Staff ID", flex: 1 },
+            { field: "animalID", headerName: "Animal ID", flex: 1 },
+            { field: "staffID", headerName: "Staff ID", flex: 1 },
             { field: "healthDescription", headerName: "Health Description", flex: 1 },
             { field: "nextCheckupDate", headerName: "Next Checkup Date", flex: 1 },
             { field: "medication", headerName: "Medication", flex: 1 },
             {
-              field: "vaccinationStatus",
+              field: "vaccineStatus",
               headerName: "Vaccination Status",
               flex: 1,
             },
@@ -254,7 +322,7 @@ const MedicalHistory = () => {
                 <div style={{ marginTop: "5px auto" }}>
                   <Button
                     variant="danger"
-                    onClick={() => handleDeleteReport(params.rowIndex)}
+                    onClick={() => handleDeleteReport(params.row._id)}
                     style={{ padding: "6px 12px" }}
                   >
                     <FaTrash />
@@ -283,9 +351,8 @@ const MedicalHistory = () => {
             <Form.Group className="mb-3" controlId="editAnimalId">
               <Form.Label>Animal ID</Form.Label>
               <Form.Control
-               type="number"
                 placeholder="Enter animal ID"
-                defaultValue={editReport ? editReport.animalId : ""}
+                defaultValue={editReport ? editReport.animalID : ""}
                 required
               />
             </Form.Group>
@@ -293,9 +360,8 @@ const MedicalHistory = () => {
             <Form.Group className="mb-3" controlId="editStaffId">
               <Form.Label>Staff ID</Form.Label>
               <Form.Control
-                type="number"
                 placeholder="Enter staff ID"
-                defaultValue={editReport ? editReport.staffId : ""}
+                defaultValue={editReport ? editReport.staffID : ""}
                 required
               />
             </Form.Group>
@@ -331,7 +397,7 @@ const MedicalHistory = () => {
 
             <Form.Group className="mb-3" controlId="editVaccinationStatus">
             <Form.Label>Vaccination Status</Form.Label>
-            <Form.Select defaultValue={editReport ? editReport.vaccinationStatus : ""} required>
+            <Form.Select defaultValue={editReport ? editReport.vaccineStatus : ""} required>
               <option value="">Select vaccination status</option>
               <option value="Vaccinated">Vaccinated</option>
               <option value="Not Vaccinated">Not Vaccinated</option>
